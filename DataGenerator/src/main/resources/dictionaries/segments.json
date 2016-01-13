@@ -1,0 +1,5 @@
+[
+  {"value": "residencial", "weight": 7},
+  {"value": "empresa", "weight": 1},
+  {"value": "autónomo", "weight": 2}
+]

@@ -1,0 +1,7 @@
+[
+  {"value": "fusión", "weight": 2},
+  {"value": "duo", "weight": 1},
+  {"value": "adsl", "weight": 4},
+  {"value": "móvil", "weight": 5},
+  {"value": "fijo", "weight": 3}
+]

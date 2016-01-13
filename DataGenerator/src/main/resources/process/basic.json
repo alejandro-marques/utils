@@ -1,0 +1,108 @@
+{
+    "generator": {
+        "maxDocuments": -1,
+        "id": [
+            {
+                "name": "segment",
+                "type": "text",
+                "subtype": "dictionary",
+                "parameters" :{
+                    "file": "dictionaries/segments.json",
+                    "limit": true
+                },
+                "value" : {
+                    "type": "fixed",
+                    "position": 0
+                },
+                "variation" : {
+                    "type": "sequential"
+                }
+            },
+            {
+                "name": "age",
+                "type": "text",
+                "subtype": "dictionary",
+                "parameters" :{
+                    "file": "dictionaries/age-ranges.json",
+                    "limit": true
+                },
+                "value" : {
+                    "type": "fixed",
+                    "position": 0
+                },
+                "variation" : {
+                    "type": "sequential"
+                }
+            },
+            {
+                "name": "product",
+                "type": "text",
+                "subtype": "dictionary",
+                "parameters" :{
+                    "file": "dictionaries/products.json",
+                    "limit": true
+                },
+                "value" : {
+                    "type": "fixed",
+                    "position": 0
+                },
+                "variation" : {
+                    "type": "sequential"
+                }
+            },
+            {
+                "name": "path",
+                "type" : "numeric",
+                "subtype" : "integer",
+                "parameters" :{
+                    "max" : 5,
+                    "limit" : true
+                },
+                "value" : {
+                    "type": "fixed",
+                    "value": 1
+                },
+                "variation" : {
+                    "type" : "uniform",
+                    "min" : 1,
+                    "max" : 1
+                }
+            }
+        ],
+        "minRelatedDocuments": 2,
+        "maxRelatedDocuments": 4
+    },
+
+    "model" :
+    [
+        {
+            "name": "position",
+            "type" : "numeric",
+            "subtype" : "integer",
+            "value" : {
+                "type": "fixed",
+                "value": 1
+            },
+            "variation" : {
+                "type" : "uniform",
+                "min" : 1,
+                "max" : 1
+            }
+        },
+        {
+            "name": "users",
+            "type" : "numeric",
+            "subtype" : "integer",
+            "value" : {
+                "type" : "gaussian",
+                "mean" : 500,
+                "variance" : 20,
+                "min" : 50,
+                "max" : 1000
+            },
+            "variation" : {
+                "type" : "none"
+            }
+        }
+    ]
+}
