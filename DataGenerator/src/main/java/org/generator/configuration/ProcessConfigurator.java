@@ -67,7 +67,7 @@ public class ProcessConfigurator {
                 Dictionary dictionary = new Dictionary(dictionaryName);
                 for (Word word : words) {dictionary.add(word.getWeight(), word.getValue());}
                 // Each dictionary is added to a CommonData object so it could be used from any class
-                CommonData.addDictionary(dictionaryFile, dictionary);
+                CommonData.addDictionary(dictionaryName, dictionary);
             }
         }
     }

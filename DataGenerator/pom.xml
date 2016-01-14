@@ -102,7 +102,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>launcher.MongoDBIndexer</mainClass>
+                            <mainClass>org.generator.launcher.MongoDBIndexer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

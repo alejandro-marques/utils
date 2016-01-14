@@ -1,0 +1,163 @@
+[
+  {
+    "value": "month 1",
+    "weight": 1,
+    "next":[
+      {"value": "CONSULTA DE DEUDA", "weight": 1},
+      {"value": "TRX , ACTIV/DESACTIV SERVICIOS", "weight": 1},
+      {"value": "TRX , ALTA", "weight": 1},
+      {"value": "TRX , INFORMACIÓN PERSONAL", "weight": 1},
+      {"value": "TRX , AFILIACIÓN/DESAFILIACIÓN SUPERCARGAS", "weight": 1},
+      {"value": "CONSULTA PROMOCIONES", "weight": 1},
+      {"value": "CONSULTA DE SALDO", "weight": 1},
+      {"value": "TRX , CAMBIO DE EQUIPO", "weight": 1},
+      {"value": "CONSULTA CENTROS DE ATENCIÓN", "weight": 1},
+      {"value": "CONSULTA CAMBIO EQUIPO", "weight": 1},
+      {"value": "CONSULTA INFORMACION LINEA", "weight": 1},
+      {"value": "OTROS", "weight": 1},
+      {"value": "TRX , CAMBIO DE PLAN", "weight": 1},
+      {"value": "TRX , RECONEXIÓN", "weight": 1},
+      {"value": "CONSULTA PLAN CONTRATADO", "weight": 1},
+      {"value": "AVERIAS", "weight": 1},
+      {"value": "TRX , AFILIACIÓN/DESAFILIACIÓN DE PAQUETES", "weight": 1}
+    ]
+  },
+  {
+    "value": "month 2",
+    "weight": 1,
+    "next":[
+      {"value": "CONSULTA DE DEUDA", "weight": 1},
+      {"value": "TRX , ACTIV/DESACTIV SERVICIOS", "weight": 1},
+      {"value": "TRX , ALTA", "weight": 1},
+      {"value": "TRX , INFORMACIÓN PERSONAL", "weight": 1},
+      {"value": "TRX , AFILIACIÓN/DESAFILIACIÓN SUPERCARGAS", "weight": 1},
+      {"value": "CONSULTA PROMOCIONES", "weight": 1},
+      {"value": "CONSULTA DE SALDO", "weight": 1},
+      {"value": "TRX , CAMBIO DE EQUIPO", "weight": 1},
+      {"value": "CONSULTA CENTROS DE ATENCIÓN", "weight": 1},
+      {"value": "CONSULTA CAMBIO EQUIPO", "weight": 1},
+      {"value": "CONSULTA INFORMACION LINEA", "weight": 1},
+      {"value": "OTROS", "weight": 1},
+      {"value": "TRX , CAMBIO DE PLAN", "weight": 1},
+      {"value": "TRX , RECONEXIÓN", "weight": 1},
+      {"value": "CONSULTA PLAN CONTRATADO", "weight": 1},
+      {"value": "AVERIAS", "weight": 1},
+      {"value": "TRX , AFILIACIÓN/DESAFILIACIÓN DE PAQUETES", "weight": 1}
+    ]
+  },
+  {
+    "value": "month 3",
+    "weight": 1,
+    "next":[
+      {"value": "CONSULTA DE DEUDA", "weight": 1},
+      {"value": "TRX , ACTIV/DESACTIV SERVICIOS", "weight": 1},
+      {"value": "TRX , ALTA", "weight": 1},
+      {"value": "TRX , INFORMACIÓN PERSONAL", "weight": 1},
+      {"value": "TRX , AFILIACIÓN/DESAFILIACIÓN SUPERCARGAS", "weight": 1},
+      {"value": "CONSULTA PROMOCIONES", "weight": 1},
+      {"value": "CONSULTA DE SALDO", "weight": 1},
+      {"value": "TRX , CAMBIO DE EQUIPO", "weight": 1},
+      {"value": "CONSULTA CENTROS DE ATENCIÓN", "weight": 1},
+      {"value": "CONSULTA CAMBIO EQUIPO", "weight": 1},
+      {"value": "CONSULTA INFORMACION LINEA", "weight": 1},
+      {"value": "OTROS", "weight": 1},
+      {"value": "TRX , CAMBIO DE PLAN", "weight": 1},
+      {"value": "TRX , RECONEXIÓN", "weight": 1},
+      {"value": "CONSULTA PLAN CONTRATADO", "weight": 1},
+      {"value": "AVERIAS", "weight": 1},
+      {"value": "TRX , AFILIACIÓN/DESAFILIACIÓN DE PAQUETES", "weight": 1}
+    ]
+  },
+  {
+    "value": "month 4",
+    "weight": 1,
+    "next":[
+      {"value": "CONSULTA DE DEUDA", "weight": 1},
+      {"value": "TRX , ACTIV/DESACTIV SERVICIOS", "weight": 1},
+      {"value": "TRX , ALTA", "weight": 1},
+      {"value": "TRX , INFORMACIÓN PERSONAL", "weight": 1},
+      {"value": "TRX , AFILIACIÓN/DESAFILIACIÓN SUPERCARGAS", "weight": 1},
+      {"value": "CONSULTA PROMOCIONES", "weight": 1},
+      {"value": "CONSULTA DE SALDO", "weight": 1},
+      {"value": "TRX , CAMBIO DE EQUIPO", "weight": 1},
+      {"value": "CONSULTA CENTROS DE ATENCIÓN", "weight": 1},
+      {"value": "CONSULTA CAMBIO EQUIPO", "weight": 1},
+      {"value": "CONSULTA INFORMACION LINEA", "weight": 1},
+      {"value": "OTROS", "weight": 1},
+      {"value": "TRX , CAMBIO DE PLAN", "weight": 1},
+      {"value": "TRX , RECONEXIÓN", "weight": 1},
+      {"value": "CONSULTA PLAN CONTRATADO", "weight": 1},
+      {"value": "AVERIAS", "weight": 1},
+      {"value": "TRX , AFILIACIÓN/DESAFILIACIÓN DE PAQUETES", "weight": 1}
+    ]
+  },
+  {
+    "value": "month 5",
+    "weight": 1,
+    "next":[
+      {"value": "CONSULTA DE DEUDA", "weight": 1},
+      {"value": "TRX , ACTIV/DESACTIV SERVICIOS", "weight": 1},
+      {"value": "TRX , ALTA", "weight": 1},
+      {"value": "TRX , INFORMACIÓN PERSONAL", "weight": 1},
+      {"value": "TRX , AFILIACIÓN/DESAFILIACIÓN SUPERCARGAS", "weight": 1},
+      {"value": "CONSULTA PROMOCIONES", "weight": 1},
+      {"value": "CONSULTA DE SALDO", "weight": 1},
+      {"value": "TRX , CAMBIO DE EQUIPO", "weight": 1},
+      {"value": "CONSULTA CENTROS DE ATENCIÓN", "weight": 1},
+      {"value": "CONSULTA CAMBIO EQUIPO", "weight": 1},
+      {"value": "CONSULTA INFORMACION LINEA", "weight": 1},
+      {"value": "OTROS", "weight": 1},
+      {"value": "TRX , CAMBIO DE PLAN", "weight": 1},
+      {"value": "TRX , RECONEXIÓN", "weight": 1},
+      {"value": "CONSULTA PLAN CONTRATADO", "weight": 1},
+      {"value": "AVERIAS", "weight": 1},
+      {"value": "TRX , AFILIACIÓN/DESAFILIACIÓN DE PAQUETES", "weight": 1}
+    ]
+  },
+  {
+    "value": "month 6",
+    "weight": 1,
+    "next":[
+      {"value": "CONSULTA DE DEUDA", "weight": 1},
+      {"value": "TRX , ACTIV/DESACTIV SERVICIOS", "weight": 1},
+      {"value": "TRX , ALTA", "weight": 1},
+      {"value": "TRX , INFORMACIÓN PERSONAL", "weight": 1},
+      {"value": "TRX , AFILIACIÓN/DESAFILIACIÓN SUPERCARGAS", "weight": 1},
+      {"value": "CONSULTA PROMOCIONES", "weight": 1},
+      {"value": "CONSULTA DE SALDO", "weight": 1},
+      {"value": "TRX , CAMBIO DE EQUIPO", "weight": 1},
+      {"value": "CONSULTA CENTROS DE ATENCIÓN", "weight": 1},
+      {"value": "CONSULTA CAMBIO EQUIPO", "weight": 1},
+      {"value": "CONSULTA INFORMACION LINEA", "weight": 1},
+      {"value": "OTROS", "weight": 1},
+      {"value": "TRX , CAMBIO DE PLAN", "weight": 1},
+      {"value": "TRX , RECONEXIÓN", "weight": 1},
+      {"value": "CONSULTA PLAN CONTRATADO", "weight": 1},
+      {"value": "AVERIAS", "weight": 1},
+      {"value": "TRX , AFILIACIÓN/DESAFILIACIÓN DE PAQUETES", "weight": 1}
+    ]
+  },
+  {
+    "value": "rest",
+    "weight": 1,
+    "next":[
+      {"value": "CONSULTA DE DEUDA", "weight": 1},
+      {"value": "TRX , ACTIV/DESACTIV SERVICIOS", "weight": 1},
+      {"value": "TRX , ALTA", "weight": 1},
+      {"value": "TRX , INFORMACIÓN PERSONAL", "weight": 1},
+      {"value": "TRX , AFILIACIÓN/DESAFILIACIÓN SUPERCARGAS", "weight": 1},
+      {"value": "CONSULTA PROMOCIONES", "weight": 1},
+      {"value": "CONSULTA DE SALDO", "weight": 1},
+      {"value": "TRX , CAMBIO DE EQUIPO", "weight": 1},
+      {"value": "CONSULTA CENTROS DE ATENCIÓN", "weight": 1},
+      {"value": "CONSULTA CAMBIO EQUIPO", "weight": 1},
+      {"value": "CONSULTA INFORMACION LINEA", "weight": 1},
+      {"value": "OTROS", "weight": 1},
+      {"value": "TRX , CAMBIO DE PLAN", "weight": 1},
+      {"value": "TRX , RECONEXIÓN", "weight": 1},
+      {"value": "CONSULTA PLAN CONTRATADO", "weight": 1},
+      {"value": "AVERIAS", "weight": 1},
+      {"value": "TRX , AFILIACIÓN/DESAFILIACIÓN DE PAQUETES", "weight": 1}
+    ]
+  }
+]

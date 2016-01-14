@@ -17,6 +17,8 @@ public class TextDictionaryFieldUtils {
         String dictionaryName = field.getParameters().get(PropertiesConstants.FILE);
         Dictionary dictionary = CommonData.getDictionary(dictionaryName);
 
+        if (null == dictionary){throw new Exception ("Dictionary " + dictionaryName + " not found.");}
+
         if (null != previousValue){
             if (previousValue instanceof String){previousStringValue = (String) previousValue;}
             else {throw new Exception (previousValue.toString() + " is not a valid String");}

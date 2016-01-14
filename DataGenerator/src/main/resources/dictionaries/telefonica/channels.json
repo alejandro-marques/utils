@@ -1,0 +1,9 @@
+[
+  {"value": "Presencial Call Movil", "weight": 1},
+  {"value": "Call center fijo", "weight": 2},
+  {"value": "Presencial fijo", "weight": 3},
+  {"value": "IVR", "weight": 4},
+  {"value": "Canal online", "weight": 5},
+  {"value": "Canal App", "weight": 6},
+  {"value": "Canal online y canal App", "weight": 7}
+]

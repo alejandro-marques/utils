@@ -3,9 +3,12 @@ package org.generator.processor;
 import org.generator.configuration.ProcessConfigurator;
 import org.generator.exception.LimitReachedException;
 import org.generator.model.configuration.GeneratorConfiguration;
+import org.generator.model.configuration.ProcessConfiguration;
 import org.generator.model.data.Field;
+import org.generator.model.data.Transformation;
 import org.generator.utils.RandomUtils;
 import org.generator.utils.properties.FieldUtils;
+import org.generator.utils.transformations.TransformationUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +19,7 @@ public class Process {
 
     private GeneratorConfiguration generatorConfiguration;
     private List<Field> model;
+    private List<Transformation> transformations;
 
     private int maxDocuments;
     private int minRelatedDocuments;
@@ -34,8 +38,10 @@ public class Process {
         ProcessConfigurator processConfigurator = new ProcessConfigurator(configurationFile,
                 resourceConfiguration);
 
-        generatorConfiguration = processConfigurator.getProcessConfiguration().getGenerator();
-        model = processConfigurator.getProcessConfiguration().getModel();
+        ProcessConfiguration configuration = processConfigurator.getProcessConfiguration();
+        generatorConfiguration = configuration.getGenerator();
+        model = configuration.getModel();
+        transformations = configuration.getTransformations();
 
         initialize();
     }
@@ -74,6 +80,7 @@ public class Process {
         document.putAll(lastId);
         // An id field formed by the id field values and the current related document counter is generated
         document.put("id", getIdValue());
+        document.put("relatedDocuments", relatedDocuments);
 
         // Generated document is stored in order to use it for related documents which values are variations of this one
         lastDocument = document;
@@ -83,6 +90,7 @@ public class Process {
         // If max related documents have been reached a new non-related document marker is reset
         if (currentRelatedDocument >= relatedDocuments){currentRelatedDocument = 0;}
 
+        transformDocument(document);
         return document;
     }
 
@@ -132,6 +140,13 @@ public class Process {
             }
         }
         throw new LimitReachedException("Last id already generated");
+    }
+
+
+    private void transformDocument (Map<String, Object> document) throws Exception {
+        for (Transformation transformation : transformations){
+            TransformationUtils.transform(document, transformation);
+        }
     }
 
     private Map<String, Object> generateFields (List<Field> fields, boolean isVariation)

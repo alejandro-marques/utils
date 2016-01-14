@@ -1,0 +1,107 @@
+[
+  {
+    "value": "Presencial Call Movil",
+    "weight": 1,
+    "next":[
+      {"value": "CONSULTA DE DEUDA", "weight": 1},
+      {"value": "TRX , ACTIV/DESACTIV SERVICIOS", "weight": 1},
+      {"value": "TRX , ALTA", "weight": 1},
+      {"value": "TRX , INFORMACIÓN PERSONAL", "weight": 1},
+      {"value": "TRX , AFILIACIÓN/DESAFILIACIÓN SUPERCARGAS", "weight": 1},
+      {"value": "CONSULTA PROMOCIONES", "weight": 1},
+      {"value": "CONSULTA DE SALDO", "weight": 1},
+      {"value": "TRX , CAMBIO DE EQUIPO", "weight": 1},
+      {"value": "CONSULTA CENTROS DE ATENCIÓN", "weight": 1},
+      {"value": "CONSULTA CAMBIO EQUIPO", "weight": 1},
+      {"value": "CONSULTA INFORMACION LINEA", "weight": 1},
+      {"value": "OTROS", "weight": 1},
+      {"value": "TRX , CAMBIO DE PLAN", "weight": 1},
+      {"value": "TRX , RECONEXIÓN", "weight": 1},
+      {"value": "CONSULTA PLAN CONTRATADO", "weight": 1},
+      {"value": "AVERIAS", "weight": 1},
+      {"value": "TRX , AFILIACIÓN/DESAFILIACIÓN DE PAQUETES", "weight": 1}
+    ]
+  },
+  {
+    "value": "Call center fijo",
+    "weight": 1,
+    "next":[
+      {"value": "CONSULTA DE DEUDA", "weight": 1},
+      {"value": "TRX , ALTA", "weight": 1},
+      {"value": "CONSULTA PROMOCIONES", "weight": 1},
+      {"value": "CONSULTA CENTROS DE ATENCIÓN", "weight": 1},
+      {"value": "OTROS", "weight": 1},
+      {"value": "TRX , RECONEXIÓN", "weight": 1},
+      {"value": "AVERIAS", "weight": 1}
+    ]
+  },
+  {
+    "value": "Presencial fijo",
+    "weight": 1,
+    "next":[
+      {"value": "CONSULTA DE DEUDA", "weight": 1},
+      {"value": "TRX , ACTIV/DESACTIV SERVICIOS", "weight": 1},
+      {"value": "TRX , ALTA", "weight": 1},
+      {"value": "TRX , INFORMACIÓN PERSONAL", "weight": 1},
+      {"value": "CONSULTA PROMOCIONES", "weight": 1},
+      {"value": "TRX , CAMBIO DE EQUIPO", "weight": 1},
+      {"value": "CONSULTA CAMBIO EQUIPO", "weight": 1},
+      {"value": "OTROS", "weight": 1},
+      {"value": "TRX , RECONEXIÓN", "weight": 1},
+      {"value": "CONSULTA PLAN CONTRATADO", "weight": 1},
+      {"value": "AVERIAS", "weight": 1}
+    ]
+  },
+  {
+    "value": "IVR",
+    "weight": 1,
+    "next":[
+      {"value": "CONSULTA DE DEUDA", "weight": 1},
+      {"value": "TRX , AFILIACIÓN/DESAFILIACIÓN SUPERCARGAS", "weight": 1},
+      {"value": "CONSULTA PROMOCIONES", "weight": 1},
+      {"value": "CONSULTA DE SALDO", "weight": 1},
+      {"value": "CONSULTA CENTROS DE ATENCIÓN", "weight": 1},
+      {"value": "CONSULTA INFORMACION LINEA", "weight": 1},
+      {"value": "OTROS", "weight": 1},
+      {"value": "TRX , RECONEXIÓN", "weight": 1},
+      {"value": "CONSULTA PLAN CONTRATADO", "weight": 1},
+      {"value": "AVERIAS", "weight": 1}
+    ]
+  },
+  {
+    "value": "Canal online",
+    "weight": 1,
+    "next":[
+      {"value": "CONSULTA DE DEUDA", "weight": 1},
+      {"value": "TRX , ACTIV/DESACTIV SERVICIOS", "weight": 1},
+      {"value": "TRX , ALTA", "weight": 1},
+      {"value": "TRX , INFORMACIÓN PERSONAL", "weight": 1},
+      {"value": "CONSULTA PROMOCIONES", "weight": 1},
+      {"value": "CONSULTA DE SALDO", "weight": 1},
+      {"value": "CONSULTA CENTROS DE ATENCIÓN", "weight": 1},
+      {"value": "CONSULTA CAMBIO EQUIPO", "weight": 1},
+      {"value": "CONSULTA PLAN CONTRATADO", "weight": 1}
+    ]
+  },
+  {
+    "value": "Canal App",
+    "weight": 1,
+    "next":[
+      {"value": "CONSULTA DE DEUDA", "weight": 1},
+      {"value": "TRX , INFORMACIÓN PERSONAL", "weight": 1},
+      {"value": "CONSULTA DE SALDO", "weight": 1},
+      {"value": "CONSULTA CENTROS DE ATENCIÓN", "weight": 1},
+      {"value": "CONSULTA PLAN CONTRATADO", "weight": 1}
+    ]
+  },
+  {
+    "value": "Canal online y canal App",
+    "weight": 1,
+    "next":[
+      {"value": "TRX , INFORMACIÓN PERSONAL", "weight": 1},
+      {"value": "TRX , CAMBIO DE EQUIPO", "weight": 1},
+      {"value": "TRX , CAMBIO DE PLAN", "weight": 1},
+      {"value": "TRX , AFILIACIÓN/DESAFILIACIÓN DE PAQUETES", "weight": 1}
+    ]
+  }
+]

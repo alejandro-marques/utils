@@ -3,7 +3,7 @@ package org.generator.processor;
 import java.util.Map;
 
 public class TestProcess {
-    private static final String CONFIGURATION_FILE = "process/basic.json";
+    private static final String CONFIGURATION_FILE = "process/telefonica.json";
 
     public static void main(String[] args) throws Exception {
         Process process = new Process(CONFIGURATION_FILE, true);

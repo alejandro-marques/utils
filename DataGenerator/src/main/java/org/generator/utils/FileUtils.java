@@ -7,9 +7,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by alejandro on 19/10/15.
- */
 public class FileUtils {
 
     public static List<String> getListFromFile (String fileName, boolean innerFile) throws Exception {
@@ -23,12 +20,10 @@ public class FileUtils {
         }
         catch (Exception exception) {throw new Exception("File \"" + fileName + "\" not found.");}
 
-        if (input != null){
-            BufferedReader reader = new BufferedReader(input);
-            String line=null;
-            while((line=reader.readLine()) != null){
-                list.add(line.trim());
-            }
+        BufferedReader reader = new BufferedReader(input);
+        String line;
+        while((line = reader.readLine()) != null){
+            list.add(line.trim());
         }
 
         return list;

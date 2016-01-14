@@ -3,11 +3,11 @@
         "maxDocuments": -1,
         "id": [
             {
-                "name": "journey",
+                "name": "journeyId",
                 "type": "text",
                 "subtype": "dictionary",
                 "parameters" :{
-                    "file": "dictionaries/journeys.json",
+                    "file": "dictionaries/telefonica/journeys.json",
                     "limit": true
                 },
                 "value" : {
@@ -23,7 +23,7 @@
                 "type": "text",
                 "subtype": "dictionary",
                 "parameters" :{
-                    "file": "dictionaries/segments.json",
+                    "file": "dictionaries/telefonica/segments.json",
                     "limit": true
                 },
                 "value" : {
@@ -39,7 +39,7 @@
                 "type": "text",
                 "subtype": "dictionary",
                 "parameters" :{
-                    "file": "dictionaries/age-ranges.json",
+                    "file": "dictionaries/telefonica/age-ranges.json",
                     "limit": true
                 },
                 "value" : {
@@ -55,7 +55,7 @@
                 "type": "text",
                 "subtype": "dictionary",
                 "parameters" :{
-                    "file": "dictionaries/products.json",
+                    "file": "dictionaries/telefonica/products.json",
                     "limit": true
                 },
                 "value" : {
@@ -67,7 +67,7 @@
                 }
             },
             {
-                "name": "path",
+                "name": "priority",
                 "type" : "numeric",
                 "subtype" : "integer",
                 "parameters" :{
@@ -85,14 +85,14 @@
                 }
             }
         ],
-        "minRelatedDocuments": 5,
-        "maxRelatedDocuments": 10
+        "minRelatedDocuments": 3,
+        "maxRelatedDocuments": 100
     },
 
     "model" :
     [
         {
-            "name": "position",
+            "name": "touchpoint_order",
             "type" : "numeric",
             "subtype" : "integer",
             "value" : {
@@ -121,11 +121,23 @@
             }
         },
         {
-            "name": "touchpoint",
+            "name": "touchpoint_functionality",
             "type": "text",
             "subtype": "dictionary",
             "parameters" :{
-                "file": "dictionaries/touchpoints.json",
+                "file": "dictionaries/telefonica/functionalities.json",
+                "limit": true
+            },
+            "value" : {
+                "type": "random"
+            }
+        },
+        {
+            "name": "touchpoint_channel",
+            "type": "text",
+            "subtype": "dictionary",
+            "parameters" :{
+                "file": "dictionaries/telefonica/channels.json",
                 "limit": true
             },
             "value" : {
@@ -137,19 +149,61 @@
     "transformations" :
     [
         {
-            "field": "touchpoint",
-            "source": ["journey"],
+          "field" : "journeyId",
+          "source": ["journeyId"],
+          "operation": "split",
+          "parameters": {
+            "character" : "#-#-#",
+            "trim" : "true"
+          }
+        },
+        {
+            "field": "functionality",
+            "source": ["journeyId_0"],
+            "operation": "rename"
+        },
+        {
+            "field": "channel",
+            "source": ["journeyId_1"],
+            "operation": "rename"
+        },
+        {
+            "field": "touchpoint_functionality",
+            "source": ["functionality"],
             "operation": "copy",
             "conditions": [
                 {
                     "condition" : "equal",
-                    "source" : ["position", "relatedDocuments"]
+                    "source" : ["touchpoint_order", "relatedDocuments"]
+                }
+            ]
+        },
+        {
+            "field": "touchpoint_channel",
+            "source": ["channel"],
+            "operation": "copy",
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["touchpoint_order", "relatedDocuments"]
                 }
             ]
         },
         {
             "source": ["id", "relatedDocuments"],
             "operation": "remove"
+        },
+        {
+            "field": "empty",
+            "operation": "add",
+            "value": {
+                "type": "text",
+                "subtype": "string",
+                "value" : {
+                    "type": "fixed",
+                    "value": ""
+                }
+            }
         }
     ]
 }
