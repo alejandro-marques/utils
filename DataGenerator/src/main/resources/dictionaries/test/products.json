@@ -1,0 +1,5 @@
+[
+  {"value": "adsl", "weight": 4},
+  {"value": "movil", "weight": 5},
+  {"value": "fijo", "weight": 1}
+]

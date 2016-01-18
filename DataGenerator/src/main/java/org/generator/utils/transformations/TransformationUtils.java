@@ -21,6 +21,7 @@ public class TransformationUtils {
         }
 
         Type type = Type.fromString(transformation.getOperation());
+        if (null == type){throw new Exception("Type \"" + transformation.getOperation() + "\" not supported.");}
 
         switch (type){
 

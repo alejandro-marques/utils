@@ -44,6 +44,9 @@ public class FieldUtils {
                     case DICTIONARY:
                         return TextDictionaryFieldUtils.getDictionaryFieldValue(field, previousValue);
 
+                    case RELATION:
+                        return TextDictionaryFieldUtils.getRelationFieldValue(field, previousValue);
+
                     default:
                         throw new Exception(
                                 "Subtype \"" + subtype.toString() + "\" not implemented yet.");

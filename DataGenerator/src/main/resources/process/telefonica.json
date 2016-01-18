@@ -71,12 +71,12 @@
                 "type" : "numeric",
                 "subtype" : "integer",
                 "parameters" :{
-                    "max" : 5,
+                    "max" : 4,
                     "limit" : true
                 },
                 "value" : {
                     "type": "fixed",
-                    "value": 1
+                    "value": 0
                 },
                 "variation" : {
                     "type" : "uniform",
@@ -85,8 +85,8 @@
                 }
             }
         ],
-        "minRelatedDocuments": 3,
-        "maxRelatedDocuments": 100
+        "minRelatedDocuments": 10,
+        "maxRelatedDocuments": 50
     },
 
     "model" :
@@ -148,6 +148,21 @@
 
     "transformations" :
     [
+        {
+            "field": "touchpoint_channel",
+            "operation": "add",
+            "source": ["touchpoint_functionality"],
+            "value": {
+                "type": "text",
+                "subtype": "relation",
+                "parameters" :{
+                    "file": "dictionaries/telefonica/relations/functionality-channel.json"
+                },
+                "value" : {
+                    "type": "random"
+                }
+            }
+        },
         {
           "field" : "journeyId",
           "source": ["journeyId"],

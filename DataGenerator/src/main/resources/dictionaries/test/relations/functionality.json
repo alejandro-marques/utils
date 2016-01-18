@@ -1,0 +1,52 @@
+[
+  {
+    "value": "alta",
+    "weight": 2,
+    "next":[
+      {"value": "saldo", "weight": 6},
+      {"value": "avería", "weight": 4},
+      {"value": "información", "weight": 7},
+      {"value": "otros", "weight": 3}
+    ]
+  },
+  {
+    "value": "saldo",
+    "weight": 5,
+    "next":[
+      {"value": "saldo", "weight": 1},
+      {"value": "avería", "weight": 5},
+      {"value": "información", "weight": 9},
+      {"value": "otros", "weight": 5}
+    ]
+  },
+  {
+    "value": "avería",
+    "weight": 2,
+    "next":[
+      {"value": "saldo", "weight": 1},
+      {"value": "avería", "weight": 8},
+      {"value": "información", "weight": 7},
+      {"value": "otros", "weight": 4}
+    ]
+  },
+  {
+    "value": "información",
+    "weight": 8,
+    "next":[
+      {"value": "saldo", "weight": 9},
+      {"value": "avería", "weight": 3},
+      {"value": "información", "weight": 7},
+      {"value": "otros", "weight": 1}
+    ]
+  },
+  {
+    "value": "otros",
+    "weight": 3,
+    "next":[
+      {"value": "saldo", "weight": 7},
+      {"value": "avería", "weight": 3},
+      {"value": "información", "weight": 9},
+      {"value": "otros", "weight": 1}
+    ]
+  }
+]

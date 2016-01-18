@@ -1,0 +1,51 @@
+[
+  {
+    "value": "alta",
+    "next":[
+      {"value": "presencial", "weight": 6},
+      {"value": "web", "weight": 4}
+    ]
+  },
+  {
+    "value": "saldo",
+    "next":[
+      {"value": "web", "weight": 2},
+      {"value": "móvil", "weight": 8}
+    ]
+  },
+  {
+    "value": "avería",
+    "next":[
+      {"value": "presencial", "weight": 2},
+      {"value": "web", "weight": 5},
+      {"value": "fijo", "weight": 2},
+      {"value": "móvil", "weight": 1}
+    ]
+  },
+  {
+    "value": "información",
+    "next":[
+      {"value": "presencial", "weight": 1},
+      {"value": "web", "weight": 6},
+      {"value": "móvil", "weight": 3}
+    ]
+  },
+  {
+    "value": "otros",
+    "next":[
+      {"value": "presencial", "weight": 2},
+      {"value": "web", "weight": 3},
+      {"value": "fijo", "weight": 3},
+      {"value": "móvil", "weight": 2}
+    ]
+  },
+  {
+    "value": "baja",
+    "next":[
+      {"value": "presencial", "weight": 1},
+      {"value": "web", "weight": 4},
+      {"value": "fijo", "weight": 1},
+      {"value": "móvil", "weight": 4}
+    ]
+  }
+]

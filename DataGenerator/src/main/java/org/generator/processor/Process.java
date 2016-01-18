@@ -1,9 +1,12 @@
 package org.generator.processor;
 
+import org.generator.configuration.CommonData;
 import org.generator.configuration.ProcessConfigurator;
+import org.generator.constants.PropertiesConstants;
 import org.generator.exception.LimitReachedException;
 import org.generator.model.configuration.GeneratorConfiguration;
 import org.generator.model.configuration.ProcessConfiguration;
+import org.generator.model.data.Dictionary;
 import org.generator.model.data.Field;
 import org.generator.model.data.Transformation;
 import org.generator.utils.RandomUtils;
@@ -31,6 +34,7 @@ public class Process {
 
     private Map<String, Object> lastDocument = null;
     private Map<String, Object> lastId = null;
+    private Double lastWeight = null;
 
 
     public Process (String configurationFile, boolean resourceConfiguration)
@@ -68,7 +72,10 @@ public class Process {
             // Calculates how many related documents are going to be generated
             relatedDocuments = RandomUtils.getRandomInteger(minRelatedDocuments, maxRelatedDocuments);
             // Generates the base id for the first document (Which is going to be shared by every related document)
-            try{lastId = generateId(generatorConfiguration.getId(), lastId);}
+            try{
+                lastId = generateId(generatorConfiguration.getId(), lastId);
+                lastWeight = generateWeight(generatorConfiguration.getId(), lastId);
+            }
             catch (LimitReachedException exception){return null;}
         }
         // If it is a related document it is marked as having variation values
@@ -80,6 +87,7 @@ public class Process {
         document.putAll(lastId);
         // An id field formed by the id field values and the current related document counter is generated
         document.put("id", getIdValue());
+        document.put("weight", lastWeight);
         document.put("relatedDocuments", relatedDocuments);
 
         // Generated document is stored in order to use it for related documents which values are variations of this one
@@ -90,8 +98,7 @@ public class Process {
         // If max related documents have been reached a new non-related document marker is reset
         if (currentRelatedDocument >= relatedDocuments){currentRelatedDocument = 0;}
 
-        transformDocument(document);
-        return document;
+        return transformDocument(document);
     }
 
 
@@ -142,11 +149,30 @@ public class Process {
         throw new LimitReachedException("Last id already generated");
     }
 
+    private Double generateWeight (List<Field> idFields, Map<String, Object> id){
+        Double weight = 1.0;
 
-    private void transformDocument (Map<String, Object> document) throws Exception {
-        for (Transformation transformation : transformations){
-            TransformationUtils.transform(document, transformation);
+        for (Field field : idFields){
+            Map<String, String> parameters = field.getParameters();
+            if (null != parameters && Boolean.parseBoolean(parameters.get(PropertiesConstants.WEIGHT))){
+                String value = (String) id.get(field.getName());
+                String dictionaryName = field.getParameters().get(PropertiesConstants.FILE);
+                Dictionary dictionary = CommonData.getDictionary(dictionaryName);
+                weight = weight * dictionary.getWeight(value);
+            }
         }
+
+        return weight;
+    }
+
+
+    private Map<String, Object> transformDocument (Map<String, Object> document) throws Exception {
+        Map<String, Object> transformedDocument = new HashMap<>();
+        transformedDocument.putAll(document);
+        for (Transformation transformation : transformations){
+            TransformationUtils.transform(transformedDocument, transformation);
+        }
+        return transformedDocument;
     }
 
     private Map<String, Object> generateFields (List<Field> fields, boolean isVariation)

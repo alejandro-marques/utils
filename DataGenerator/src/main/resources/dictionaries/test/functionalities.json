@@ -1,0 +1,7 @@
+[
+  {"value": "alta", "weight": 2},
+  {"value": "saldo", "weight": 5},
+  {"value": "avería", "weight": 2},
+  {"value": "información", "weight": 8},
+  {"value": "otros", "weight": 3}
+]

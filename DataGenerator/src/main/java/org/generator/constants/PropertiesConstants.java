@@ -19,6 +19,7 @@ public interface PropertiesConstants {
     String DOUBLE = "double";
     String STRING = "string";
     String DICTIONARY = "dictionary";
+    String RELATION = "relation";
 
     // Common
     String NONE = "none";
@@ -29,18 +30,19 @@ public interface PropertiesConstants {
     String POSITION = "position";
     String MIN = "min";
     String MAX = "max";
-    String ROTATE = "rotate";
     String LIMIT = "limit";
+    String WEIGHT = "weight";
 
-    // String properties
+    // Text properties
     String FILE = "file";
     String SEQUENTIAL = "sequential";
+    String RELATED = "related";
 
     // Date properties
     String STEP = "step";
     String FORMAT = "format";
 
-    // Integer properties
+    // Numeric properties
     String GAUSSIAN = "gaussian";
     String MEAN = "mean";
     String VARIANCE = "variance";

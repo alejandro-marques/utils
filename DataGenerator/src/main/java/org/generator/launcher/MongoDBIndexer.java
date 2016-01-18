@@ -130,7 +130,7 @@ public class MongoDBIndexer {
 
     public static void printUsage (){
         System.out.println("Usage:");
-        System.out.print("java -jar MongoDBIndexer.jar ");
+        System.out.print("java -jar data-generator.jar ");
         for (Parameter parameter : Parameter.values()){
             System.out.print(parameter.mandatory? "" : "[");
             System.out.print("-" + parameter.name + "={");

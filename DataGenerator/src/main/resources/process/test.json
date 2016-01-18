@@ -3,27 +3,12 @@
         "maxDocuments": -1,
         "id": [
             {
-                "name": "journey",
-                "type": "text",
-                "subtype": "dictionary",
-                "parameters" :{
-                    "file": "dictionaries/journeys.json",
-                    "limit": true
-                },
-                "value" : {
-                    "type": "fixed",
-                    "position": 0
-                },
-                "variation" : {
-                    "type": "sequential"
-                }
-            },
-            {
                 "name": "segment",
                 "type": "text",
                 "subtype": "dictionary",
                 "parameters" :{
-                    "file": "dictionaries/segments.json",
+                    "file": "dictionaries/test/segments.json",
+                    "weight": true,
                     "limit": true
                 },
                 "value" : {
@@ -39,7 +24,8 @@
                 "type": "text",
                 "subtype": "dictionary",
                 "parameters" :{
-                    "file": "dictionaries/age-ranges.json",
+                    "file": "dictionaries/test/age-ranges.json",
+                    "weight": true,
                     "limit": true
                 },
                 "value" : {
@@ -55,7 +41,8 @@
                 "type": "text",
                 "subtype": "dictionary",
                 "parameters" :{
-                    "file": "dictionaries/products.json",
+                    "file": "dictionaries/test/products.json",
+                    "weight": true,
                     "limit": true
                 },
                 "value" : {
@@ -85,8 +72,8 @@
                 }
             }
         ],
-        "minRelatedDocuments": 5,
-        "maxRelatedDocuments": 10
+        "minRelatedDocuments": 3,
+        "maxRelatedDocuments": 5
     },
 
     "model" :
@@ -121,14 +108,16 @@
             }
         },
         {
-            "name": "touchpoint",
+            "name": "functionality",
             "type": "text",
-            "subtype": "dictionary",
+            "subtype": "relation",
             "parameters" :{
-                "file": "dictionaries/touchpoints.json",
-                "limit": true
+                "file": "dictionaries/test/relations/functionality.json"
             },
             "value" : {
+                "type": "random"
+            },
+            "variation" : {
                 "type": "random"
             }
         }
@@ -137,9 +126,34 @@
     "transformations" :
     [
         {
-            "field": "touchpoint",
-            "source": ["journey"],
-            "operation": "copy",
+            "field" : "weight",
+            "source": ["weight"],
+            "operation": "sum",
+            "value": {
+                "type" : "numeric",
+                "subtype" : "integer",
+                "value" : {
+                    "type" : "fixed",
+                    "value" : 1
+                }
+            }
+        },
+        {
+            "field" : "users",
+            "source": ["users", "weight"],
+            "operation": "multiply"
+        },
+        {
+            "field": "functionality",
+            "operation": "add",
+            "value": {
+                "type": "text",
+                "subtype": "string",
+                "value" : {
+                    "type": "fixed",
+                    "value": "baja"
+                }
+            },
             "conditions": [
                 {
                     "condition" : "equal",
@@ -148,7 +162,26 @@
             ]
         },
         {
-            "source": ["id", "relatedDocuments"],
+            "field": "channel",
+            "operation": "add",
+            "source": ["functionality"],
+            "value": {
+                "type": "text",
+                "subtype": "relation",
+                "parameters" :{
+                    "file": "dictionaries/test/relations/functionality-channel.json"
+                },
+                "value" : {
+                    "type": "random"
+                }
+            }
+        },
+        {
+            "source": ["users"],
+            "operation": "round"
+        },
+        {
+            "source": ["id", "relatedDocuments", "weight"],
             "operation": "remove"
         }
     ]

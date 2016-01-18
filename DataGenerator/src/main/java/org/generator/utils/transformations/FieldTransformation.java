@@ -1,5 +1,6 @@
 package org.generator.utils.transformations;
 
+import org.generator.constants.PropertiesConstants;
 import org.generator.model.data.Field;
 import org.generator.model.data.Transformation;
 import org.generator.utils.properties.FieldUtils;
@@ -12,7 +13,22 @@ public class FieldTransformation {
     public static void addField(Map<String, Object> document, Transformation transformation)
             throws Exception {
         Field operand = transformation.getValue();
-        document.put(transformation.getField(), FieldUtils.getFieldValue(operand, null));
+        String fieldName = transformation.getField();
+        List<String> sources = transformation.getSource();
+
+        String suffix = "";
+        int count = 1;
+
+        if (sources == null){document.put(fieldName, FieldUtils.getFieldValue(operand, null));}
+        else {
+            for (String source : sources) {
+                if (null != operand) {
+                    operand.getParameters().put(PropertiesConstants.RELATION, document.get(source).toString());
+                }
+                document.put(fieldName + suffix, FieldUtils.getFieldValue(operand, null));
+                suffix = "" + count++;
+            }
+        }
     }
 
     public static void removeField(Map<String, Object> document, Transformation transformation)

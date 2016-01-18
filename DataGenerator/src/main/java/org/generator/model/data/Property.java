@@ -7,7 +7,7 @@ import java.util.EnumSet;
 public class Property {
 
     public enum Type {
-        TEXT (PropertiesConstants.TEXT, EnumSet.of(Subtype.STRING, Subtype.DICTIONARY)),
+        TEXT (PropertiesConstants.TEXT, EnumSet.of(Subtype.STRING, Subtype.DICTIONARY, Subtype.RELATION)),
         NUMERIC (PropertiesConstants.NUMERIC, EnumSet.of(Subtype.INTEGER, Subtype.DOUBLE)),
         DATE (PropertiesConstants.DATE, null);
 
@@ -30,7 +30,10 @@ public class Property {
     public enum Subtype {
         DICTIONARY (PropertiesConstants.DICTIONARY,
                 EnumSet.of(Value.FIXED, Value.RANDOM),
-                EnumSet.of(Value.NONE, Value.SEQUENTIAL)),
+                EnumSet.of(Value.NONE, Value.SEQUENTIAL, Value.RELATED)),
+        RELATION (PropertiesConstants.RELATION,
+                EnumSet.of(Value.FIXED, Value.RANDOM),
+                EnumSet.of(Value.NONE, Value.SEQUENTIAL, Value.RELATED)),
         STRING (PropertiesConstants.STRING,
                 EnumSet.of(Value.FIXED, Value.RANDOM),
                 EnumSet.of(Value.NONE)),
@@ -69,7 +72,8 @@ public class Property {
         RANDOM (PropertiesConstants.RANDOM),
         UNIFORM (PropertiesConstants.UNIFORM),
         GAUSSIAN(PropertiesConstants.GAUSSIAN),
-        SEQUENTIAL(PropertiesConstants.SEQUENTIAL);
+        SEQUENTIAL(PropertiesConstants.SEQUENTIAL),
+        RELATED(PropertiesConstants.RELATED);
 
         private String name;
 
