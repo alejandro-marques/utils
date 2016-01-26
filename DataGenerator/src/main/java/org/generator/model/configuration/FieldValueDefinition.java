@@ -1,13 +1,13 @@
-package org.generator.model.data;
+package org.generator.model.configuration;
 
 import org.generator.constants.PropertiesConstants;
 
 import java.util.EnumSet;
 
-public class Property {
+public class FieldValueDefinition {
 
     public enum Type {
-        TEXT (PropertiesConstants.TEXT, EnumSet.of(Subtype.STRING, Subtype.DICTIONARY, Subtype.RELATION)),
+        TEXT (PropertiesConstants.TEXT, EnumSet.of(Subtype.STRING, Subtype.DICTIONARY)),
         NUMERIC (PropertiesConstants.NUMERIC, EnumSet.of(Subtype.INTEGER, Subtype.DOUBLE)),
         DATE (PropertiesConstants.DATE, null);
 
@@ -29,36 +29,33 @@ public class Property {
 
     public enum Subtype {
         DICTIONARY (PropertiesConstants.DICTIONARY,
-                EnumSet.of(Value.FIXED, Value.RANDOM),
-                EnumSet.of(Value.NONE, Value.SEQUENTIAL, Value.RELATED)),
-        RELATION (PropertiesConstants.RELATION,
-                EnumSet.of(Value.FIXED, Value.RANDOM),
-                EnumSet.of(Value.NONE, Value.SEQUENTIAL, Value.RELATED)),
+                EnumSet.of(Mode.FIXED, Mode.RANDOM),
+                EnumSet.of(Mode.NONE, Mode.FIXED, Mode.RANDOM, Mode.SEQUENTIAL)),
         STRING (PropertiesConstants.STRING,
-                EnumSet.of(Value.FIXED, Value.RANDOM),
-                EnumSet.of(Value.NONE)),
+                EnumSet.of(Mode.FIXED, Mode.RANDOM),
+                EnumSet.of(Mode.NONE)),
         INTEGER (PropertiesConstants.INTEGER,
-                EnumSet.of(Value.FIXED, Value.UNIFORM, Value.GAUSSIAN),
-                EnumSet.of(Value.NONE, Value.FIXED, Value.UNIFORM, Value.GAUSSIAN)),
+                EnumSet.of(Mode.FIXED, Mode.UNIFORM, Mode.GAUSSIAN),
+                EnumSet.of(Mode.NONE, Mode.FIXED, Mode.UNIFORM, Mode.GAUSSIAN)),
         DOUBLE(PropertiesConstants.DOUBLE,
-                EnumSet.of(Value.FIXED, Value.UNIFORM, Value.GAUSSIAN),
-                EnumSet.of(Value.NONE, Value.FIXED, Value.UNIFORM, Value.GAUSSIAN));
+                EnumSet.of(Mode.FIXED, Mode.UNIFORM, Mode.GAUSSIAN),
+                EnumSet.of(Mode.NONE, Mode.FIXED, Mode.UNIFORM, Mode.GAUSSIAN));
 
         private String name;
-        private EnumSet<Value> values;
-        private EnumSet<Value> variations;
+        private EnumSet<Mode> values;
+        private EnumSet<Mode> variations;
 
-        Subtype (String name, EnumSet<Value> values, EnumSet<Value> variations){
+        Subtype (String name, EnumSet<Mode> values, EnumSet<Mode> variations){
             this.name = name;
             this.values = values;
             this.variations = variations;
         }
 
-        public boolean isValidValue(Value value){
+        public boolean isValidInitialMode(Mode value){
             return values.contains(value);
         }
 
-        public boolean isValidVariation(Value variation){
+        public boolean isValidVariationMode(Mode variation){
             return variations.contains(variation);
         }
 
@@ -66,7 +63,7 @@ public class Property {
         public String toString() {return name;}
     }
 
-    public enum Value {
+    public enum Mode {
         NONE (PropertiesConstants.NONE),
         FIXED (PropertiesConstants.FIXED),
         RANDOM (PropertiesConstants.RANDOM),
@@ -77,7 +74,7 @@ public class Property {
 
         private String name;
 
-        Value (String name){
+        Mode(String name){
             this.name = name;
         }
 

@@ -2,12 +2,15 @@ package org.generator.model.data;
 
 import org.generator.exception.LimitReachedException;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.NavigableMap;
+import java.util.Random;
+import java.util.TreeMap;
 
 public class Dictionary {
 
-    private final NavigableMap<Double, String> cumulativeWeightsMap = new TreeMap<>();
-    private final Map<String, Double> weightsMap = new HashMap<>();
+    private final NavigableMap<Double, Word> weightsMap = new TreeMap<>();
     private final Random random = new Random();
 
     private String name;
@@ -18,19 +21,23 @@ public class Dictionary {
         this.name = name;
     }
 
-    public void add(Double weight, String word) throws Exception {
-        if (null == weight){weight = 1.0;}
+    public void add(Word word) throws Exception {
+        Double weight = word.getWeight();
+        if (null == weight){
+            weight = 1.0;
+            word.setWeight(weight);
+        }
         if (weight <= 0) {throw new Exception("Weight cannot be lower than 1");}
+
         if (weight > maxWeight) {maxWeight = weight;}
         total += weight;
-        cumulativeWeightsMap.put(total, word);
-        weightsMap.put(word, weight);
+        weightsMap.put(total, word);
     }
 
-    public String getWord(int position) throws Exception {
-        if (position >= 0 && position < cumulativeWeightsMap.size()) {
+    public Word getWord(int position) throws Exception {
+        if (position >= 0 && position < weightsMap.size()) {
             int count = 0;
-            for (Map.Entry<Double, String> entry : cumulativeWeightsMap.entrySet()) {
+            for (Entry<Double, Word> entry : weightsMap.entrySet()) {
                 if (count == position) return entry.getValue();
                 count++;
             }
@@ -38,28 +45,31 @@ public class Dictionary {
         throw new Exception("Wrong position \"" + position + "\" for dictionary \"" + name + "\".");
     }
 
-    public Double getWeight (String wordName){
-        if (null != wordName && null != weightsMap.get(wordName)){
-            return weightsMap.get(wordName)/maxWeight;
+    public Word getWord(String wordValue) throws Exception {
+        if (null != wordValue) {
+            for (Word word : weightsMap.values()) {
+                if (wordValue.equals(word.getValue())) return word;
+            }
         }
-        return null;
+        throw new Exception("Word \"" + wordValue + "\" not found in dictionary \"" + name + "\".");
     }
 
-    public String getRandomWord() {
+    public Word getRandomWord() {
         double value = random.nextDouble() * total;
-        return cumulativeWeightsMap.ceilingEntry(value).getValue();
+        if (weightsMap.isEmpty()){return null;}
+        return weightsMap.ceilingEntry(value).getValue();
     }
 
-    public String getNextWord (String previousWord, boolean limit) throws Exception{
-        if (previousWord.equals(cumulativeWeightsMap.lastEntry().getValue())){
-            if (!limit){return cumulativeWeightsMap.firstEntry().getValue();}
+    public Word getNextWord (String previousWord, boolean limit) throws Exception{
+        if (previousWord.equals(weightsMap.lastEntry().getValue().getValue())){
+            if (!limit){return weightsMap.firstEntry().getValue();}
             throw new LimitReachedException(previousWord,
                     "Last word in dictionary \"" + name + "\" already reached.");
         }
 
-        Iterator<String> iterator = cumulativeWeightsMap.values().iterator();
+        Iterator<Word> iterator = weightsMap.values().iterator();
         while (iterator.hasNext()){
-            if (previousWord.equals(iterator.next())){
+            if (previousWord.equals(iterator.next().getValue())){
                 return iterator.next();
             }
         }
@@ -67,8 +77,12 @@ public class Dictionary {
                 "\" was found in dictionary \"" + name + "\".");
     }
 
+    public double getMaxWeight() {
+        return maxWeight;
+    }
+
     @Override
     public String toString() {
-        return cumulativeWeightsMap.toString();
+        return weightsMap.toString();
     }
 }

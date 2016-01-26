@@ -1,8 +1,5 @@
 package org.generator.constants;
 
-/**
- * Created by alejandro on 5/11/15.
- */
 public interface TransformationConstants {
 
     // Types
@@ -10,6 +7,7 @@ public interface TransformationConstants {
     String RENAME = "rename";
     String COPY = "copy";
     String REMOVE = "remove";
+    String TRANSLATE = "translate";
 
     String SUM = "sum";
     String SUBTRACT = "subtract";
@@ -26,4 +24,8 @@ public interface TransformationConstants {
     // SPLIT
     String CHARACTER = "character";
     String TRIM = "trim";
+
+    // Common
+    String FIELD = "field";
+    String SOURCE = "source";
 }

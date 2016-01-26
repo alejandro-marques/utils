@@ -6,12 +6,12 @@ public class TestProcess {
     private static final String CONFIGURATION_FILE = "process/test.json";
 
     public static void main(String[] args) throws Exception {
-        Process process = new Process(CONFIGURATION_FILE, true);
+        Processor processor = new Processor(CONFIGURATION_FILE, true);
 
         Map<String, Object> document;
         int count = 0;
 
-        while (null != (document = process.nextDocument())){
+        while (null != (document = processor.nextDocument())){
             System.out.println(document);
             count++;
         }

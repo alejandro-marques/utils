@@ -2,7 +2,7 @@ package org.generator.launcher;
 
 import org.generator.connector.DatabaseConnector;
 import org.generator.connector.MongoDBConnector;
-import org.generator.processor.Process;
+import org.generator.processor.Processor;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -33,7 +33,7 @@ public class MongoDBIndexer {
     private static final int MESSAGE_FREQUENCY = 10000;
     private static SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss.SSS");
 
-    private static Process process;
+    private static Processor processor;
     private static int documentCount = 0;
     private static long start;
 
@@ -53,13 +53,13 @@ public class MongoDBIndexer {
 
             if (null != processModel){
                 System.out.println("Retrieving process configuration from " + processModel);
-                process = new Process(processModel, false);
+                processor = new Processor(processModel, false);
 
             }
 
             try {
                 Map<String, Object> document;
-                while (null != (document = process.nextDocument())) {
+                while (null != (document = processor.nextDocument())) {
                     if (documentCount % MESSAGE_FREQUENCY == 0){printProcess();}
                     connector.bufferedIndexMap(document);
                     documentCount++;

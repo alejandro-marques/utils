@@ -1,7 +1,6 @@
 [
   {
     "value": "month 1",
-    "weight": 1,
     "next":[
       {"value": "Presencial Call Movil", "weight": 1},
       {"value": "Call center fijo", "weight": 1},
@@ -14,7 +13,6 @@
   },
   {
     "value": "month 2",
-    "weight": 1,
     "next":[
       {"value": "Presencial Call Movil", "weight": 1},
       {"value": "Call center fijo", "weight": 1},
@@ -27,7 +25,6 @@
   },
   {
     "value": "month 3",
-    "weight": 1,
     "next":[
       {"value": "Presencial Call Movil", "weight": 1},
       {"value": "Call center fijo", "weight": 1},
@@ -40,7 +37,6 @@
   },
   {
     "value": "month 4",
-    "weight": 1,
     "next":[
       {"value": "Presencial Call Movil", "weight": 1},
       {"value": "Call center fijo", "weight": 1},
@@ -53,7 +49,6 @@
   },
   {
     "value": "month 5",
-    "weight": 1,
     "next":[
       {"value": "Presencial Call Movil", "weight": 1},
       {"value": "Call center fijo", "weight": 1},
@@ -66,7 +61,6 @@
   },
   {
     "value": "month 6",
-    "weight": 1,
     "next":[
       {"value": "Presencial Call Movil", "weight": 1},
       {"value": "Call center fijo", "weight": 1},
@@ -79,7 +73,6 @@
   },
   {
     "value": "rest",
-    "weight": 1,
     "next":[
       {"value": "Presencial Call Movil", "weight": 1},
       {"value": "Call center fijo", "weight": 1},

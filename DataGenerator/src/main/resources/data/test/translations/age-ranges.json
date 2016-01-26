@@ -1,0 +1,26 @@
+[
+  {
+    "value": "joven",
+    "fields": {
+      "min_age": 18,
+      "max_age": 30,
+      "age_code": 0
+    }
+  },
+  {
+    "value": "adulto",
+    "fields": {
+      "min_age": 31,
+      "max_age": 60,
+      "age_code": 1
+    }
+  },
+  {
+    "value": "tercera edad",
+    "fields": {
+      "min_age": 61,
+      "max_age": 100,
+      "age_code": 2
+    }
+  }
+]

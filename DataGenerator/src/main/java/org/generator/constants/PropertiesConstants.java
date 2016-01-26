@@ -6,7 +6,7 @@ package org.generator.constants;
 public interface PropertiesConstants {
 
     // General
-    String TYPE = "type";
+    String MODE = "mode";
 
     // Types
     String NUMERIC = "numeric";
@@ -20,6 +20,7 @@ public interface PropertiesConstants {
     String STRING = "string";
     String DICTIONARY = "dictionary";
     String RELATION = "relation";
+    String TRANSLATION = "translation";
 
     // Common
     String NONE = "none";
@@ -32,6 +33,7 @@ public interface PropertiesConstants {
     String MAX = "max";
     String LIMIT = "limit";
     String WEIGHT = "weight";
+    String ORIGIN = "origin";
 
     // Text properties
     String FILE = "file";

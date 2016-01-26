@@ -1,147 +1,179 @@
 {
     "generator": {
         "maxDocuments": -1,
-        "id": [
+        "minRelatedDocuments": 10,
+        "maxRelatedDocuments": 50,
+        "auxiliaryFields": true,
+        "idFields": [
             {
                 "name": "journeyId",
-                "type": "text",
-                "subtype": "dictionary",
-                "parameters" :{
-                    "file": "dictionaries/telefonica/journeys.json",
-                    "limit": true
+                "order": 1,
+                "options": {
+                    "weight": true
                 },
-                "value" : {
-                    "type": "fixed",
-                    "position": 0
-                },
-                "variation" : {
-                    "type": "sequential"
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "data/telefonica/dictionaries/journeys.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "data/telefonica/dictionaries/journeys.json"
+                    }
                 }
             },
             {
                 "name": "segment",
-                "type": "text",
-                "subtype": "dictionary",
-                "parameters" :{
-                    "file": "dictionaries/telefonica/segments.json",
-                    "limit": true
+                "order": 2,
+                "options": {
+                    "weight": true
                 },
-                "value" : {
-                    "type": "fixed",
-                    "position": 0
-                },
-                "variation" : {
-                    "type": "sequential"
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "data/telefonica/dictionaries/segments.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "data/telefonica/dictionaries/segments.json"
+                    }
                 }
             },
             {
                 "name": "age",
-                "type": "text",
-                "subtype": "dictionary",
-                "parameters" :{
-                    "file": "dictionaries/telefonica/age-ranges.json",
-                    "limit": true
+                "order": 3,
+                "options": {
+                    "weight": true
                 },
-                "value" : {
-                    "type": "fixed",
-                    "position": 0
-                },
-                "variation" : {
-                    "type": "sequential"
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "data/telefonica/dictionaries/age-ranges.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "data/telefonica/dictionaries/age-ranges.json"
+                    }
                 }
             },
             {
                 "name": "product",
-                "type": "text",
-                "subtype": "dictionary",
-                "parameters" :{
-                    "file": "dictionaries/telefonica/products.json",
-                    "limit": true
+                "order": 4,
+                "options": {
+                    "weight": true
                 },
-                "value" : {
-                    "type": "fixed",
-                    "position": 0
-                },
-                "variation" : {
-                    "type": "sequential"
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "data/telefonica/dictionaries/products.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "data/telefonica/dictionaries/products.json"
+                    }
                 }
             },
             {
                 "name": "priority",
-                "type" : "numeric",
-                "subtype" : "integer",
-                "parameters" :{
-                    "max" : 4,
-                    "limit" : true
-                },
-                "value" : {
-                    "type": "fixed",
-                    "value": 0
-                },
-                "variation" : {
-                    "type" : "uniform",
-                    "min" : 1,
-                    "max" : 1
+                "order": 5,
+                "value": {
+                    "type": "numeric",
+                    "subtype": "integer",
+                    "options": {
+                        "max": 4,
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "value": 0
+                    },
+                    "variation": {
+                        "mode": "fixed",
+                        "value": 1
+                    }
                 }
             }
-        ],
-        "minRelatedDocuments": 10,
-        "maxRelatedDocuments": 50
+        ]
     },
 
     "model" :
     [
         {
             "name": "touchpoint_order",
-            "type" : "numeric",
-            "subtype" : "integer",
-            "value" : {
-                "type": "fixed",
-                "value": 1
-            },
-            "variation" : {
-                "type" : "uniform",
-                "min" : 1,
-                "max" : 1
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode": "fixed",
+                    "value": 1
+                },
+                "variation": {
+                    "mode": "fixed",
+                    "value": 1
+                }
             }
         },
         {
             "name": "users",
-            "type" : "numeric",
-            "subtype" : "integer",
-            "value" : {
-                "type" : "gaussian",
-                "mean" : 500,
-                "variance" : 20,
-                "min" : 50,
-                "max" : 1000
-            },
-            "variation" : {
-                "type" : "none"
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode" : "gaussian",
+                    "mean" : 500,
+                    "variance" : 20,
+                    "min" : 50,
+                    "max" : 1000
+                },
+                "variation": {
+                    "mode" : "none"
+                }
             }
         },
         {
             "name": "touchpoint_functionality",
-            "type": "text",
-            "subtype": "dictionary",
-            "parameters" :{
-                "file": "dictionaries/telefonica/functionalities.json",
-                "limit": true
-            },
-            "value" : {
-                "type": "random"
+            "value": {
+                "type": "text",
+                "subtype": "dictionary",
+                "initial": {
+                    "mode": "random",
+                    "dictionary": "data/telefonica/dictionaries/functionalities.json"
+                }
             }
         },
         {
             "name": "touchpoint_channel",
-            "type": "text",
-            "subtype": "dictionary",
-            "parameters" :{
-                "file": "dictionaries/telefonica/channels.json",
-                "limit": true
-            },
-            "value" : {
-                "type": "random"
+            "value": {
+                "type": "text",
+                "subtype": "dictionary",
+                "initial": {
+                    "mode": "random",
+                    "dictionary": "data/telefonica/dictionaries/channels.json"
+                }
             }
         }
     ],
@@ -149,76 +181,88 @@
     "transformations" :
     [
         {
-            "field": "touchpoint_channel",
             "operation": "add",
-            "source": ["touchpoint_functionality"],
+            "field": "touchpoint_channel",
             "value": {
                 "type": "text",
-                "subtype": "relation",
-                "parameters" :{
-                    "file": "dictionaries/telefonica/relations/functionality-channel.json"
+                "subtype": "dictionary",
+                "options": {
+                    "limit": true
                 },
-                "value" : {
-                    "type": "random"
+                "initial": {
+                    "mode": "random",
+                    "position": 0,
+                    "relation": "data/telefonica/relations/functionality-channel.json",
+                    "origin": "touchpoint_functionality"
                 }
             }
         },
         {
-          "field" : "journeyId",
-          "source": ["journeyId"],
-          "operation": "split",
-          "parameters": {
-            "character" : "#-#-#",
-            "trim" : "true"
-          }
+            "operation": "split",
+            "field" : "journeyId",
+            "source": ["journeyId"],
+            "parameters": {
+                "character" : "#-#-#",
+                "trim" : "true"
+            }
         },
         {
+            "operation": "rename",
             "field": "functionality",
-            "source": ["journeyId_0"],
-            "operation": "rename"
+            "source": ["journeyId_0"]
         },
         {
+            "operation": "rename",
             "field": "channel",
-            "source": ["journeyId_1"],
-            "operation": "rename"
+            "source": ["journeyId_1"]
         },
         {
+            "operation": "copy",
             "field": "touchpoint_functionality",
             "source": ["functionality"],
-            "operation": "copy",
             "conditions": [
                 {
                     "condition" : "equal",
-                    "source" : ["touchpoint_order", "relatedDocuments"]
+                    "source" : ["touchpoint_order", "_relatedDocuments"]
                 }
             ]
         },
         {
+            "operation": "copy",
             "field": "touchpoint_channel",
             "source": ["channel"],
-            "operation": "copy",
             "conditions": [
                 {
                     "condition" : "equal",
-                    "source" : ["touchpoint_order", "relatedDocuments"]
+                    "source" : ["touchpoint_order", "_relatedDocuments"]
                 }
             ]
         },
         {
-            "source": ["id", "relatedDocuments"],
-            "operation": "remove"
-        },
-        {
-            "field": "empty",
-            "operation": "add",
+            "operation": "sum",
+            "field": "modified_weight",
+            "source": ["_weight"],
             "value": {
-                "type": "text",
-                "subtype": "string",
-                "value" : {
-                    "type": "fixed",
-                    "value": ""
+                "type": "numeric",
+                "subtype": "integer",
+                "initial" : {
+                    "mode": "fixed",
+                    "value": "1"
                 }
             }
+        },
+        {
+            "operation": "multiply",
+            "field": "users",
+            "source": ["users", "modified_weight"]
+        },
+        {
+            "operation": "round",
+            "source": ["users"]
+        },
+        {
+            "operation": "remove",
+            "source": ["_id", "_relatedDocuments", "_weight", "modified_weight"]
         }
     ]
 }

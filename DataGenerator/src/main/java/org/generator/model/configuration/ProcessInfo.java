@@ -1,22 +1,21 @@
 package org.generator.model.configuration;
 
-import org.generator.model.data.Field;
 import org.generator.model.data.Transformation;
 
 import java.util.List;
 
-public class ProcessConfiguration {
-    private GeneratorConfiguration generator;
-    private List<Field> model;
+public class ProcessInfo {
+    private GeneratorInfo generator;
+    private List<FieldInfo> model;
     private List<Transformation> transformations;
 
-    public GeneratorConfiguration getGenerator() {return generator;}
-    public void setGenerator(GeneratorConfiguration generator) {
+    public GeneratorInfo getGenerator() {return generator;}
+    public void setGenerator(GeneratorInfo generator) {
         this.generator = generator;
     }
 
-    public List<Field> getModel() {return model;}
-    public void setModel(List<Field> model) {
+    public List<FieldInfo> getModel() {return model;}
+    public void setModel(List<FieldInfo> model) {
         this.model = model;
     }
 

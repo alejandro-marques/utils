@@ -1,9 +1,9 @@
 package org.generator.model;
 
-import org.generator.model.data.Property;
-import org.generator.model.data.Property.Type;
-import org.generator.model.data.Property.Subtype;
-import org.generator.model.data.Property.Value;
+import org.generator.model.configuration.FieldValueDefinition;
+import org.generator.model.configuration.FieldValueDefinition.Type;
+import org.generator.model.configuration.FieldValueDefinition.Subtype;
+import org.generator.model.configuration.FieldValueDefinition.Mode;
 
 public class TestProperties {
 
@@ -20,7 +20,7 @@ public class TestProperties {
 
     private static void checkProperty (String typeName, String subtypeName, String valueName)
             throws Exception {
-        Type type = Property.getEnum(Type.class, typeName);
+        Type type = FieldValueDefinition.getEnum(Type.class, typeName);
         if (null == type){throw new Exception("Type \"" + typeName + "\" not supported");}
 
         switch (type){
@@ -61,7 +61,7 @@ public class TestProperties {
 
     private static Subtype checkSubtype(Type type, String subtypeName, String valueName)
             throws Exception {
-        Subtype subtype = Property.getEnum(Subtype.class, subtypeName);
+        Subtype subtype = FieldValueDefinition.getEnum(Subtype.class, subtypeName);
         if (null == subtype){throw new Exception("Subtype \"" + subtypeName + "\" not supported");}
         if (!type.isValidSubtype(subtype)){
             throw new Exception("Subtype \"" + subtypeName + "\" not supported " +
@@ -70,13 +70,13 @@ public class TestProperties {
         return subtype;
     }
 
-    private static Value checkValue(Type type, Subtype subtype, String valueName, boolean variation)
+    private static Mode checkValue(Type type, Subtype subtype, String valueName, boolean variation)
             throws Exception {
-        Value value = Property.getEnum(Value.class, valueName);
+        Mode value = FieldValueDefinition.getEnum(Mode.class, valueName);
         if (null == value){
             throw new Exception((variation?"Variation":"Value") + " \"" + valueName + "\" not supported");
         }
-        if (!variation && !subtype.isValidValue(value) || variation && !subtype.isValidVariation(value)){
+        if (!variation && !subtype.isValidInitialMode(value) || variation && !subtype.isValidVariationMode(value)){
             throw new Exception((variation?"Variation":"Value") + " \"" + valueName + "\" not supported " +
                     "for subtype " + subtype.toString() + " and type " + type.toString() );
         }

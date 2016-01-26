@@ -2,13 +2,14 @@ package org.generator.utils.condition;
 
 import org.generator.model.data.Condition;
 import org.generator.model.data.Condition.Type;
+import org.generator.model.data.FieldValue;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class ConditionUtils {
-    public static boolean check (Map<String,Object> document, Condition condition) throws Exception {
+    public static boolean check (Map<String,FieldValue> document, Condition condition) throws Exception {
 
         Type type = Type.fromString(condition.getCondition());
 
@@ -22,7 +23,7 @@ public class ConditionUtils {
     }
 
 
-    private static boolean checkEqual (Map<String,Object> document, Condition condition) throws Exception {
+    private static boolean checkEqual (Map<String,FieldValue> document, Condition condition) throws Exception {
         List<Object> values = getValues(document, condition);
         Object firstObject = values.remove(0);
         if (null == firstObject){
@@ -36,10 +37,10 @@ public class ConditionUtils {
         return true;
     }
 
-    private static List<Object> getValues  (Map<String, Object> document, Condition condition)
+    private static List<Object> getValues  (Map<String, FieldValue> document, Condition condition)
             throws Exception {
         List<Object> values = new ArrayList<>();
-        for (String sourceField : condition.getSource()){values.add(document.get(sourceField));}
+        for (String sourceField : condition.getSource()){values.add(document.get(sourceField).getValue());}
         if (null != condition.getValue()){values.add(condition.getValue());}
         return values;
     }

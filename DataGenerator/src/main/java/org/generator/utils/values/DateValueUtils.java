@@ -1,15 +1,16 @@
-package org.generator.utils.properties;
+package org.generator.utils.values;
 
 import org.generator.constants.PropertiesConstants;
-import org.generator.model.data.Field;
-import org.generator.model.data.Property;
-import org.generator.model.data.Property.Value;
+import org.generator.model.configuration.FieldValueDefinition;
+import org.generator.model.configuration.FieldValueDefinition.Mode;
+import org.generator.model.configuration.FieldValueInfo;
+import org.generator.model.data.FieldValue;
 import org.generator.utils.RandomUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class DateFieldUtils {
+public class DateValueUtils {
 
     public static final Map<String, Integer> stepConverter = new LinkedHashMap<String, Integer>(){
         {
@@ -24,9 +25,10 @@ public class DateFieldUtils {
     };
 
 
-    public static Object getDatePropertyValue (Field field, Object previousValue, boolean stringFormat) throws Exception {
+    public static FieldValue getDatePropertyValue (FieldValueInfo fieldValueInfo,
+            Object previousValue, boolean stringFormat) throws Exception {
         Date value = null;
-        Map<String, String> parameters = field.getValue();
+        Map<String, String> parameters = fieldValueInfo.getInitial();
         SimpleDateFormat dateFormat = new SimpleDateFormat(parameters.get(PropertiesConstants.FORMAT));
 
         if (null != previousValue){
@@ -38,20 +40,20 @@ public class DateFieldUtils {
             }
             else if (previousValue instanceof Date){value = (Date) previousValue;}
             else {throw new Exception (previousValue.toString() + " is not a valid Date");}
-            parameters = field.getVariation();
+            parameters = fieldValueInfo.getVariation();
         }
 
         value = getValue(parameters, value);
-        return stringFormat? dateFormat.format(value) : value;
+        return new FieldValue(stringFormat? dateFormat.format(value) : value);
     }
 
     private static Date getValue (Map<String, String> parameters, Date previousValue) throws Exception {
-        String typeString = parameters.get(PropertiesConstants.TYPE);
-        Value valueType = Property.getEnum(Value.class, typeString);
+        String modeName = parameters.get(PropertiesConstants.MODE);
+        Mode mode = FieldValueDefinition.getEnum(Mode.class, modeName);
         Calendar value = new GregorianCalendar();
         if (null != previousValue) {value.setTime(previousValue);}
 
-        switch (valueType){
+        switch (mode){
             case FIXED:
                 if (null == previousValue){value = getFixedValue(parameters);}
                 else {addFixedVariation(parameters, value);}
@@ -63,7 +65,7 @@ public class DateFieldUtils {
                 break;
 
             default:
-                throw new Exception("String type \"" + typeString + "\" not implemented yet.");
+                throw new Exception("String type \"" + modeName + "\" not implemented yet.");
         }
 
         return value.getTime();

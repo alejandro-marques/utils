@@ -1,44 +1,55 @@
-package org.generator.utils.properties;
+package org.generator.utils.values;
 
 import org.generator.constants.PropertiesConstants;
 import org.generator.exception.LimitReachedException;
-import org.generator.model.data.Field;
-import org.generator.model.data.Property;
-import org.generator.model.data.Property.Value;
+import org.generator.model.configuration.FieldValueDefinition;
+import org.generator.model.configuration.FieldValueDefinition.Mode;
+import org.generator.model.configuration.FieldValueInfo;
+import org.generator.model.data.FieldValue;
 import org.generator.utils.RandomUtils;
 
 import java.util.Map;
 
-public class NumericFieldUtils {
+public class NumericValueUtils {
 
-    public static Integer getIntegerFieldValue(Field field, Object previousValue) throws Exception {
-        return getNumericFieldValue(field, previousValue).intValue();
+    public static FieldValue getIntegerValue(FieldValueInfo fieldValueInfo, FieldValue previousValue) throws Exception {
+        return new FieldValue(getNumericValue(fieldValueInfo, previousValue).intValue());
     }
 
-    public static Double getDoubleFieldValue(Field field, Object previousValue) throws Exception {
-        return getNumericFieldValue(field, previousValue);
+    public static FieldValue getDoubleValue(FieldValueInfo fieldValueInfo, FieldValue previousValue) throws Exception {
+        return new FieldValue(getNumericValue(fieldValueInfo, previousValue));
     }
 
-    public static Double getNumericFieldValue(Field field, Object previousValue) throws Exception {
+    public static Double getNumericValue(FieldValueInfo fieldValueInfo, FieldValue previousValue) throws Exception {
         Double value;
+        // If there was a previous value
         if (null != previousValue){
-            if (previousValue instanceof Double){value = (Double) previousValue;}
-            else if (previousValue instanceof Integer){value = ((Integer) previousValue).doubleValue();}
-            else {throw new Exception (previousValue.toString() + " is not a valid number");}
+            // Checks if previous value was a valid number
+            try {value = Double.parseDouble(previousValue.getValue().toString());}
+            catch (Exception exception){
+                throw new Exception ("Error while generating numeric variation. Previous value \"" +
+                        previousValue.toString() + "\" is not a valid number.");
+            }
 
-            value = value + getValue(field.getVariation());
-            value = limitValue(value, field.getParameters());
+            // New value is calculated adding the variation to the original value
+            value = value + getValue(fieldValueInfo.getVariation());
+            // Then resulting value is limited if necessary
+            value = limitValue(value, fieldValueInfo.getOptions());
         }
-        else {value = getValue(field.getValue());}
+        // If no previous value was received then initial value is calculated instead of variation
+        else {value = getValue(fieldValueInfo.getInitial());}
 
         return value;
     }
 
     public static Double getValue (Map<String, String> parameters) throws Exception {
-        String typeString = parameters.get(PropertiesConstants.TYPE);
-        Value valueType = Property.getEnum(Value.class, typeString);
+        String modeName = parameters.get(PropertiesConstants.MODE);
+        Mode valueMode = FieldValueDefinition.getEnum(Mode.class, modeName);
+        if (null == valueMode) {
+            throw new Exception("Not supported numeric mode \"" + modeName + "\".");
+        }
 
-        switch (valueType){
+        switch (valueMode){
             case FIXED:
                 return getFixedValue(parameters);
 
@@ -49,7 +60,7 @@ public class NumericFieldUtils {
                 return getGaussianValue(parameters);
 
             default:
-                throw new Exception("Integer type \"" + typeString + "\" not implemented yet.");
+                throw new Exception("Numeric mode \"" + modeName + "\" not implemented yet.");
         }
     }
 

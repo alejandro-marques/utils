@@ -1,18 +1,20 @@
 package org.generator.model.data;
 
 import org.generator.constants.TransformationConstants;
+import org.generator.model.configuration.FieldValueInfo;
 
 import java.util.List;
 import java.util.Map;
 
 public class Transformation {
 
-    public enum Type{
+    public enum Operation {
 
         ADD(TransformationConstants.ADD),
         REMOVE(TransformationConstants.REMOVE),
         COPY (TransformationConstants.COPY),
         RENAME (TransformationConstants.RENAME),
+        TRANSLATE (TransformationConstants.TRANSLATE),
 
         MULTIPLY(TransformationConstants.MULTIPLY),
         DIVIDE(TransformationConstants.DIVIDE),
@@ -25,28 +27,32 @@ public class Transformation {
 
         public String name;
 
-        Type (String name){
+        Operation(String name){
             this.name = name;
         }
 
-        public static Type fromString(String text) {
+        public static Operation fromString(String text) {
             if (text != null) {
-                for (Type type : Type.values()) {
-                    if (text.equals(type.name)) {
-                        return type;
+                for (Operation operation : Operation.values()) {
+                    if (text.equals(operation.name)) {
+                        return operation;
                     }
                 }
             }
             return null;
         }
+
+        @Override
+        public String toString() {return name;}
     }
 
     private String field;
     private List<String> source;
     private String operation;
+    private Integer order;
     private List<Condition> conditions;
     private Map<String, String> parameters;
-    private Field value;
+    private FieldValueInfo value;
 
 
     public String getField() {return field;}
@@ -58,12 +64,22 @@ public class Transformation {
     public String getOperation() {return operation;}
     public void setOperation(String operation) {this.operation = operation;}
 
+    public Integer getOrder() {return order;}
+    public void setOrder(Integer order) {this.order = order;}
+
     public List<Condition> getConditions() {return conditions;}
     public void setConditions(List<Condition> conditions) {this.conditions = conditions;}
 
     public Map<String, String> getParameters() {return parameters;}
     public void setParameters(Map<String, String> parameters) {this.parameters = parameters;}
 
-    public Field getValue() {return value;}
-    public void setValue(Field value) {this.value = value;}
+    public FieldValueInfo getValue() {return value;}
+    public void setValue(FieldValueInfo value) {this.value = value;}
+
+    @Override
+    public String toString() {
+        return operation +
+                (null != field? " (" + field + ")" :
+                        (null != source? " (" + source + ")" : ""));
+    }
 }

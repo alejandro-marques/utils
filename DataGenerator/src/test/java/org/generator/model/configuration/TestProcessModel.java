@@ -9,10 +9,10 @@ public class TestProcessModel {
 
     public static void main(String[] args) throws Exception {
 
-        ProcessConfiguration processConfiguration = FileUtils.getObjectFromJsonFile(CONFIGURATION_FILE,
-                new TypeToken<ProcessConfiguration>(){}.getType(),
+        ProcessInfo processInfo = FileUtils.getObjectFromJsonFile(CONFIGURATION_FILE,
+                new TypeToken<ProcessInfo>(){}.getType(),
                 true);
-        System.out.println(FormatUtils.getObjectAsJson(processConfiguration));
+        System.out.println(FormatUtils.getObjectAsJson(processInfo));
         System.out.println("END");
     }
 }

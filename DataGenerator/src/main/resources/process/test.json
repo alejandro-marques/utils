@@ -1,124 +1,148 @@
 {
     "generator": {
         "maxDocuments": -1,
-        "id": [
+        "minRelatedDocuments": 3,
+        "maxRelatedDocuments": 5,
+        "auxiliaryFields": true,
+        "idFields": [
             {
                 "name": "segment",
-                "type": "text",
-                "subtype": "dictionary",
-                "parameters" :{
-                    "file": "dictionaries/test/segments.json",
-                    "weight": true,
-                    "limit": true
+                "order": 1,
+                "options": {
+                    "weight": true
                 },
-                "value" : {
-                    "type": "fixed",
-                    "position": 0
-                },
-                "variation" : {
-                    "type": "sequential"
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "data/test/dictionaries/segments.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "data/test/dictionaries/segments.json"
+                    }
                 }
             },
             {
                 "name": "age",
-                "type": "text",
-                "subtype": "dictionary",
-                "parameters" :{
-                    "file": "dictionaries/test/age-ranges.json",
-                    "weight": true,
-                    "limit": true
+                "order": 2,
+                "options": {
+                    "weight": true
                 },
-                "value" : {
-                    "type": "fixed",
-                    "position": 0
-                },
-                "variation" : {
-                    "type": "sequential"
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "data/test/dictionaries/age-ranges.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "data/test/dictionaries/age-ranges.json"
+                    }
                 }
             },
             {
                 "name": "product",
-                "type": "text",
-                "subtype": "dictionary",
-                "parameters" :{
-                    "file": "dictionaries/test/products.json",
-                    "weight": true,
-                    "limit": true
+                "order": 3,
+                "options": {
+                    "weight": true
                 },
-                "value" : {
-                    "type": "fixed",
-                    "position": 0
-                },
-                "variation" : {
-                    "type": "sequential"
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "data/test/dictionaries/products.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "data/test/dictionaries/products.json"
+                    }
                 }
             },
             {
                 "name": "path",
-                "type" : "numeric",
-                "subtype" : "integer",
-                "parameters" :{
-                    "max" : 5,
-                    "limit" : true
-                },
-                "value" : {
-                    "type": "fixed",
-                    "value": 1
-                },
-                "variation" : {
-                    "type" : "uniform",
-                    "min" : 1,
-                    "max" : 1
+                "value": {
+                    "type": "numeric",
+                    "subtype": "integer",
+                    "options": {
+                        "max": 5,
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "value": 1
+                    },
+                    "variation": {
+                        "mode": "fixed",
+                        "value": 1
+                    }
                 }
             }
-        ],
-        "minRelatedDocuments": 3,
-        "maxRelatedDocuments": 5
+        ]
     },
 
     "model" :
     [
         {
             "name": "position",
-            "type" : "numeric",
-            "subtype" : "integer",
-            "value" : {
-                "type": "fixed",
-                "value": 1
-            },
-            "variation" : {
-                "type" : "uniform",
-                "min" : 1,
-                "max" : 1
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode": "fixed",
+                    "value": 1
+                },
+                "variation": {
+                    "mode": "fixed",
+                    "value": 1
+                }
             }
         },
         {
             "name": "users",
-            "type" : "numeric",
-            "subtype" : "integer",
-            "value" : {
-                "type" : "gaussian",
-                "mean" : 500,
-                "variance" : 20,
-                "min" : 50,
-                "max" : 1000
-            },
-            "variation" : {
-                "type" : "none"
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode": "gaussian",
+                    "mean" : 500,
+                    "variance" : 20,
+                    "min" : 50,
+                    "max" : 1000
+                },
+                "variation": {
+                    "mode": "none"
+                }
             }
         },
         {
             "name": "functionality",
-            "type": "text",
-            "subtype": "relation",
-            "parameters" :{
-                "file": "dictionaries/test/relations/functionality.json"
-            },
-            "value" : {
-                "type": "random"
-            },
-            "variation" : {
-                "type": "random"
+            "value": {
+                "type": "text",
+                "subtype": "dictionary",
+                "initial": {
+                    "mode": "random",
+                    "dictionary": "data/test/dictionaries/functionalities.json"
+                },
+                "variation": {
+                    "mode": "random",
+                    "relation": "data/test/relations/functionality.json"
+                }
             }
         }
     ],
@@ -126,63 +150,68 @@
     "transformations" :
     [
         {
-            "field" : "weight",
-            "source": ["weight"],
             "operation": "sum",
+            "field": "modified_weight",
+            "source": ["_weight"],
             "value": {
-                "type" : "numeric",
-                "subtype" : "integer",
-                "value" : {
-                    "type" : "fixed",
-                    "value" : 1
+                "type": "numeric",
+                "subtype": "integer",
+                "initial" : {
+                    "mode": "fixed",
+                    "value": 1
                 }
             }
         },
         {
+            "operation": "multiply",
             "field" : "users",
-            "source": ["users", "weight"],
-            "operation": "multiply"
+            "source": ["users", "modified_weight"]
         },
         {
-            "field": "functionality",
             "operation": "add",
+            "field": "functionality",
             "value": {
                 "type": "text",
                 "subtype": "string",
-                "value" : {
-                    "type": "fixed",
+                "initial" : {
+                    "mode": "fixed",
                     "value": "baja"
                 }
             },
             "conditions": [
                 {
                     "condition" : "equal",
-                    "source" : ["position", "relatedDocuments"]
+                    "source" : ["position", "_relatedDocuments"]
                 }
             ]
         },
         {
-            "field": "channel",
             "operation": "add",
-            "source": ["functionality"],
+            "field": "channel",
             "value": {
                 "type": "text",
-                "subtype": "relation",
-                "parameters" :{
-                    "file": "dictionaries/test/relations/functionality-channel.json"
-                },
-                "value" : {
-                    "type": "random"
+                "subtype": "dictionary",
+                "initial" :{
+                    "mode": "random",
+                    "origin": "functionality",
+                    "relation": "data/test/relations/functionality-channel.json"
                 }
             }
         },
         {
-            "source": ["users"],
-            "operation": "round"
+            "operation": "remove",
+            "source": ["_id", "_relatedDocuments", "_weight", "modified_weight"]
         },
         {
-            "source": ["id", "relatedDocuments", "weight"],
-            "operation": "remove"
+            "operation": "translate",
+            "source": ["age"],
+            "parameters": {
+                "translation": "data/test/translations/age-ranges.json"
+            }
+        },
+        {
+            "operation": "round",
+            "source": ["users"]
         }
     ]
 }

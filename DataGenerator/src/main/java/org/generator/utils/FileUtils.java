@@ -34,11 +34,10 @@ public class FileUtils {
         for (String line : getListFromFile(fileName, inner)){
             builder.append(line.trim());
         }
-        try {
-            return FormatUtils.getJsonAsObject(builder.toString(), type);
-        }
+        try {return FormatUtils.getJsonAsObject(builder.toString(), type);}
         catch (Exception exception){
-            throw new Exception("File \"" + fileName + "\" does not have the expected format for " + type);
+            throw new Exception("File \"" + fileName + "\" does not have the expected format" +
+                    " [" + exception.getMessage() + "]");
         }
     }
 }

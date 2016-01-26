@@ -1,8 +1,9 @@
 package org.generator.utils.transformations;
 
 import org.generator.model.data.Condition;
+import org.generator.model.data.FieldValue;
 import org.generator.model.data.Transformation;
-import org.generator.model.data.Transformation.Type;
+import org.generator.model.data.Transformation.Operation;
 import org.generator.utils.condition.ConditionUtils;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Map;
 
 public class TransformationUtils {
 
-    public static void transform (Map<String,Object> document, Transformation transformation) throws Exception {
+    public static void transform (Map<String,FieldValue> document, Transformation transformation) throws Exception {
         if (null == document){return;}
 
         List<Condition> conditions = transformation.getConditions();
@@ -20,10 +21,10 @@ public class TransformationUtils {
             }
         }
 
-        Type type = Type.fromString(transformation.getOperation());
-        if (null == type){throw new Exception("Type \"" + transformation.getOperation() + "\" not supported.");}
+        Operation operation = Operation.fromString(transformation.getOperation());
+        if (null == operation){throw new Exception("Type \"" + transformation.getOperation() + "\" not supported.");}
 
-        switch (type){
+        switch (operation){
 
             case ADD:
                 FieldTransformation.addField(document, transformation);
@@ -48,19 +49,10 @@ public class TransformationUtils {
 
 
             case MULTIPLY:
-                NumericTransformation.multiply(document, transformation);
-                break;
-
             case DIVIDE:
-                NumericTransformation.divide(document, transformation);
-                break;
-
             case SUM:
-                NumericTransformation.sum(document, transformation);
-                break;
-
             case SUBTRACT:
-                NumericTransformation.subtract(document, transformation);
+                NumericTransformation.operate(document, transformation);
                 break;
 
             case ROUND:
@@ -70,6 +62,10 @@ public class TransformationUtils {
 
             case SPLIT:
                 TextTransformation.split(document, transformation);
+                break;
+
+            case TRANSLATE:
+                TextTransformation.translate(document, transformation);
                 break;
 
 
