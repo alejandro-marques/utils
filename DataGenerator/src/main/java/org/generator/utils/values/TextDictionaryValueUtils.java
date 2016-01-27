@@ -2,6 +2,7 @@ package org.generator.utils.values;
 
 import org.generator.configuration.CommonData;
 import org.generator.constants.PropertiesConstants;
+import org.generator.exception.LimitReachedException;
 import org.generator.model.configuration.FieldValueInfo;
 import org.generator.model.data.Dictionary;
 import org.generator.model.configuration.FieldValueDefinition;
@@ -13,48 +14,35 @@ import java.util.Map;
 
 public class TextDictionaryValueUtils {
 
-    public static FieldValue getDictionaryFieldValue(FieldValueInfo fieldValueInfo, FieldValue previousValue,
-            Map<String, FieldValue> relatedValues) throws Exception {
+    public static FieldValue getDictionaryFieldValue(FieldValueInfo fieldValueInfo,
+            boolean isVariation, FieldValue previousValue, Map<String, FieldValue> relatedValues)
+            throws Exception {
+        // Checks whether the number of values to be returned is limited or not
         boolean limit = Boolean.parseBoolean(fieldValueInfo.getOptions().get(PropertiesConstants.LIMIT));
-        return getValueFromDictionaryFieldValue(fieldValueInfo, previousValue, relatedValues, limit);
-    }
 
-    /*public static String getRelationFieldValue(ValueInfo valueInfo, Object previousValue) throws Exception {
-        String relationName = valueInfo.getOptions().get(PropertiesConstants.RELATION);
-
-        if (null == relationName && null == previousValue){
-            return getDictionaryFieldValue(valueInfo, previousValue);
-        }
-        if (null == relationName){relationName = previousValue.toString();}
-        boolean limit = Boolean.parseBoolean(valueInfo.getOptions().get(PropertiesConstants.LIMIT));
-        String dictionaryName = valueInfo.getOptions().get(PropertiesConstants.FILE);
-        Map<String, Dictionary> relation = CommonData.getRelation(dictionaryName);
-        if (null == relation){throw new Exception ("Relation " + dictionaryName + " not found.");}
-        Dictionary dictionary = relation.get(relationName);
-        if (null == dictionary){throw new Exception ("Relation for " + relationName + " not found in " + dictionaryName + ".");}
-
-        return getValueFromDictionaryFieldValue(valueInfo, previousValue, limit);
-    }*/
-
-    public static FieldValue getValueFromDictionaryFieldValue(FieldValueInfo fieldValueInfo,
-            FieldValue previousValue, Map<String, FieldValue> relatedValues, boolean limit) throws Exception {
+        // Checks if there is a previous value to be taken into account
         String previousStringValue = null;
-        if (null != previousValue){
-            if (previousValue.getValue() instanceof String){previousStringValue = (String) previousValue.getValue();}
-            else {throw new Exception (previousValue.toString() + " is not a valid String");}
+        if (isVariation && null != previousValue && null != previousValue.getValue()){
+            if (previousValue.getValue() instanceof String){
+                previousStringValue = (String) previousValue.getValue();
+            }
+            else {throw new Exception (previousValue.getValue() + " is not a valid String");}
         }
 
-        Map<String, String> parameters = null == previousStringValue?
-                fieldValueInfo.getInitial() : fieldValueInfo.getVariation();
-        return getValue(parameters, previousStringValue, relatedValues, limit);
+        // If it is a variation the variation value is used, otherwise it is used the initial value
+        return getValue(isVariation? fieldValueInfo.getVariation() : fieldValueInfo.getInitial(),
+                previousStringValue, relatedValues, limit);
     }
+
 
     public static FieldValue getValue (Map<String, String> parameters, String previousValue,
-            Map<String, FieldValue> relatedValues, boolean limit) throws Exception {
+            Map<String, FieldValue> relatedValues, boolean limit)
+            throws Exception {
         String modeName = parameters.get(PropertiesConstants.MODE);
         Mode mode = FieldValueDefinition.getEnum(Mode.class, modeName);
+        boolean isRelation = null != parameters.get(PropertiesConstants.RELATION);
 
-        Dictionary dictionary = getDictionary(parameters, previousValue, relatedValues);
+        Dictionary dictionary = getDictionary(parameters, previousValue, relatedValues, isRelation);
         Word word;
 
         if (null == mode) {
@@ -63,15 +51,15 @@ public class TextDictionaryValueUtils {
 
         switch (mode){
             case FIXED:
-                word = getFixedValue(parameters, dictionary);
+                word = getFixedValue(parameters, dictionary, isRelation);
                 break;
 
             case RANDOM:
-                word = getRandomValue(dictionary);
+                word = getRandomValue(dictionary, isRelation);
                 break;
 
             case SEQUENTIAL:
-                word = getSequentialValue(previousValue, dictionary, limit);
+                word = getSequentialValue(previousValue, dictionary, limit, isRelation);
                 break;
 
             default:
@@ -85,20 +73,18 @@ public class TextDictionaryValueUtils {
 
     private static Double getRelativeWeightWord (Word word, Dictionary dictionary){
         if (null == word) {return 0.0;}
-        return word.getWeight() / dictionary.getMaxWeight();
+        if (null == dictionary) {return 1.0;}
+        return word.getWeight() / dictionary.getMeanWeight();
     }
 
     public static Dictionary getDictionary (Map<String, String> parameters, String previousValue,
-            Map<String, FieldValue> relatedValues) throws Exception {
+            Map<String, FieldValue> relatedValues, boolean isRelation) throws Exception {
 
-        String parameter = parameters.get(PropertiesConstants.DICTIONARY);
-        if (null != parameter){return getDictionary(parameter);}
-        parameter = parameters.get(PropertiesConstants.RELATION);
-        if (null != parameter){
-            return getDictionaryFromRelation(parameter, parameters.get(PropertiesConstants.ORIGIN),
-                    previousValue, relatedValues);
+        if (isRelation){
+            return getDictionaryFromRelation(parameters.get(PropertiesConstants.RELATION),
+                parameters.get(PropertiesConstants.ORIGIN), previousValue, relatedValues);
         }
-        throw new Exception ("Wrong dictionary configuration. Missing relation or dictionary.");
+        else {return getDictionary(parameters.get(PropertiesConstants.DICTIONARY));}
     }
 
     private static Dictionary getDictionary(String dictionaryName) throws Exception {
@@ -121,31 +107,34 @@ public class TextDictionaryValueUtils {
             FieldValue originValue = relatedValues.get(origin);
             if (null != originValue) {key = originValue.getValue().toString();}
         }
-        if (null == key){
-            throw new Exception("Value used as key for relation \"" + relationName + "\" is null.");
-        }
 
-        Dictionary dictionary = relation.get(key);
-        if (null == dictionary){
-            throw new Exception ("Value used as key \"" + key + "\" not found " +
-                    "for relation \"" + relationName + "\".");
+        if (null != key){
+            Dictionary dictionary = relation.get(key);
+            if (null != dictionary){return dictionary;}
+
         }
-        return dictionary;
+        throw new LimitReachedException(key, "No relation found for " + key);
     }
 
-    private static Word getFixedValue (Map<String, String> parameters, Dictionary dictionary)
-            throws Exception {
+    private static Word getFixedValue (Map<String, String> parameters, Dictionary dictionary,
+            boolean isRelation) throws Exception {
+        if (isRelation && null == dictionary) {return new Word(null, 1.0);}
         int position = Integer.parseInt(parameters.get(PropertiesConstants.POSITION));
         return dictionary.getWord(position);
     }
 
-    private static Word getRandomValue (Dictionary dictionary)
+    private static Word getRandomValue (Dictionary dictionary, boolean isRelation)
             throws Exception {
+        if (isRelation && null == dictionary) {return new Word(null, 1.0);}
         return dictionary.getRandomWord();
     }
 
     private static Word getSequentialValue(String previousValue,
-            Dictionary dictionary, boolean limit) throws Exception {
+            Dictionary dictionary, boolean limit, boolean isRelation) throws Exception {
+        if (isRelation && null == dictionary) {
+            if (null == previousValue) {return new Word(null, 1.0);}
+            throw new LimitReachedException(null, "Last word for relation already reached.");
+        }
         return dictionary.getNextWord(previousValue, limit);
     }
 }

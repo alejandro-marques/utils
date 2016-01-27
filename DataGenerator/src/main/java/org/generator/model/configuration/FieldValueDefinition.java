@@ -69,8 +69,7 @@ public class FieldValueDefinition {
         RANDOM (PropertiesConstants.RANDOM),
         UNIFORM (PropertiesConstants.UNIFORM),
         GAUSSIAN(PropertiesConstants.GAUSSIAN),
-        SEQUENTIAL(PropertiesConstants.SEQUENTIAL),
-        RELATED(PropertiesConstants.RELATED);
+        SEQUENTIAL(PropertiesConstants.SEQUENTIAL);
 
         private String name;
 

@@ -21,8 +21,8 @@ public class TransformationValidator {
 
         switch (operation){
 
-            case ADD:
-                FieldTransformationValidator.validateAddField(transformation, previousFields);
+            case CREATE:
+                FieldTransformationValidator.validateCreateField(transformation, previousFields);
                 break;
 
             case REMOVE:

@@ -3,7 +3,7 @@ package org.generator.constants;
 public interface TransformationConstants {
 
     // Types
-    String ADD = "add";
+    String CREATE = "create";
     String RENAME = "rename";
     String COPY = "copy";
     String REMOVE = "remove";

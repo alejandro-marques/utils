@@ -168,7 +168,7 @@
             "source": ["users", "modified_weight"]
         },
         {
-            "operation": "add",
+            "operation": "create",
             "field": "functionality",
             "value": {
                 "type": "text",
@@ -186,7 +186,7 @@
             ]
         },
         {
-            "operation": "add",
+            "operation": "create",
             "field": "channel",
             "value": {
                 "type": "text",

@@ -26,8 +26,8 @@ public class TransformationUtils {
 
         switch (operation){
 
-            case ADD:
-                FieldTransformation.addField(document, transformation);
+            case CREATE:
+                FieldTransformation.createField(document, transformation);
                 break;
 
             case REMOVE:

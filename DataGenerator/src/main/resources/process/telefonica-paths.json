@@ -181,7 +181,7 @@
     "transformations" :
     [
         {
-            "operation": "add",
+            "operation": "create",
             "field": "touchpoint_channel",
             "value": {
                 "type": "text",

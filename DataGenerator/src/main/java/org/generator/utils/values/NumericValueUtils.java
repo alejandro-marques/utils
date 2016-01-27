@@ -12,15 +12,18 @@ import java.util.Map;
 
 public class NumericValueUtils {
 
-    public static FieldValue getIntegerValue(FieldValueInfo fieldValueInfo, FieldValue previousValue) throws Exception {
+    public static FieldValue getIntegerValue(FieldValueInfo fieldValueInfo, FieldValue previousValue)
+            throws Exception {
         return new FieldValue(getNumericValue(fieldValueInfo, previousValue).intValue());
     }
 
-    public static FieldValue getDoubleValue(FieldValueInfo fieldValueInfo, FieldValue previousValue) throws Exception {
+    public static FieldValue getDoubleValue(FieldValueInfo fieldValueInfo, FieldValue previousValue)
+            throws Exception {
         return new FieldValue(getNumericValue(fieldValueInfo, previousValue));
     }
 
-    public static Double getNumericValue(FieldValueInfo fieldValueInfo, FieldValue previousValue) throws Exception {
+    public static Double getNumericValue(FieldValueInfo fieldValueInfo, FieldValue previousValue)
+            throws Exception {
         Double value;
         // If there was a previous value
         if (null != previousValue){

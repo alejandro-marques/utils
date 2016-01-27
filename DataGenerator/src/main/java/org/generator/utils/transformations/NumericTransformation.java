@@ -33,7 +33,7 @@ public class NumericTransformation {
         }
         FieldValueInfo value = transformation.getValue();
         if (null != value){
-            values.add(getDoubleValue(ValueUtils.getValue(value, null, document).getValue().toString()));
+            values.add(getDoubleValue(ValueUtils.getValue(value, 0, null, document).getValue().toString()));
             if (Subtype.INTEGER != FieldValueDefinition.getEnum(Subtype.class, value.getSubtype())){
                 isInteger = false;
             }

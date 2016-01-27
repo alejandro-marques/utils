@@ -31,14 +31,13 @@ public interface PropertiesConstants {
     String POSITION = "position";
     String MIN = "min";
     String MAX = "max";
+    String MAX_VARIATIONS = "maxVariations";
     String LIMIT = "limit";
     String WEIGHT = "weight";
     String ORIGIN = "origin";
 
     // Text properties
-    String FILE = "file";
     String SEQUENTIAL = "sequential";
-    String RELATED = "related";
 
     // Date properties
     String STEP = "step";

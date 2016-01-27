@@ -1,6 +1,7 @@
 package org.generator.utils.values;
 
 import org.generator.constants.PropertiesConstants;
+import org.generator.exception.LimitReachedException;
 import org.generator.model.configuration.FieldValueInfo;
 import org.generator.model.configuration.FieldValueDefinition;
 import org.generator.model.configuration.FieldValueDefinition.Subtype;
@@ -11,18 +12,20 @@ import java.util.Map;
 
 public class ValueUtils {
 
-    public static FieldValue getValue (FieldValueInfo fieldValueInfo, FieldValue previousValue,
-            Map<String, FieldValue> relatedValues) throws Exception {
+    public static FieldValue getValue (FieldValueInfo fieldValueInfo, int variationCount,
+            FieldValue previousValue, Map<String, FieldValue> relatedValues) throws Exception {
         Type type = FieldValueDefinition.getEnum(Type.class, fieldValueInfo.getType());
         Subtype subtype = FieldValueDefinition.getEnum(Subtype.class, fieldValueInfo.getSubtype());
 
         // If no variation is defined each time an event is generated the value is calculated as a new one
-        if (!hasVariation(fieldValueInfo)){previousValue = null;}
+        if (!hasVariation(fieldValueInfo)){variationCount = 0;}
+        if (variationCount > 0) {
+            // Checks if number of allowed variations has been reached
+            checkVariationLimit(fieldValueInfo.getOptions(), variationCount, previousValue);
 
-        // If variation is set to "none" the value is only generated for the first event and then it remains constant for the
-        // next ones
-        else if (null != previousValue && isNoVariation(fieldValueInfo.getVariation())){
-            return previousValue;
+            // If variation is set to "none" the value is only generated for the first event and then it remains constant
+            // for the next ones
+            if (isNoVariation(fieldValueInfo.getVariation())) {return previousValue;}
         }
 
         switch (type){
@@ -46,7 +49,7 @@ public class ValueUtils {
 
                     case DICTIONARY:
                         return TextDictionaryValueUtils.getDictionaryFieldValue(fieldValueInfo,
-                                previousValue, relatedValues);
+                                variationCount > 0, previousValue, relatedValues);
 
                     default:
                         throw new Exception(
@@ -67,8 +70,21 @@ public class ValueUtils {
     }
 
     private static boolean isNoVariation (Map<String, String> variation) throws Exception {
-        if (null == variation) {throw new Exception("Received null variation to be checked");}
-        if (variation.isEmpty()) {throw new Exception("Received empty variation to be checked");}
-        return PropertiesConstants.NONE.equals(variation.get(PropertiesConstants.MODE));
+        return null != variation && !variation.isEmpty() &&
+                PropertiesConstants.NONE.equals(variation.get(PropertiesConstants.MODE));
+    }
+
+    private static void checkVariationLimit (Map<String, String> options, int variationCount,
+            FieldValue previousValue) throws Exception {
+        if (null != options) {
+            boolean limit = Boolean.parseBoolean(options.get(PropertiesConstants.LIMIT));
+            if (limit) {
+                String maxString = options.get(PropertiesConstants.MAX_VARIATIONS);
+                if (null != maxString && variationCount > Integer.parseInt(maxString)){
+                    throw new LimitReachedException(previousValue.getValue(),
+                            "Max allowed variations reached.");
+                }
+            }
+        }
     }
 }

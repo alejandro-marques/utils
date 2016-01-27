@@ -9,12 +9,12 @@ import java.util.Map;
 
 public class FieldTransformation {
 
-    public static void addField(Map<String, FieldValue> document, Transformation transformation)
+    public static void createField(Map<String, FieldValue> document, Transformation transformation)
             throws Exception {
         FieldValueInfo operand = transformation.getValue();
         String fieldName = transformation.getField();
 
-        document.put(fieldName, ValueUtils.getValue(operand, null, document));
+        document.put(fieldName, ValueUtils.getValue(operand, 0, null, document));
     }
 
     public static void removeField(Map<String, FieldValue> document, Transformation transformation)

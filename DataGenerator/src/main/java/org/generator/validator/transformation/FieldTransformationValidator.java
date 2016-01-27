@@ -7,7 +7,7 @@ import java.util.List;
 
 public class FieldTransformationValidator {
 
-    public static void validateAddField (Transformation transformation, List<String> previousFields)
+    public static void validateCreateField(Transformation transformation, List<String> previousFields)
             throws Exception {
         String fieldName = TransformationValidator.checkField(transformation.getField());
         FieldInfoValidator.checkFieldValueInfo(transformation.getValue(), previousFields);

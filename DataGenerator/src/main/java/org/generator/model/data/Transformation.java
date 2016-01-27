@@ -10,7 +10,7 @@ public class Transformation {
 
     public enum Operation {
 
-        ADD(TransformationConstants.ADD),
+        CREATE(TransformationConstants.CREATE),
         REMOVE(TransformationConstants.REMOVE),
         COPY (TransformationConstants.COPY),
         RENAME (TransformationConstants.RENAME),

@@ -6,7 +6,7 @@ import org.generator.utils.FormatUtils;
 import java.util.Map;
 
 public class TestProcessConfigurator {
-    private static final String CONFIGURATION_FILE = "process/test.json";
+    private static final String CONFIGURATION_FILE = "process/test-paths.json";
 
     public static void main(String[] args) throws Exception {
 

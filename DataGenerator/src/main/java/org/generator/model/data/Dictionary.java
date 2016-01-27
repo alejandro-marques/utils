@@ -35,7 +35,7 @@ public class Dictionary {
     }
 
     public Word getWord(int position) throws Exception {
-        if (position >= 0 && position < weightsMap.size()) {
+        if (!weightsMap.isEmpty() && position >= 0 && position < weightsMap.size()) {
             int count = 0;
             for (Entry<Double, Word> entry : weightsMap.entrySet()) {
                 if (count == position) return entry.getValue();
@@ -45,23 +45,15 @@ public class Dictionary {
         throw new Exception("Wrong position \"" + position + "\" for dictionary \"" + name + "\".");
     }
 
-    public Word getWord(String wordValue) throws Exception {
-        if (null != wordValue) {
-            for (Word word : weightsMap.values()) {
-                if (wordValue.equals(word.getValue())) return word;
-            }
-        }
-        throw new Exception("Word \"" + wordValue + "\" not found in dictionary \"" + name + "\".");
-    }
-
     public Word getRandomWord() {
         double value = random.nextDouble() * total;
-        if (weightsMap.isEmpty()){return null;}
+        if (weightsMap.isEmpty()){return new Word(null, 1.0);}
         return weightsMap.ceilingEntry(value).getValue();
     }
 
     public Word getNextWord (String previousWord, boolean limit) throws Exception{
-        if (previousWord.equals(weightsMap.lastEntry().getValue().getValue())){
+        if (weightsMap.isEmpty()){return new Word(null, 1.0);}
+        if (null == previousWord || previousWord.equals(weightsMap.lastEntry().getValue().getValue())){
             if (!limit){return weightsMap.firstEntry().getValue();}
             throw new LimitReachedException(previousWord,
                     "Last word in dictionary \"" + name + "\" already reached.");
@@ -79,6 +71,10 @@ public class Dictionary {
 
     public double getMaxWeight() {
         return maxWeight;
+    }
+
+    public double getMeanWeight() {
+        return total / weightsMap.size();
     }
 
     @Override

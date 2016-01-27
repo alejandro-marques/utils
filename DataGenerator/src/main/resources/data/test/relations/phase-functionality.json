@@ -1,0 +1,43 @@
+[
+  {
+    "value": "month 1",
+    "next":[
+      {"value": "alta", "weight": 20},
+      {"value": "saldo", "weight": 20},
+      {"value": "avería", "weight": 10},
+      {"value": "información", "weight": 40},
+      {"value": "otros", "weight": 5},
+      {"value": "baja", "weight": 5}
+    ]
+  },
+  {
+    "value": "month 2",
+    "next":[
+      {"value": "saldo", "weight": 30},
+      {"value": "avería", "weight": 15},
+      {"value": "información", "weight": 30},
+      {"value": "otros", "weight": 10},
+      {"value": "baja", "weight": 15}
+    ]
+  },
+  {
+    "value": "month 3",
+    "next":[
+      {"value": "saldo", "weight": 30},
+      {"value": "avería", "weight": 20},
+      {"value": "información", "weight": 20},
+      {"value": "otros", "weight": 10},
+      {"value": "baja", "weight": 20}
+    ]
+  },
+  {
+    "value": "rest",
+    "next":[
+      {"value": "saldo", "weight": 30},
+      {"value": "avería", "weight": 15},
+      {"value": "información", "weight": 20},
+      {"value": "otros", "weight": 10},
+      {"value": "baja", "weight": 25}
+    ]
+  }
+]
