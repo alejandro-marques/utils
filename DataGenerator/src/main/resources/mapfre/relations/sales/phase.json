@@ -1,0 +1,18 @@
+[
+  {
+    "value": "Descubrir",
+    "next":[{"value": "Info"}]
+  },
+  {
+    "value": "Info",
+    "next":[{"value": "Presupuesto"}]
+  },
+  {
+    "value": "Presupuesto",
+    "next":[{"value": "Venta"}]
+  },
+  {
+    "value": "Venta",
+    "next":[{"value": "null"}]
+  }
+]

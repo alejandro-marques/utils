@@ -23,6 +23,7 @@ public class Transformation {
         ROUND (TransformationConstants.ROUND),
 
         COMBINE (TransformationConstants.COMBINE),
+        CLEAN (TransformationConstants.CLEAN),
         SPLIT (TransformationConstants.SPLIT);
 
         public String name;

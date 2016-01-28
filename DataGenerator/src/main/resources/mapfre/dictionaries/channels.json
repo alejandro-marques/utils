@@ -1,0 +1,9 @@
+[
+  {"value": "App", "weight": 15},
+  {"value": "Web", "weight": 30},
+  {"value": "Redes Sociales", "weight": 25},
+  {"value": "Agregador", "weight": 10},
+  {"value": "Agente exclusivo", "weight": 5},
+  {"value": "Agente no exclusivo", "weight": 5},
+  {"value": "Call Center", "weight": 10}
+]

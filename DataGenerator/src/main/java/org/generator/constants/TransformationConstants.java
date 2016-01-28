@@ -16,6 +16,7 @@ public interface TransformationConstants {
     String ROUND = "round";
 
     String COMBINE = "combine";
+    String CLEAN = "clean";
     String SPLIT = "split";
 
     // Conditions

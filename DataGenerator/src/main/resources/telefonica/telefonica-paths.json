@@ -20,11 +20,11 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "dictionary": "data/telefonica/dictionaries/journeys.json"
+                        "dictionary": "telefonica/dictionaries/journeys.json"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "dictionary": "data/telefonica/dictionaries/journeys.json"
+                        "dictionary": "telefonica/dictionaries/journeys.json"
                     }
                 }
             },
@@ -43,11 +43,11 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "dictionary": "data/telefonica/dictionaries/segments.json"
+                        "dictionary": "telefonica/dictionaries/segments.json"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "dictionary": "data/telefonica/dictionaries/segments.json"
+                        "dictionary": "telefonica/dictionaries/segments.json"
                     }
                 }
             },
@@ -66,11 +66,11 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "dictionary": "data/telefonica/dictionaries/age-ranges.json"
+                        "dictionary": "telefonica/dictionaries/age-ranges.json"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "dictionary": "data/telefonica/dictionaries/age-ranges.json"
+                        "dictionary": "telefonica/dictionaries/age-ranges.json"
                     }
                 }
             },
@@ -89,11 +89,11 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "dictionary": "data/telefonica/dictionaries/products.json"
+                        "dictionary": "telefonica/dictionaries/products.json"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "dictionary": "data/telefonica/dictionaries/products.json"
+                        "dictionary": "telefonica/dictionaries/products.json"
                     }
                 }
             },
@@ -161,7 +161,7 @@
                 "subtype": "dictionary",
                 "initial": {
                     "mode": "random",
-                    "dictionary": "data/telefonica/dictionaries/functionalities.json"
+                    "dictionary": "telefonica/dictionaries/functionalities.json"
                 }
             }
         },
@@ -172,7 +172,7 @@
                 "subtype": "dictionary",
                 "initial": {
                     "mode": "random",
-                    "dictionary": "data/telefonica/dictionaries/channels.json"
+                    "dictionary": "telefonica/dictionaries/channels.json"
                 }
             }
         }
@@ -192,7 +192,7 @@
                 "initial": {
                     "mode": "random",
                     "position": 0,
-                    "relation": "data/telefonica/relations/functionality-channel.json",
+                    "relation": "telefonica/relations/functionality-channel.json",
                     "origin": "touchpoint_functionality"
                 }
             }

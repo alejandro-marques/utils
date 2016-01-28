@@ -25,6 +25,6 @@
   },
   {
     "value": "rest",
-    "next":[{"value": null}]
+    "next":[{"value": "null"}]
   }
 ]

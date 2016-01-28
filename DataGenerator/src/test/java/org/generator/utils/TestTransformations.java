@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TestTransformations {
-    private static final String CONFIGURATION_FILE = "process/telefonica-paths.json";
+    private static final String CONFIGURATION_FILE = "telefonica/telefonica-paths.json";
 
     public static void main(String[] args) throws Exception {
 

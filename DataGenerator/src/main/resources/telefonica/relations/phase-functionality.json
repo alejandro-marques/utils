@@ -159,5 +159,11 @@
       {"value": "AVERIAS", "weight": 1},
       {"value": "TRX , AFILIACIÓN/DESAFILIACIÓN DE PAQUETES", "weight": 1}
     ]
+  },
+  {
+    "value": "null",
+    "next":[
+      {"value": "null"}
+    ]
   }
 ]

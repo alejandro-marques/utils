@@ -5,7 +5,7 @@ import org.generator.utils.FileUtils;
 import org.generator.utils.FormatUtils;
 
 public class TestProcessModel {
-    private static final String CONFIGURATION_FILE = "process/test-paths.json";
+    private static final String CONFIGURATION_FILE = "test/test-paths.json";
 
     public static void main(String[] args) throws Exception {
 

@@ -1,0 +1,6 @@
+[
+  {"value": "Descubrir", "weight": 100},
+  {"value": "Info", "weight": 50},
+  {"value": "Presupuesto", "weight": 25},
+  {"value": "Venta", "weight": 10}
+]

@@ -47,6 +47,10 @@ public class TransformationUtils {
                 BasicTransformation.combine(document, transformation);
                 break;
 
+            case CLEAN:
+                BasicTransformation.clean(document, transformation);
+                break;
+
 
             case MULTIPLY:
             case DIVIDE:

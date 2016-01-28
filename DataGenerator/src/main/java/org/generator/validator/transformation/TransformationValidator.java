@@ -42,6 +42,10 @@ public class TransformationValidator {
                 BasicTransformationValidator.validateCombine(transformation, previousFields);
                 break;
 
+            case CLEAN:
+                BasicTransformationValidator.validateClean(transformation, previousFields);
+                break;
+
 
             case MULTIPLY:
             case DIVIDE:

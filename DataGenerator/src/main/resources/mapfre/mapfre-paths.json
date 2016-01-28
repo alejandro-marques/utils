@@ -1,0 +1,223 @@
+{
+    "generator": {
+        "maxDocuments": -1,
+        "minRelatedDocuments": 3,
+        "maxRelatedDocuments": 5,
+        "auxiliaryFields": true,
+        "idFields": [
+            {
+                "name": "functionality",
+                "order": 1,
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "mapfre/dictionaries/cancelation/journeys.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "mapfre/dictionaries/cancelation/journeys.json"
+                    }
+                }
+            },
+            {
+                "name": "channel",
+                "order": 2,
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "relation": "mapfre/relations/cancelation/journey-channel.json",
+                        "origin": "functionality"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "relation": "mapfre/relations/cancelation/journey-channel.json",
+                        "origin": "functionality"
+                    }
+                }
+            },
+            {
+                "name": "segment",
+                "order": 3,
+                "options": {
+                    "weight": true
+                },
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "mapfre/dictionaries/segments.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "mapfre/dictionaries/segments.json"
+                    }
+                }
+            },
+            {
+                "name": "age",
+                "order": 4,
+                "options": {
+                    "weight": true
+                },
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "mapfre/dictionaries/age-ranges.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "mapfre/dictionaries/age-ranges.json"
+                    }
+                }
+            },
+            {
+                "name": "priority",
+                "order": 5,
+                "value": {
+                    "type": "numeric",
+                    "subtype": "integer",
+                    "options": {
+                        "limit": true,
+                        "max": 4
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "value": 0
+                    },
+                    "variation": {
+                        "mode": "fixed",
+                        "value": 1
+                    }
+                }
+            }
+        ]
+    },
+
+    "model" :
+    [
+        {
+            "name": "touchpoint_functionality",
+            "order": 1,
+            "value": {
+                "type": "text",
+                "subtype": "dictionary",
+                "initial": {
+                    "mode": "random",
+                    "dictionary": "mapfre/dictionaries/cancelation/functionalities.json"
+                },
+                "variation": {
+                    "mode": "random",
+                    "relation": "mapfre/relations/cancelation/functionality.json"
+                }
+            }
+        },
+        {
+            "name": "touchpoint_channel",
+            "order": 2,
+            "value": {
+                "type": "text",
+                "subtype": "dictionary",
+                "initial": {
+                    "mode": "random",
+                    "relation": "mapfre/relations/cancelation/functionality-channel.json",
+                    "origin": "touchpoint_functionality"
+                }
+            }
+        },
+        {
+            "name": "touchpoint_order",
+            "order": 3,
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode": "fixed",
+                    "value": 1
+                },
+                "variation": {
+                    "mode": "fixed",
+                    "value": 1
+                }
+            }
+        },
+        {
+            "name": "users",
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode" : "gaussian",
+                    "mean" : 500,
+                    "variance" : 20,
+                    "min" : 50,
+                    "max" : 1000
+                },
+                "variation": {
+                    "mode" : "none"
+                }
+            }
+        }
+    ],
+
+    "transformations" :
+    [
+        {
+            "operation": "copy",
+            "field": "touchpoint_functionality",
+            "source": ["functionality"],
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["touchpoint_order", "_relatedDocuments"]
+                }
+            ]
+        },
+        {
+            "operation": "copy",
+            "field": "touchpoint_channel",
+            "source": ["channel"],
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["touchpoint_order", "_relatedDocuments"]
+                }
+            ]
+        },
+        {
+            "operation": "multiply",
+            "field": "users",
+            "source": ["users", "_weight"]
+        },
+        {
+            "operation": "round",
+            "source": ["users"]
+        },
+        {
+            "operation": "remove",
+            "source": ["_id", "_relatedDocuments", "_weight"]
+        }
+    ]
+}

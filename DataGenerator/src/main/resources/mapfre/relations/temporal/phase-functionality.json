@@ -1,0 +1,71 @@
+[
+  {
+    "value": "mes 1",
+    "next":[
+      {"value": "Alta incidencia", "weight": 2},
+      {"value": "Revisa incidencia", "weight": 1},
+      {"value": "Consulta datos", "weight": 3},
+      {"value": "Consulta factura", "weight": 4}
+    ]
+  },
+  {
+    "value": "mes 2",
+    "next":[
+      {"value": "Alta incidencia", "weight": 2},
+      {"value": "Revisa incidencia", "weight": 1},
+      {"value": "Consulta datos", "weight": 3},
+      {"value": "Consulta factura", "weight": 4}
+    ]
+  },
+  {
+    "value": "mes 3",
+    "next":[
+      {"value": "Alta incidencia", "weight": 2},
+      {"value": "Revisa incidencia", "weight": 1},
+      {"value": "Consulta datos", "weight": 3},
+      {"value": "Consulta factura", "weight": 4}
+    ]
+  },
+  {
+    "value": "mes 4",
+    "next":[
+      {"value": "Alta incidencia", "weight": 2},
+      {"value": "Revisa incidencia", "weight": 1},
+      {"value": "Consulta datos", "weight": 3},
+      {"value": "Consulta factura", "weight": 4}
+    ]
+  },
+  {
+    "value": "mes 5",
+    "next":[
+      {"value": "Alta incidencia", "weight": 2},
+      {"value": "Revisa incidencia", "weight": 1},
+      {"value": "Consulta datos", "weight": 3},
+      {"value": "Consulta factura", "weight": 4}
+    ]
+  },
+  {
+    "value": "mes 6",
+    "next":[
+      {"value": "Alta incidencia", "weight": 2},
+      {"value": "Revisa incidencia", "weight": 1},
+      {"value": "Consulta datos", "weight": 3},
+      {"value": "Consulta factura", "weight": 4}
+    ]
+  },
+  {
+    "value": "resto",
+    "next":[
+      {"value": "Alta incidencia", "weight": 2},
+      {"value": "Revisa incidencia", "weight": 1},
+      {"value": "Consulta datos", "weight": 3},
+      {"value": "Consulta factura", "weight": 4}
+    ]
+  },
+  {
+    "value": "null",
+    "next":[
+      {"value": "null"}
+    ]
+  }
+]

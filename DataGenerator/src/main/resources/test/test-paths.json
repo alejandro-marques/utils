@@ -20,11 +20,11 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "dictionary": "data/test/dictionaries/segments.json"
+                        "dictionary": "test/dictionaries/segments.json"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "dictionary": "data/test/dictionaries/segments.json"
+                        "dictionary": "test/dictionaries/segments.json"
                     }
                 }
             },
@@ -43,11 +43,11 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "dictionary": "data/test/dictionaries/age-ranges.json"
+                        "dictionary": "test/dictionaries/age-ranges.json"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "dictionary": "data/test/dictionaries/age-ranges.json"
+                        "dictionary": "test/dictionaries/age-ranges.json"
                     }
                 }
             },
@@ -66,11 +66,11 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "dictionary": "data/test/dictionaries/products.json"
+                        "dictionary": "test/dictionaries/products.json"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "dictionary": "data/test/dictionaries/products.json"
+                        "dictionary": "test/dictionaries/products.json"
                     }
                 }
             },
@@ -137,11 +137,11 @@
                 "subtype": "dictionary",
                 "initial": {
                     "mode": "random",
-                    "dictionary": "data/test/dictionaries/functionalities.json"
+                    "dictionary": "test/dictionaries/functionalities.json"
                 },
                 "variation": {
                     "mode": "random",
-                    "relation": "data/test/relations/functionality.json"
+                    "relation": "test/relations/functionality.json"
                 }
             }
         }
@@ -194,7 +194,7 @@
                 "initial" :{
                     "mode": "random",
                     "origin": "functionality",
-                    "relation": "data/test/relations/functionality-channel.json"
+                    "relation": "test/relations/functionality-channel.json"
                 }
             }
         },
@@ -206,7 +206,7 @@
             "operation": "translate",
             "source": ["age"],
             "parameters": {
-                "translation": "data/test/translations/age-ranges.json"
+                "translation": "test/translations/age-ranges.json"
             }
         },
         {

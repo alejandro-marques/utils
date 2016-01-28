@@ -20,11 +20,11 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "dictionary": "data/test/dictionaries/phases.json"
+                        "dictionary": "mapfre/dictionaries/temporal/phases.json"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "dictionary": "data/test/dictionaries/phases.json"
+                        "dictionary": "mapfre/dictionaries/temporal/phases.json"
                     }
                 }
             },
@@ -40,12 +40,12 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "relation": "data/test/relations/phase.json",
+                        "relation": "mapfre/relations/temporal/phase.json",
                         "origin": "phase1"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "relation": "data/test/relations/phase.json",
+                        "relation": "mapfre/relations/temporal/phase.json",
                         "origin": "phase1"
                     }
                 }
@@ -53,6 +53,9 @@
             {
                 "name": "functionality1",
                 "order": 3,
+                "options": {
+                    "weight": true
+                },
                 "value": {
                     "type": "text",
                     "subtype": "dictionary",
@@ -62,12 +65,12 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "relation": "data/test/relations/phase-functionality.json",
+                        "relation": "mapfre/relations/temporal/phase-functionality.json",
                         "origin": "phase1"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "relation": "data/test/relations/phase-functionality.json",
+                        "relation": "mapfre/relations/temporal/phase-functionality.json",
                         "origin": "phase1"
                     }
                 }
@@ -75,6 +78,9 @@
             {
                 "name": "channel1",
                 "order": 4,
+                "options": {
+                    "weight": true
+                },
                 "value": {
                     "type": "text",
                     "subtype": "dictionary",
@@ -84,12 +90,12 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "relation": "data/test/relations/functionality-channel.json",
+                        "relation": "mapfre/relations/temporal/functionality-channel.json",
                         "origin": "functionality1"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "relation": "data/test/relations/functionality-channel.json",
+                        "relation": "mapfre/relations/temporal/functionality-channel.json",
                         "origin": "functionality1"
                     }
                 }
@@ -97,6 +103,9 @@
             {
                 "name": "functionality2",
                 "order": 5,
+                "options": {
+                    "weight": true
+                },
                 "value": {
                     "type": "text",
                     "subtype": "dictionary",
@@ -106,19 +115,22 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "relation": "data/test/relations/functionality.json",
-                        "origin": "functionality1"
+                        "relation": "mapfre/relations/temporal/phase-functionality.json",
+                        "origin": "phase2"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "relation": "data/test/relations/functionality.json",
-                        "origin": "functionality1"
+                        "relation": "mapfre/relations/temporal/phase-functionality.json",
+                        "origin": "phase2"
                     }
                 }
             },
             {
                 "name": "channel2",
                 "order": 6,
+                "options": {
+                    "weight": true
+                },
                 "value": {
                     "type": "text",
                     "subtype": "dictionary",
@@ -128,12 +140,12 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "relation": "data/test/relations/functionality-channel.json",
+                        "relation": "mapfre/relations/temporal/functionality-channel.json",
                         "origin": "functionality2"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "relation": "data/test/relations/functionality-channel.json",
+                        "relation": "mapfre/relations/temporal/functionality-channel.json",
                         "origin": "functionality2"
                     }
                 }
@@ -153,16 +165,16 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "dictionary": "data/test/dictionaries/age-ranges.json"
+                        "dictionary": "mapfre/dictionaries/age-ranges.json"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "dictionary": "data/test/dictionaries/age-ranges.json"
+                        "dictionary": "mapfre/dictionaries/age-ranges.json"
                     }
                 }
             },
             {
-                "name": "product",
+                "name": "segment",
                 "order": 8,
                 "options": {
                     "weight": true
@@ -176,34 +188,11 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "dictionary": "data/test/dictionaries/products.json"
+                        "dictionary": "mapfre/dictionaries/segments.json"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "dictionary": "data/test/dictionaries/products.json"
-                    }
-                }
-            },
-            {
-                "name": "segment",
-                "order": 9,
-                "options": {
-                    "weight": true
-                },
-                "value": {
-                    "type": "text",
-                    "subtype": "dictionary",
-                    "options": {
-                        "limit": true
-                    },
-                    "initial": {
-                        "mode": "fixed",
-                        "position": 0,
-                        "dictionary": "data/test/dictionaries/segments.json"
-                    },
-                    "variation": {
-                        "mode": "sequential",
-                        "dictionary": "data/test/dictionaries/segments.json"
+                        "dictionary": "mapfre/dictionaries/segments.json"
                     }
                 }
             }
@@ -244,22 +233,6 @@
         },
         {
             "operation": "multiply",
-            "field": "lines",
-            "source": ["users"],
-            "value": {
-                "type": "numeric",
-                "subtype": "double",
-                "initial" : {
-                    "mode" : "gaussian",
-                    "mean" : "1.5",
-                    "variance" : "0.2",
-                    "min" : "1",
-                    "max" : "4"
-                }
-            }
-        },
-        {
-            "operation": "multiply",
             "field": "events",
             "source": ["users"],
             "value": {
@@ -267,16 +240,16 @@
                 "subtype": "double",
                 "initial" : {
                     "mode" : "gaussian",
-                    "mean" : "10",
-                    "variance" : "2",
+                    "mean" : "1",
+                    "variance" : "0.5",
                     "min" : "1",
-                    "max" : "20"
+                    "max" : "5"
                 }
             }
         },
         {
             "operation": "round",
-            "source": ["lines", "events"]
+            "source": ["events"]
         },
         {
             "operation": "remove",
@@ -293,6 +266,17 @@
                     "value" : ""
                 }
             }
+        },
+        {
+            "operation": "remove",
+            "source": ["phase2", "functionality2", "channel2"],
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["phase2"],
+                    "value": "null"
+                }
+            ]
         }
     ]
 }

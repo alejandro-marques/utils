@@ -1,0 +1,30 @@
+[
+  {
+    "value": "mes 1",
+    "next":[{"value": "mes 2"}]
+  },
+  {
+    "value": "mes 2",
+    "next":[{"value": "mes 3"}]
+  },
+  {
+    "value": "mes 3",
+    "next":[{"value": "mes 4"}]
+  },
+  {
+    "value": "mes 4",
+    "next":[{"value": "mes 5"}]
+  },
+  {
+    "value": "mes 5",
+    "next":[{"value": "mes 6"}]
+  },
+  {
+    "value": "mes 6",
+    "next":[{"value": "resto"}]
+  },
+  {
+    "value": "resto",
+    "next":[{"value": "null"}]
+  }
+]

@@ -105,7 +105,9 @@ public class TextDictionaryValueUtils {
         if (null == origin){key = previousValue;}
         else {
             FieldValue originValue = relatedValues.get(origin);
-            if (null != originValue) {key = originValue.getValue().toString();}
+            if (null != originValue && null != originValue.getValue()) {
+                key = originValue.getValue().toString();
+            }
         }
 
         if (null != key){

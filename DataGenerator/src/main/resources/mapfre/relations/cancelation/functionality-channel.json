@@ -1,0 +1,38 @@
+[
+  {
+    "value": "Alta incidencia",
+    "next":[
+      {"value": "Web", "weight": 30},
+      {"value": "Agente exclusivo", "weight": 10},
+      {"value": "Call Center", "weight": 60}
+    ]
+  },
+  {
+    "value": "Revisa incidencia",
+    "next":[
+      {"value": "Web", "weight": 60},
+      {"value": "Agente exclusivo", "weight": 10},
+      {"value": "Call Center", "weight": 30}
+    ]
+  },
+  {
+    "value": "Consulta datos",
+    "next":[
+      {"value": "App", "weight": 20},
+      {"value": "Web", "weight": 40},
+      {"value": "Agente exclusivo", "weight": 10},
+      {"value": "Agente no exclusivo", "weight": 10},
+      {"value": "Call Center", "weight": 10}
+    ]
+  },
+  {
+    "value": "Consulta factura",
+    "next":[
+      {"value": "App", "weight": 30},
+      {"value": "Web", "weight": 40},
+      {"value": "Agente exclusivo", "weight": 5},
+      {"value": "Agente no exclusivo", "weight": 5},
+      {"value": "Call Center", "weight": 1}
+    ]
+  }
+]

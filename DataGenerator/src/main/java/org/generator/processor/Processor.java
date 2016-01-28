@@ -18,6 +18,7 @@ import org.generator.utils.values.ValueUtils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class Processor {
 
@@ -136,9 +137,10 @@ public class Processor {
     private boolean hasWeight (){
         if (generatorInfo.getIdFields() != null){
             for (FieldInfo fieldInfo : generatorInfo.getIdFields()){
-                if (null != fieldInfo.getOptions()){
-                    return Boolean.parseBoolean(fieldInfo.getOptions()
-                            .get(PropertiesConstants.WEIGHT));
+                if (null != fieldInfo.getOptions() && !fieldInfo.getOptions().isEmpty()){
+                    if (Boolean.parseBoolean(fieldInfo.getOptions().get(PropertiesConstants.WEIGHT))) {
+                        return true;
+                    }
                 }
             }
         }
@@ -262,8 +264,7 @@ public class Processor {
     private Map<String, FieldValue> transformDocument (Map<String, FieldValue> document) throws Exception {
         if (null == transformations || transformations.isEmpty()){return document;}
 
-        Map<String, FieldValue> transformedDocument = new HashMap<>();
-        transformedDocument.putAll(document);
+        Map<String, FieldValue> transformedDocument = duplicateDocument(document);
         for (Transformation transformation : transformations){
             TransformationUtils.transform(transformedDocument, transformation);
         }
@@ -295,5 +296,16 @@ public class Processor {
             values.put(extendedValue.getKey(), extendedValue.getValue().getValue());
         }
         return values;
+    }
+
+    private Map<String, FieldValue> duplicateDocument (Map<String, FieldValue> document){
+        if (null == document) {return null;}
+        Map<String, FieldValue> newDocument = new HashMap<>();
+        if (!document.isEmpty()){
+            for (Entry<String, FieldValue> entry : document.entrySet()){
+                newDocument.put(entry.getKey(), new FieldValue(entry.getValue().getValue()));
+            }
+        }
+        return newDocument;
     }
 }

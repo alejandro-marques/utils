@@ -1,0 +1,320 @@
+{
+    "generator": {
+        "maxDocuments": -1,
+        "minRelatedDocuments": 1,
+        "maxRelatedDocuments": 1,
+        "auxiliaryFields": true,
+        "idFields": [
+            {
+                "name": "phase1",
+                "order": 1,
+                "options": {
+                    "weight": true
+                },
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "telefonica/dictionaries/phases.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "telefonica/dictionaries/phases.json"
+                    }
+                }
+            },
+            {
+                "name": "phase2",
+                "order": 2,
+                "options": {
+                    "weight": true
+                },
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "relation": "telefonica/relations/phase.json",
+                        "origin": "phase1"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "relation": "telefonica/relations/phase.json",
+                        "origin": "phase1"
+                    }
+                }
+            },
+            {
+                "name": "functionality1",
+                "order": 3,
+                "options": {
+                    "weight": true
+                },
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "telefonica/dictionaries/functionalities.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "telefonica/dictionaries/functionalities.json"
+                    }
+                }
+            },
+            {
+                "name": "channel1",
+                "order": 4,
+                "options": {
+                    "weight": true
+                },
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "relation": "telefonica/relations/functionality-channel.json",
+                        "origin": "functionality1"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "relation": "telefonica/relations/functionality-channel.json",
+                        "origin": "functionality1"
+                    }
+                }
+            },
+            {
+                "name": "functionality2",
+                "order": 5,
+                "options": {
+                    "weight": true
+                },
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "telefonica/dictionaries/functionalities.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "telefonica/dictionaries/functionalities.json"
+                    }
+                }
+            },
+            {
+                "name": "channel2",
+                "order": 6,
+                "options": {
+                    "weight": true
+                },
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "relation": "telefonica/relations/functionality-channel.json",
+                        "origin": "functionality2"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "relation": "telefonica/relations/functionality-channel.json",
+                        "origin": "functionality2"
+                    }
+                }
+            },
+            {
+                "name": "age",
+                "order": 7,
+                "options": {
+                    "weight": true
+                },
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "telefonica/dictionaries/age-ranges.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "telefonica/dictionaries/age-ranges.json"
+                    }
+                }
+            },
+            {
+                "name": "product",
+                "order": 8,
+                "options": {
+                    "weight": true
+                },
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "telefonica/dictionaries/products.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "telefonica/dictionaries/products.json"
+                    }
+                }
+            },
+            {
+                "name": "segment",
+                "order": 9,
+                "options": {
+                    "weight": true
+                },
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "telefonica/dictionaries/segments.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "telefonica/dictionaries/segments.json"
+                    }
+                }
+            }
+        ]
+    },
+
+    "model" :
+    [
+        {
+            "name": "users",
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode" : "gaussian",
+                    "mean" : 500,
+                    "variance" : 20,
+                    "min" : 50,
+                    "max" : 1000
+                },
+                "variation": {
+                    "mode" : "none"
+                }
+            }
+        }
+    ],
+
+    "transformations" :
+    [
+        {
+            "operation": "multiply",
+            "field": "users",
+            "source": ["users", "_weight"]
+        },
+        {
+            "operation": "round",
+            "source": ["users"]
+        },
+        {
+            "operation": "multiply",
+            "field": "lines",
+            "source": ["users"],
+            "value": {
+                "type": "numeric",
+                "subtype": "double",
+                "initial" : {
+                    "mode" : "gaussian",
+                    "mean" : "1.5",
+                    "variance" : "0.2",
+                    "min" : "1",
+                    "max" : "4"
+                }
+            }
+        },
+        {
+            "operation": "multiply",
+            "field": "events",
+            "source": ["users"],
+            "value": {
+                "type": "numeric",
+                "subtype": "double",
+                "initial" : {
+                    "mode" : "gaussian",
+                    "mean" : "10",
+                    "variance" : "2",
+                    "min" : "1",
+                    "max" : "20"
+                }
+            }
+        },
+        {
+            "operation": "round",
+            "source": ["lines", "events"]
+        },
+        {
+            "operation": "remove",
+            "source": ["_id", "_relatedDocuments", "_weight"]
+        },
+        {
+            "operation": "create",
+            "field": "empty",
+            "value": {
+                "type": "text",
+                "subtype": "string",
+                "initial" : {
+                    "mode" : "fixed",
+                    "value" : ""
+                }
+            }
+        },
+        {
+            "operation": "remove",
+            "source": ["phase2", "functionality2", "channel2"],
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["phase2"],
+                    "value": "null"
+                }
+            ]
+        }
+    ]
+}

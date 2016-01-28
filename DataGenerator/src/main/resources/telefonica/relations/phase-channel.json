@@ -82,5 +82,11 @@
       {"value": "Canal App", "weight": 1},
       {"value": "Canal online y canal App", "weight": 1}
     ]
+  },
+  {
+    "value": "null",
+    "next":[
+      {"value": "null"}
+    ]
   }
 ]

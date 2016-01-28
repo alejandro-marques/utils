@@ -1,0 +1,9 @@
+[
+  {"value": "mes 1", "weight": 16},
+  {"value": "mes 2", "weight": 15},
+  {"value": "mes 3", "weight": 14},
+  {"value": "mes 4", "weight": 13},
+  {"value": "mes 5", "weight": 12},
+  {"value": "mes 6", "weight": 11},
+  {"value": "resto", "weight": 10}
+]

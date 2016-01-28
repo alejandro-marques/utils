@@ -23,7 +23,7 @@ public class ProcessValidator {
             validateGenerator(processInfo);
             checkFields(processInfo);
             validateModel(processInfo);
-            validateTransformations(processInfo.getTransformations());
+            validateTransformations(processInfo);
         }
         catch (Exception exception){
             throw new Exception("Error while validating process configuration " +
@@ -94,8 +94,12 @@ public class ProcessValidator {
         }
     }
 
-    private static void validateTransformations(List<Transformation> transformations)
+    private static void validateTransformations(ProcessInfo processInfo)
             throws Exception {
+        List<Transformation> transformations = processInfo.getTransformations();
+        transformations = orderTransformations(transformations);
+        processInfo.setTransformations(transformations);
+
         if (null != transformations && !transformations.isEmpty()){
             for (Transformation transformation : transformations){
                 try {TransformationValidator.validate(transformation, previousFields);}
@@ -149,5 +153,24 @@ public class ProcessValidator {
         }
         orderedFields.addAll(unorderedFields);
         return orderedFields;
+    }
+
+    private static List<Transformation> orderTransformations(List<Transformation> transformations){
+        if (null == transformations){return null;}
+        List<Transformation> orderedTransformations = new ArrayList<>();
+        List<Transformation> unorderedTransformations = new ArrayList<>();
+        SortedMap<Integer, Transformation> orderedTransformationsMap = new TreeMap<>();
+
+        for(Transformation transformation : transformations) {
+            Integer order = transformation.getOrder();
+            if (null == order) { unorderedTransformations.add(transformation);}
+            else {orderedTransformationsMap.put(order, transformation);}
+        }
+
+        for (Map.Entry<Integer, Transformation> entry : orderedTransformationsMap.entrySet()) {
+            orderedTransformations.add(entry.getValue());
+        }
+        orderedTransformations.addAll(unorderedTransformations);
+        return orderedTransformations;
     }
 }

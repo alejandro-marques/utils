@@ -1,0 +1,38 @@
+[
+  {
+    "value": "Alta incidencia",
+    "next":[
+      {"value": "Alta incidencia", "weight": 5},
+      {"value": "Revisa incidencia", "weight": 50},
+      {"value": "Consulta datos", "weight": 25},
+      {"value": "Consulta factura", "weight": 20}
+    ]
+  },
+  {
+    "value": "Revisa incidencia",
+    "next":[
+      {"value": "Alta incidencia", "weight": 10},
+      {"value": "Revisa incidencia", "weight": 40},
+      {"value": "Consulta datos", "weight": 30},
+      {"value": "Consulta factura", "weight": 20}
+    ]
+  },
+  {
+    "value": "Consulta datos",
+    "next":[
+      {"value": "Alta incidencia", "weight": 15},
+      {"value": "Revisa incidencia", "weight": 5},
+      {"value": "Consulta datos", "weight": 30},
+      {"value": "Consulta factura", "weight": 40}
+    ]
+  },
+  {
+    "value": "Consulta factura",
+    "next":[
+      {"value": "Alta incidencia", "weight": 15},
+      {"value": "Revisa incidencia", "weight": 5},
+      {"value": "Consulta datos", "weight": 40},
+      {"value": "Consulta factura", "weight": 30}
+    ]
+  }
+]

@@ -3,7 +3,7 @@ package org.generator.processor;
 import java.util.Map;
 
 public class TestProcess {
-    private static final String CONFIGURATION_FILE = "process/telefonica-reap.json";
+    private static final String CONFIGURATION_FILE = "telefonica/telefonica-paths.json";
 
     public static void main(String[] args) throws Exception {
         Processor processor = new Processor(CONFIGURATION_FILE, true);

@@ -1,0 +1,6 @@
+[
+  {"value": "Alta incidencia", "weight": 2},
+  {"value": "Revisa incidencia", "weight": 1},
+  {"value": "Consulta datos", "weight": 3},
+  {"value": "Consulta factura", "weight": 4}
+]

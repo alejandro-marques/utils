@@ -17,4 +17,11 @@ public class BasicTransformation {
         }
         document.put(transformation.getField(), new FieldValue(combined));
     }
+
+    public static void clean (Map<String, FieldValue> document, Transformation transformation)
+            throws Exception {
+        for (String sourceField : transformation.getSource()){
+            document.get(sourceField).setValue(null);
+        }
+    }
 }

@@ -40,7 +40,9 @@ public class ConditionUtils {
     private static List<Object> getValues  (Map<String, FieldValue> document, Condition condition)
             throws Exception {
         List<Object> values = new ArrayList<>();
-        for (String sourceField : condition.getSource()){values.add(document.get(sourceField).getValue());}
+        for (String sourceField : condition.getSource()){
+            values.add(document.get(sourceField).getValue());
+        }
         if (null != condition.getValue()){values.add(condition.getValue());}
         return values;
     }

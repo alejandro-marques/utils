@@ -1,0 +1,49 @@
+[
+  {
+    "value": "Descubrir",
+    "next":[
+      {"value": "App", "weight": 5},
+      {"value": "Web", "weight": 40},
+      {"value": "Redes Sociales", "weight": 25},
+      {"value": "Agregador", "weight": 30}
+    ]
+  },
+  {
+    "value": "Info",
+    "next":[
+      {"value": "App", "weight": 10},
+      {"value": "Web", "weight": 50},
+      {"value": "Redes Sociales", "weight": 5},
+      {"value": "Agente exclusivo", "weight": 20},
+      {"value": "Agente no exclusivo", "weight": 5},
+      {"value": "Call Center", "weight": 10}
+    ]
+  },
+  {
+    "value": "Presupuesto",
+    "next":[
+      {"value": "App", "weight": 10},
+      {"value": "Web", "weight": 40},
+      {"value": "Agregador", "weight": 20},
+      {"value": "Agente exclusivo", "weight": 15},
+      {"value": "Agente no exclusivo", "weight": 5},
+      {"value": "Call Center", "weight": 10}
+    ]
+  },
+  {
+    "value": "Venta",
+    "next":[
+      {"value": "App", "weight": 5},
+      {"value": "Web", "weight": 5},
+      {"value": "Agente exclusivo", "weight": 45},
+      {"value": "Agente no exclusivo", "weight": 35},
+      {"value": "Call Center", "weight": 10}
+    ]
+  },
+  {
+    "value": "null",
+    "next":[
+      {"value": "null"}
+    ]
+  }
+]

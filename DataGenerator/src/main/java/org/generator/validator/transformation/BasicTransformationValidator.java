@@ -12,4 +12,9 @@ public class BasicTransformationValidator {
         TransformationValidator.checkSourceFields(transformation.getSource(), previousFields, -1);
         previousFields.add(fieldName);
     }
+
+    public static void validateClean (Transformation transformation, List<String> previousFields)
+            throws Exception {
+        TransformationValidator.checkSourceFields(transformation.getSource(), previousFields, -1);
+    }
 }

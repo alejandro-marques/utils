@@ -20,20 +20,17 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "dictionary": "data/telefonica/dictionaries/phases.json"
+                        "dictionary": "mapfre/dictionaries/sales/phases.json"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "dictionary": "data/telefonica/dictionaries/phases.json"
+                        "dictionary": "mapfre/dictionaries/sales/phases.json"
                     }
                 }
             },
             {
                 "name": "phase2",
                 "order": 2,
-                "options": {
-                    "weight": true
-                },
                 "value": {
                     "type": "text",
                     "subtype": "dictionary",
@@ -43,18 +40,18 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "relation": "data/telefonica/relations/phase.json",
+                        "relation": "mapfre/relations/sales/phase.json",
                         "origin": "phase1"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "relation": "data/telefonica/relations/phase.json",
+                        "relation": "mapfre/relations/sales/phase.json",
                         "origin": "phase1"
                     }
                 }
             },
             {
-                "name": "functionality1",
+                "name": "channel1",
                 "order": 3,
                 "options": {
                     "weight": true
@@ -68,16 +65,18 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "dictionary": "data/telefonica/dictionaries/functionalities.json"
+                        "relation": "mapfre/relations/sales/phase-channel.json",
+                        "origin": "phase1"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "dictionary": "data/telefonica/dictionaries/functionalities.json"
+                        "relation": "mapfre/relations/sales/phase-channel.json",
+                        "origin": "phase1"
                     }
                 }
             },
             {
-                "name": "channel1",
+                "name": "channel2",
                 "order": 4,
                 "options": {
                     "weight": true
@@ -91,18 +90,18 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "relation": "data/telefonica/relations/functionality-channel.json",
-                        "origin": "functionality1"
+                        "relation": "mapfre/relations/sales/phase-channel.json",
+                        "origin": "phase2"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "relation": "data/telefonica/relations/functionality-channel.json",
-                        "origin": "functionality1"
+                        "relation": "mapfre/relations/sales/phase-channel.json",
+                        "origin": "phase2"
                     }
                 }
             },
             {
-                "name": "functionality2",
+                "name": "age",
                 "order": 5,
                 "options": {
                     "weight": true
@@ -116,16 +115,16 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "dictionary": "data/telefonica/dictionaries/functionalities.json"
+                        "dictionary": "mapfre/dictionaries/age-ranges.json"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "dictionary": "data/telefonica/dictionaries/functionalities.json"
+                        "dictionary": "mapfre/dictionaries/age-ranges.json"
                     }
                 }
             },
             {
-                "name": "channel2",
+                "name": "segment",
                 "order": 6,
                 "options": {
                     "weight": true
@@ -139,82 +138,11 @@
                     "initial": {
                         "mode": "fixed",
                         "position": 0,
-                        "relation": "data/telefonica/relations/functionality-channel.json",
-                        "origin": "functionality2"
+                        "dictionary": "mapfre/dictionaries/segments.json"
                     },
                     "variation": {
                         "mode": "sequential",
-                        "relation": "data/telefonica/relations/functionality-channel.json",
-                        "origin": "functionality2"
-                    }
-                }
-            },
-            {
-                "name": "age",
-                "order": 7,
-                "options": {
-                    "weight": true
-                },
-                "value": {
-                    "type": "text",
-                    "subtype": "dictionary",
-                    "options": {
-                        "limit": true
-                    },
-                    "initial": {
-                        "mode": "fixed",
-                        "position": 0,
-                        "dictionary": "data/telefonica/dictionaries/age-ranges.json"
-                    },
-                    "variation": {
-                        "mode": "sequential",
-                        "dictionary": "data/telefonica/dictionaries/age-ranges.json"
-                    }
-                }
-            },
-            {
-                "name": "product",
-                "order": 8,
-                "options": {
-                    "weight": true
-                },
-                "value": {
-                    "type": "text",
-                    "subtype": "dictionary",
-                    "options": {
-                        "limit": true
-                    },
-                    "initial": {
-                        "mode": "fixed",
-                        "position": 0,
-                        "dictionary": "data/telefonica/dictionaries/products.json"
-                    },
-                    "variation": {
-                        "mode": "sequential",
-                        "dictionary": "data/telefonica/dictionaries/products.json"
-                    }
-                }
-            },
-            {
-                "name": "segment",
-                "order": 9,
-                "options": {
-                    "weight": true
-                },
-                "value": {
-                    "type": "text",
-                    "subtype": "dictionary",
-                    "options": {
-                        "limit": true
-                    },
-                    "initial": {
-                        "mode": "fixed",
-                        "position": 0,
-                        "dictionary": "data/telefonica/dictionaries/segments.json"
-                    },
-                    "variation": {
-                        "mode": "sequential",
-                        "dictionary": "data/telefonica/dictionaries/segments.json"
+                        "dictionary": "mapfre/dictionaries/segments.json"
                     }
                 }
             }
@@ -246,31 +174,31 @@
     [
         {
             "operation": "multiply",
+            "order": 1,
             "field": "users",
             "source": ["users", "_weight"]
         },
         {
             "operation": "round",
+            "order": 2,
             "source": ["users"]
         },
         {
-            "operation": "multiply",
-            "field": "lines",
+            "operation": "copy",
+            "order": 3,
+            "field": "events",
             "source": ["users"],
-            "value": {
-                "type": "numeric",
-                "subtype": "double",
-                "initial" : {
-                    "mode" : "gaussian",
-                    "mean" : "1.5",
-                    "variance" : "0.2",
-                    "min" : "1",
-                    "max" : "4"
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["phase1"],
+                    "value": "Descubrir"
                 }
-            }
+            ]
         },
         {
             "operation": "multiply",
+            "order": 4,
             "field": "events",
             "source": ["users"],
             "value": {
@@ -278,23 +206,93 @@
                 "subtype": "double",
                 "initial" : {
                     "mode" : "gaussian",
-                    "mean" : "10",
+                    "mean" : "5",
                     "variance" : "2",
                     "min" : "1",
                     "max" : "20"
                 }
-            }
+            },
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["phase1"],
+                    "value": "Info"
+                }
+            ]
+        },
+        {
+            "operation": "multiply",
+            "order": 5,
+            "field": "events",
+            "source": ["users"],
+            "value": {
+                "type": "numeric",
+                "subtype": "double",
+                "initial" : {
+                    "mode" : "gaussian",
+                    "mean" : "2",
+                    "variance" : "1",
+                    "min" : "1",
+                    "max" : "10"
+                }
+            },
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["phase1"],
+                    "value": "Presupuesto"
+                }
+            ]
+        },
+        {
+            "operation": "multiply",
+            "order": 6,
+            "field": "events",
+            "source": ["users"],
+            "value": {
+                "type": "numeric",
+                "subtype": "double",
+                "initial" : {
+                    "mode" : "gaussian",
+                    "mean" : "1",
+                    "variance" : "0.5",
+                    "min" : "1",
+                    "max" : "5"
+                }
+            },
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["phase1"],
+                    "value": "Venta"
+                }
+            ]
         },
         {
             "operation": "round",
-            "source": ["lines", "events"]
+            "order": 7,
+            "source": ["events"]
         },
         {
             "operation": "remove",
+            "order": 8,
             "source": ["_id", "_relatedDocuments", "_weight"]
         },
         {
+            "operation": "copy",
+            "order": 9,
+            "field": "functionality1",
+            "source": ["phase1"]
+        },
+        {
+            "operation": "copy",
+            "order": 10,
+            "field": "functionality2",
+            "source": ["phase2"]
+        },
+        {
             "operation": "create",
+            "order": 11,
             "field": "empty",
             "value": {
                 "type": "text",
@@ -304,6 +302,18 @@
                     "value" : ""
                 }
             }
+        },
+        {
+            "operation": "clean",
+            "order": 12,
+            "source": ["phase2", "functionality2", "channel2"],
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["phase2"],
+                    "value": "null"
+                }
+            ]
         }
     ]
 }
