@@ -1,0 +1,30 @@
+[
+  {
+    "value": "Presencial Call Movil",
+    "next":[{"value": "store"}]
+  },
+  {
+    "value": "Call center fijo",
+    "next":[{"value": "call_center"}]
+  },
+  {
+    "value": "Presencial fijo",
+    "next":[{"value": "store"}]
+  },
+  {
+    "value": "IVR",
+    "next":[{"value": "call_center"}]
+  },
+  {
+    "value": "Canal online",
+    "next":[{"value": "web"}]
+  },
+  {
+    "value": "Canal App",
+    "next":[{"value": "app"}]
+  },
+  {
+    "value": "Canal online y canal App",
+    "next":[{"value": "web"}]
+  }
+]

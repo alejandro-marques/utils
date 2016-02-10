@@ -1,0 +1,302 @@
+{
+    "generator": {
+        "maxDocuments": -1,
+        "minRelatedDocuments": 1,
+        "maxRelatedDocuments": 1,
+        "auxiliaryFields": true,
+        "idFields": [
+            {
+                "name": "phase1",
+                "order": 1,
+                "options": {
+                    "weight": true
+                },
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "stratio/dictionaries/temporal-phases.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "stratio/dictionaries/temporal-phases.json"
+                    }
+                }
+            },
+            {
+                "name": "phase2",
+                "order": 2,
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "relation": "stratio/relations/temporal-phase.json",
+                        "origin": "phase1"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "relation": "stratio/relations/temporal-phase.json",
+                        "origin": "phase1"
+                    }
+                }
+            },
+            {
+                "name": "functionality1",
+                "order": 3,
+                "options": {
+                    "weight": true
+                },
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "relation": "stratio/relations/temporal-phase-functionality.json",
+                        "origin": "phase1"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "relation": "stratio/relations/temporal-phase-functionality.json",
+                        "origin": "phase1"
+                    }
+                }
+            },
+            {
+                "name": "channel1",
+                "order": 4,
+                "options": {
+                    "weight": true
+                },
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "relation": "stratio/relations/functionality-channel.json",
+                        "origin": "functionality1"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "relation": "stratio/relations/functionality-channel.json",
+                        "origin": "functionality1"
+                    }
+                }
+            },
+            {
+                "name": "functionality2",
+                "order": 5,
+                "options": {
+                    "weight": true
+                },
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "relation": "stratio/relations/temporal-phase-functionality.json",
+                        "origin": "phase2"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "relation": "stratio/relations/temporal-phase-functionality.json",
+                        "origin": "phase2"
+                    }
+                }
+            },
+            {
+                "name": "channel2",
+                "order": 6,
+                "options": {
+                    "weight": true
+                },
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "relation": "stratio/relations/functionality-channel.json",
+                        "origin": "functionality2"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "relation": "stratio/relations/functionality-channel.json",
+                        "origin": "functionality2"
+                    }
+                }
+            },
+            {
+                "name": "age",
+                "order": 7,
+                "options": {
+                    "weight": true
+                },
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "stratio/dictionaries/age-ranges.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "stratio/dictionaries/age-ranges.json"
+                    }
+                }
+            },
+            {
+                "name": "segment",
+                "order": 8,
+                "options": {
+                    "weight": true
+                },
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "stratio/dictionaries/segments.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "stratio/dictionaries/segments.json"
+                    }
+                }
+            }
+        ]
+    },
+
+    "model" :
+    [
+        {
+            "name": "users",
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode" : "gaussian",
+                    "mean" : 500,
+                    "variance" : 20,
+                    "min" : 50,
+                    "max" : 1000
+                },
+                "variation": {
+                    "mode" : "none"
+                }
+            }
+        }
+    ],
+
+    "transformations" :
+    [
+        {
+            "operation": "multiply",
+            "field": "users",
+            "source": ["users"],
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial" : {
+                    "mode" : "fixed",
+                    "value" : "14"
+                }
+            },
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["phase2"],
+                    "value": "null"
+                }
+            ]
+        },
+        {
+            "operation": "multiply",
+            "field": "users",
+            "source": ["users", "_weight"]
+        },
+        {
+            "operation": "round",
+            "source": ["users"]
+        },
+        {
+            "operation": "multiply",
+            "field": "events",
+            "source": ["users"],
+            "value": {
+                "type": "numeric",
+                "subtype": "double",
+                "initial" : {
+                    "mode" : "gaussian",
+                    "mean" : "1",
+                    "variance" : "0.5",
+                    "min" : "1",
+                    "max" : "5"
+                }
+            }
+        },
+        {
+            "operation": "round",
+            "source": ["events"]
+        },
+        {
+            "operation": "remove",
+            "source": ["_id", "_relatedDocuments", "_count", "_weight"]
+        },
+        {
+            "operation": "create",
+            "field": "empty",
+            "value": {
+                "type": "text",
+                "subtype": "string",
+                "initial" : {
+                    "mode" : "fixed",
+                    "value" : ""
+                }
+            }
+        },
+        {
+            "operation": "remove",
+            "source": ["phase2", "functionality2", "channel2"],
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["phase2"],
+                    "value": "null"
+                }
+            ]
+        }
+    ]
+}

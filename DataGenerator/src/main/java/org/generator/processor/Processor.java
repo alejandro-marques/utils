@@ -107,10 +107,13 @@ public class Processor {
         document.putAll(lastAuxiliaryFields);
 
         // An specific id for each related document is generated if necesary
-        if (hasAuxiliaryFields && hasRelations) {
-            String id = document.get(FieldConstants.ID_FIELD).getValue().toString() + "-"
-                    + (currentRelatedDocument + 1);
-            document.put(FieldConstants.ID_FIELD, new FieldValue(id));
+        if (hasAuxiliaryFields){
+            document.put(FieldConstants.COUNT_FIELD, new FieldValue(currentDocument));
+            if (hasRelations) {
+                String id = document.get(FieldConstants.ID_FIELD).getValue().toString() + "-"
+                        + (currentRelatedDocument + 1);
+                document.put(FieldConstants.ID_FIELD, new FieldValue(id));
+            }
         }
 
         // Document values are generated

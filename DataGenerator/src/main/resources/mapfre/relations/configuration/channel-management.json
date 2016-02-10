@@ -1,0 +1,30 @@
+[
+  {
+    "value": "App",
+    "next":[{"value": "self-managed"}]
+  },
+  {
+    "value": "Web",
+    "next":[{"value": "self-managed"}]
+  },
+  {
+    "value": "Redes Sociales",
+    "next":[{"value": "self-managed"}]
+  },
+  {
+    "value": "Agregador",
+    "next":[{"value": "self-managed"}]
+  },
+  {
+    "value": "Agente exclusivo",
+    "next":[{"value": "traditional"}]
+  },
+  {
+    "value": "Agente no exclusivo",
+    "next":[{"value": "traditional"}]
+  },
+  {
+    "value": "Call Center",
+    "next":[{"value": "traditional"}]
+  }
+]

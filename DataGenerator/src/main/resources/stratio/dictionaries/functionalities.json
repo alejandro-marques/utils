@@ -1,0 +1,6 @@
+[
+  {"value": "Open issue", "weight": 2},
+  {"value": "Check issue", "weight": 1},
+  {"value": "Check data", "weight": 3},
+  {"value": "Check invoice", "weight": 4}
+]

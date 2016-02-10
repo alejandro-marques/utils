@@ -1,0 +1,144 @@
+{
+    "generator": {
+        "maxDocuments": -1,
+        "minRelatedDocuments": 1,
+        "maxRelatedDocuments": 1,
+        "auxiliaryFields": true,
+        "idFields": [
+            {
+                "name": "functionality",
+                "order": 1,
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "mapfre/dictionaries/cancelation/functionalities.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "mapfre/dictionaries/cancelation/functionalities.json"
+                    }
+                }
+            },
+            {
+                "name": "channel",
+                "order": 2,
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "relation": "mapfre/relations/cancelation/functionality-channel.json",
+                        "origin": "functionality"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "relation": "mapfre/relations/cancelation/functionality-channel.json",
+                        "origin": "functionality"
+                    }
+                }
+            }
+        ]
+    },
+
+    "model" :
+    [
+        {
+            "name": "icon",
+            "value": {
+                "type": "text",
+                "subtype": "dictionary",
+                "initial": {
+                    "mode": "fixed",
+                    "position": 0,
+                    "relation": "mapfre/relations/configuration/channel-icon.json",
+                    "origin": "channel"
+                }
+            }
+        },
+        {
+            "name": "type",
+            "value": {
+                "type": "text",
+                "subtype": "dictionary",
+                "initial": {
+                    "mode": "fixed",
+                    "position": 0,
+                    "relation": "mapfre/relations/configuration/channel-management.json",
+                    "origin": "channel"
+                }
+            }
+        }
+    ],
+
+    "transformations" :
+    [
+        {
+            "operation": "rename",
+            "field": "id",
+            "source": ["_count"]
+        },
+        {
+            "operation": "copy",
+            "field": "position",
+            "source": ["id"]
+        },
+        {
+            "operation": "remove",
+            "source": ["_id", "_relatedDocuments", "_weight"]
+        },
+        {
+            "operation": "create",
+            "field": "cost",
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial" : {
+                    "mode" : "gaussian",
+                    "mean" : 10,
+                    "variance" : 5,
+                    "min" : 1,
+                    "max" : 25
+                }
+            },
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["type"],
+                    "value": "self-managed"
+                }
+            ]
+        },
+        {
+            "operation": "create",
+            "field": "cost",
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial" : {
+                    "mode" : "gaussian",
+                    "mean" : 30,
+                    "variance" : 5,
+                    "min" : 10,
+                    "max" : 50
+                }
+            },
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["type"],
+                    "value": "traditional"
+                }
+            ]
+        }
+    ]
+}

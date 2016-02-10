@@ -1,0 +1,30 @@
+[
+  {
+    "value": "App",
+    "next":[{"value": "app"}]
+  },
+  {
+    "value": "Web",
+    "next":[{"value": "web"}]
+  },
+  {
+    "value": "Redes Sociales",
+    "next":[{"value": "web"}]
+  },
+  {
+    "value": "Agregador",
+    "next":[{"value": "web"}]
+  },
+  {
+    "value": "Agente exclusivo",
+    "next":[{"value": "store"}]
+  },
+  {
+    "value": "Agente no exclusivo",
+    "next":[{"value": "store"}]
+  },
+  {
+    "value": "Call Center",
+    "next":[{"value": "call_center"}]
+  }
+]

@@ -1,0 +1,249 @@
+{
+    "generator": {
+        "maxDocuments": -1,
+        "minRelatedDocuments": 1,
+        "maxRelatedDocuments": 1,
+        "auxiliaryFields": true,
+        "idFields": [
+            {
+                "name": "cluster_id",
+                "order": 1,
+                "value": {
+                    "type": "numeric",
+                    "subtype": "integer",
+                    "options": {
+                        "limit": true,
+                        "max": 10
+                    },
+                    "initial": {"mode": "fixed", "value": 1},
+                    "variation": {"mode": "fixed", "value": 1}
+                }
+            },
+            {
+                "name": "path_id",
+                "order": 2,
+                "value": {
+                    "type": "numeric",
+                    "subtype": "integer",
+                    "options": {
+                        "limit": true,
+                        "max": 5
+                    },
+                    "initial": {"mode": "fixed", "value": 1},
+                    "variation": {"mode": "fixed", "value": 1}
+                }
+            },
+            {
+                "name": "gender",
+                "order": 3,
+                "value": {
+                    "type": "text",
+                    "subtype": "dictionary",
+                    "options": {
+                        "limit": true
+                    },
+                    "initial": {
+                        "mode": "fixed",
+                        "position": 0,
+                        "dictionary": "stratio/dictionaries/genders.json"
+                    },
+                    "variation": {
+                        "mode": "sequential",
+                        "dictionary": "stratio/dictionaries/genders.json"
+                    }
+                }
+            }
+        ]
+    },
+
+    "model" :
+    [
+        {
+            "name": "users",
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode" : "gaussian",
+                    "mean" : 500,
+                    "variance" : 100,
+                    "min" : 50,
+                    "max" : 1000
+                },
+                "variation": {
+                    "mode" : "none"
+                }
+            }
+        },
+        {
+            "name": "age",
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode" : "gaussian",
+                    "mean" : 35,
+                    "variance" : 15,
+                    "min" : 18,
+                    "max" : 100
+                },
+                "variation": {
+                    "mode" : "none"
+                }
+            }
+        },
+        {
+            "name": "budget",
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode" : "gaussian",
+                    "mean" : 50,
+                    "variance" : 15,
+                    "min" : 5,
+                    "max" : 1000
+                },
+                "variation": {
+                    "mode" : "none"
+                }
+            }
+        }
+    ],
+
+    "transformations" :
+    [
+        {
+            "operation": "create",
+            "field": "path_weight",
+            "value": {
+                "type": "numeric",
+                "subtype": "double",
+                "initial" : {"mode" : "fixed", "value" : "10"}
+            }
+        },
+        {
+            "operation": "divide",
+            "field": "path_weight",
+            "source": ["path_weight", "path_id"],
+            "value": {
+                "type": "numeric",
+                "subtype": "double",
+                "initial" : {"mode" : "fixed", "value" : "5"}
+            }
+        },
+        {
+            "operation": "multiply",
+            "field": "users",
+            "source": ["users", "path_weight"]
+        },
+        {
+            "operation": "round",
+            "source": ["users"]
+        },
+        {
+            "operation": "remove",
+            "source": ["_id", "_relatedDocuments", "_count", "_weight", "path_weight"]
+        },
+        {
+            "operation": "create",
+            "field": "weight",
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode" : "gaussian",
+                    "mean" : 75,
+                    "variance" : 10,
+                    "min" : 50,
+                    "max" : 120
+                },
+                "variation": {
+                    "mode" : "none"
+                }
+            },
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["gender"],
+                    "value": "male"
+                }
+            ]
+        },
+        {
+            "operation": "create",
+            "field": "weight",
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode" : "gaussian",
+                    "mean" : 65,
+                    "variance" : 10,
+                    "min" : 40,
+                    "max" : 100
+                },
+                "variation": {
+                    "mode" : "none"
+                }
+            },
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["gender"],
+                    "value": "female"
+                }
+            ]
+        },
+        {
+            "operation": "create",
+            "field": "height",
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode" : "gaussian",
+                    "mean" : 170,
+                    "variance" : 20,
+                    "min" : 140,
+                    "max" : 210
+                },
+                "variation": {
+                    "mode" : "none"
+                }
+            },
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["gender"],
+                    "value": "male"
+                }
+            ]
+        },
+        {
+            "operation": "create",
+            "field": "height",
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode" : "gaussian",
+                    "mean" : 160,
+                    "variance" : 15,
+                    "min" : 130,
+                    "max" : 190
+                },
+                "variation": {
+                    "mode" : "none"
+                }
+            },
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["gender"],
+                    "value": "female"
+                }
+            ]
+        }
+    ]
+}

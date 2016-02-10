@@ -1,0 +1,5 @@
+[
+  {"value": "residential", "weight": 7},
+  {"value": "enterprise", "weight": 1},
+  {"value": "freelance", "weight": 2}
+]

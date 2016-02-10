@@ -42,6 +42,7 @@ public class ProcessValidator {
         if (generatorInfo.isAuxiliaryFields()){
             previousFields.add(FieldConstants.ID_FIELD);
             previousFields.add(FieldConstants.WEIGHT_FIELD);
+            previousFields.add(FieldConstants.COUNT_FIELD);
             previousFields.add(FieldConstants.RELATED_DOCUMENTS_FIELD);
         }
 

@@ -115,7 +115,7 @@ public class TextDictionaryValueUtils {
             if (null != dictionary){return dictionary;}
 
         }
-        throw new LimitReachedException(key, "No relation found for " + key);
+        throw new Exception("No relation found for " + key);
     }
 
     private static Word getFixedValue (Map<String, String> parameters, Dictionary dictionary,

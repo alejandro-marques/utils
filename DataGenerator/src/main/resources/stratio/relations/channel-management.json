@@ -1,0 +1,22 @@
+[
+  {
+    "value": "App",
+    "next":[{"value": "self-managed"}]
+  },
+  {
+    "value": "Web",
+    "next":[{"value": "self-managed"}]
+  },
+  {
+    "value": "Social Networks",
+    "next":[{"value": "self-managed"}]
+  },
+  {
+    "value": "Office",
+    "next":[{"value": "traditional"}]
+  },
+  {
+    "value": "Call Center",
+    "next":[{"value": "traditional"}]
+  }
+]

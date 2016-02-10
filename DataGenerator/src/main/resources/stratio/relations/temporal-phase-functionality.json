@@ -1,0 +1,71 @@
+[
+  {
+    "value": "month 1",
+    "next":[
+      {"value": "Open issue", "weight": 2},
+      {"value": "Check issue", "weight": 1},
+      {"value": "Check data", "weight": 3},
+      {"value": "Check invoice", "weight": 4}
+    ]
+  },
+  {
+    "value": "month 2",
+    "next":[
+      {"value": "Open issue", "weight": 2},
+      {"value": "Check issue", "weight": 1},
+      {"value": "Check data", "weight": 3},
+      {"value": "Check invoice", "weight": 4}
+    ]
+  },
+  {
+    "value": "month 3",
+    "next":[
+      {"value": "Open issue", "weight": 2},
+      {"value": "Check issue", "weight": 1},
+      {"value": "Check data", "weight": 3},
+      {"value": "Check invoice", "weight": 4}
+    ]
+  },
+  {
+    "value": "month 4",
+    "next":[
+      {"value": "Open issue", "weight": 2},
+      {"value": "Check issue", "weight": 1},
+      {"value": "Check data", "weight": 3},
+      {"value": "Check invoice", "weight": 4}
+    ]
+  },
+  {
+    "value": "month 5",
+    "next":[
+      {"value": "Open issue", "weight": 2},
+      {"value": "Check issue", "weight": 1},
+      {"value": "Check data", "weight": 3},
+      {"value": "Check invoice", "weight": 4}
+    ]
+  },
+  {
+    "value": "month 6",
+    "next":[
+      {"value": "Open issue", "weight": 2},
+      {"value": "Check issue", "weight": 1},
+      {"value": "Check data", "weight": 3},
+      {"value": "Check invoice", "weight": 4}
+    ]
+  },
+  {
+    "value": "rest",
+    "next":[
+      {"value": "Open issue", "weight": 2},
+      {"value": "Check issue", "weight": 1},
+      {"value": "Check data", "weight": 3},
+      {"value": "Check invoice", "weight": 4}
+    ]
+  },
+  {
+    "value": "null",
+    "next":[
+      {"value": "null"}
+    ]
+  }
+]

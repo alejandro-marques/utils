@@ -1,0 +1,42 @@
+[
+  {
+    "value": "Open issue",
+    "next":[
+      {"value": "Web", "weight": 30},
+      {"value": "Office", "weight": 10},
+      {"value": "Call Center", "weight": 60}
+    ]
+  },
+  {
+    "value": "Check issue",
+    "next":[
+      {"value": "Web", "weight": 60},
+      {"value": "Office", "weight": 10},
+      {"value": "Call Center", "weight": 30}
+    ]
+  },
+  {
+    "value": "Check data",
+    "next":[
+      {"value": "App", "weight": 20},
+      {"value": "Web", "weight": 40},
+      {"value": "Office", "weight": 10},
+      {"value": "Call Center", "weight": 10}
+    ]
+  },
+  {
+    "value": "Check invoice",
+    "next":[
+      {"value": "App", "weight": 30},
+      {"value": "Web", "weight": 40},
+      {"value": "Office", "weight": 5},
+      {"value": "Call Center", "weight": 1}
+    ]
+  },
+  {
+    "value": "null",
+    "next":[
+      {"value": "null"}
+    ]
+  }
+]

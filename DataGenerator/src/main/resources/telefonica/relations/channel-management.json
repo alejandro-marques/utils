@@ -1,0 +1,30 @@
+[
+  {
+    "value": "Presencial Call Movil",
+    "next":[{"value": "traditional"}]
+  },
+  {
+    "value": "Presencial fijo",
+    "next":[{"value": "traditional"}]
+  },
+  {
+    "value": "Call center fijo",
+    "next":[{"value": "traditional"}]
+  },
+  {
+    "value": "IVR",
+    "next":[{"value": "traditional"}]
+  },
+  {
+    "value": "Canal online",
+    "next":[{"value": "self-managed"}]
+  },
+  {
+    "value": "Canal App",
+    "next":[{"value": "self-managed"}]
+  },
+  {
+    "value": "Canal online y canal App",
+    "next":[{"value": "self-managed"}]
+  }
+]

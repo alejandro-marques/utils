@@ -1,0 +1,7 @@
+[
+  {"value": "App", "weight": 10},
+  {"value": "Web", "weight": 50},
+  {"value": "Social Networks", "weight": 10},
+  {"value": "Office", "weight": 20},
+  {"value": "Call Center", "weight": 10}
+]

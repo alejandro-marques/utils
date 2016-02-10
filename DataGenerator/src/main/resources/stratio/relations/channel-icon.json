@@ -1,0 +1,22 @@
+[
+  {
+    "value": "App",
+    "next":[{"value": "app"}]
+  },
+  {
+    "value": "Web",
+    "next":[{"value": "web"}]
+  },
+  {
+    "value": "Social Networks",
+    "next":[{"value": "web"}]
+  },
+  {
+    "value": "Office",
+    "next":[{"value": "store"}]
+  },
+  {
+    "value": "Call Center",
+    "next":[{"value": "call_center"}]
+  }
+]
