@@ -3,6 +3,7 @@ package org.generator.launcher.output;
 import org.generator.connector.DatabaseConnector;
 import org.generator.connector.MongoDBConnector;
 import org.generator.launcher.LauncherConstants;
+import org.generator.launcher.LauncherConstants.Format;
 import org.generator.launcher.LauncherConstants.OutputType;
 import org.generator.launcher.LauncherUtils;
 
@@ -24,12 +25,17 @@ public class MongoDbOutput implements Output{
     }
 
     @Override
-    public void write(Map<String, Object> document) throws Exception {
+    public void write(Map<String, Object> document, Format format) throws Exception {
         connector.bufferedIndexMap(document);
     }
 
     @Override
     public void flush() throws Exception {
         connector.flushBuffer();
+    }
+
+    @Override
+    public void close() throws Exception {
+        connector.close();
     }
 }

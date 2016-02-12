@@ -1,7 +1,9 @@
 package org.generator.launcher;
 
+import org.generator.launcher.LauncherConstants.Format;
 import org.generator.launcher.LauncherConstants.OutputType;
 import org.generator.launcher.output.ConsoleOutput;
+import org.generator.launcher.output.HdfsOutput;
 import org.generator.launcher.output.MongoDbOutput;
 import org.generator.launcher.output.Output;
 import org.generator.processor.Processor;
@@ -31,6 +33,8 @@ public class Launcher {
             innerResources = parameters.containsKey("inner");
             parameters = LauncherUtils.validateParameters(parameters, OutputType.ANY);
 
+            Format format = Format.getByName(parameters.get(LauncherConstants.FORMAT));
+
             setModel(parameters);
             setOutput(parameters);
 
@@ -40,10 +44,11 @@ public class Launcher {
                 Map<String, Object> document;
                 while (null != (document = processor.nextDocument())) {
                     if (processMessages && documentCount % MESSAGE_FREQUENCY == 0){printProcess();}
-                    output.write(document);
+                    output.write(document, format);
                     documentCount++;
                 }
                 output.flush();
+                output.close();
             }
             catch (Exception exception){
                 System.out.println("Error while generating documents (Reason: "
@@ -87,6 +92,11 @@ public class Launcher {
 
             case MONGODB:
                 output = new MongoDbOutput(parameters);
+                processMessages = true;
+                break;
+
+            case HDFS:
+                output = new HdfsOutput(parameters);
                 processMessages = true;
                 break;
 

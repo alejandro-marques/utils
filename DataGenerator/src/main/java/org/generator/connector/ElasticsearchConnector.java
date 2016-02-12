@@ -87,4 +87,9 @@ public class ElasticsearchConnector implements DatabaseConnector{
     public List<Map<String, Object>> getFirst(int results) throws Exception {
         return null;
     }
+
+    @Override
+    public void close() throws Exception {
+        client.close();
+    }
 }

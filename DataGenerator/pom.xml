@@ -16,6 +16,7 @@
         <gson.version>2.4</gson.version>
         <mongodb.version>3.1.0</mongodb.version>
         <elasticsearch.version>1.7.3</elasticsearch.version>
+        <hadoop.version>2.7.1</hadoop.version>
     </properties>
 
     <dependencies>
@@ -55,6 +56,20 @@
             <artifactId>elasticsearch</artifactId>
             <version>${elasticsearch.version}</version>
         </dependency>
+
+        <!-- Hadoop -->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client</artifactId>
+            <version>${hadoop.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-hdfs</artifactId>
+            <version>${hadoop.version}</version>
+        </dependency>
+
 
     </dependencies>
 

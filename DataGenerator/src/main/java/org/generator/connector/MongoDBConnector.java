@@ -113,6 +113,11 @@ public class MongoDBConnector implements DatabaseConnector{
         return list;
     }
 
+    @Override
+    public void close() throws Exception {
+        client.close();
+    }
+
     public MongoCollection<Document> getCollection (){return collection;}
 
     public void search(int number){

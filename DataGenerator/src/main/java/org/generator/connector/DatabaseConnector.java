@@ -16,4 +16,6 @@ public interface DatabaseConnector {
     public Map<String, Object> getById(String id, String idField) throws Exception;
     public long count() throws Exception;
     public List<Map<String, Object>> getFirst(int results) throws Exception;
+
+    public void close() throws Exception;
 }
