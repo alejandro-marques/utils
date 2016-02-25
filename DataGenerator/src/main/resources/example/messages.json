@@ -1,0 +1,56 @@
+{
+    "generator": {
+        "maxDocuments": -1,
+        "minRelatedDocuments": 1,
+        "maxRelatedDocuments": 3,
+        "auxiliaryFields": true,
+        "idFields": [
+            {
+                "name": "user_id",
+                "order": 1,
+                "value": {
+                    "type": "numeric",
+                    "subtype": "integer",
+                    "options": {
+                        "max": 5,
+                        "limit": true
+                    },
+                    "initial": {"mode": "fixed", "value": 1},
+                    "variation": {"mode": "fixed", "value": 1}
+                }
+            }
+        ]
+    },
+
+    "model" :
+    [
+        {
+            "name": "message",
+            "value": {
+                "type": "text",
+                "subtype": "dictionary",
+                "initial": {
+                    "mode": "paragraph",
+                    "language": "common/words",
+                    "minParagraphs": 1,
+                    "maxParagraphs": 2,
+                    "minWords": 10,
+                    "maxWords": 50
+                }
+            }
+        }
+    ],
+
+    "transformations" :
+    [
+        {
+            "operation": "rename",
+            "field": "message_id",
+            "source": ["_id"]
+        },
+        {
+            "operation": "remove",
+            "source": ["_relatedDocuments", "_count"]
+        }
+    ]
+}

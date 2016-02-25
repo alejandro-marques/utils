@@ -23,6 +23,15 @@ public class CommonData {
     private static Map<String, Dictionary> dictionaries = new HashMap<>();
     private static Map<String, Map<String, Dictionary>> relations = new HashMap<>();
     private static Map<String, Map<String, Map<String, Object>>> translations = new HashMap<>();
+    private static Map<String, Dictionary> languages = new HashMap<>();
+
+    public static Map<String, Dictionary> getLanguages (){return languages;}
+    public static Dictionary getLanguage (String name){
+        return languages.get(name);
+    }
+    public static void addLanguage (String name, Dictionary language){
+        languages.put(name, language);
+    }
 
     public static Map<String, Dictionary> getDictionaries (){return dictionaries;}
     public static Dictionary getDictionary (String name){

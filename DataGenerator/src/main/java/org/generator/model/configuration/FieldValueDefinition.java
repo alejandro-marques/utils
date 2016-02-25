@@ -29,7 +29,7 @@ public class FieldValueDefinition {
 
     public enum Subtype {
         DICTIONARY (PropertiesConstants.DICTIONARY,
-                EnumSet.of(Mode.FIXED, Mode.RANDOM),
+                EnumSet.of(Mode.FIXED, Mode.RANDOM, Mode.PARAGRAPH),
                 EnumSet.of(Mode.NONE, Mode.FIXED, Mode.RANDOM, Mode.SEQUENTIAL)),
         STRING (PropertiesConstants.STRING,
                 EnumSet.of(Mode.FIXED, Mode.RANDOM),
@@ -69,11 +69,27 @@ public class FieldValueDefinition {
         RANDOM (PropertiesConstants.RANDOM),
         UNIFORM (PropertiesConstants.UNIFORM),
         GAUSSIAN(PropertiesConstants.GAUSSIAN),
-        SEQUENTIAL(PropertiesConstants.SEQUENTIAL);
+        SEQUENTIAL(PropertiesConstants.SEQUENTIAL),
+        PARAGRAPH(PropertiesConstants.PARAGRAPH);
 
         private String name;
 
         Mode(String name){
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {return name;}
+    }
+
+    public enum DictionaryType {
+        DICTIONARY (PropertiesConstants.DICTIONARY),
+        RELATION (PropertiesConstants.RELATION),
+        LANGUAGE (PropertiesConstants.LANGUAGE);
+
+        private String name;
+
+        DictionaryType(String name){
             this.name = name;
         }
 

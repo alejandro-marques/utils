@@ -38,6 +38,12 @@ public interface PropertiesConstants {
 
     // Text properties
     String SEQUENTIAL = "sequential";
+    String PARAGRAPH = "paragraph";
+    String LANGUAGE = "language";
+    String MIN_WORDS = "minWords";
+    String MAX_WORDS = "maxWords";
+    String MIN_PARAGRAPHS = "minParagraphs";
+    String MAX_PARAGRAPHS = "maxParagraphs";
 
     // Date properties
     String STEP = "step";

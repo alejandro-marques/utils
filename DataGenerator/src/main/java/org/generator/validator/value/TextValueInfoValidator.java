@@ -89,6 +89,9 @@ public class TextValueInfoValidator extends FieldValueInfoValidator {
             case SEQUENTIAL:
                 validateSequentialDictionary(parameters, previousFields, isVariation);
                 break;
+            case PARAGRAPH:
+                validateParagraphDictionary(parameters);
+                break;
         }
     }
 
@@ -110,6 +113,39 @@ public class TextValueInfoValidator extends FieldValueInfoValidator {
     private static void validateSequentialDictionary(Map<String, String> parameters,
             List<String> previousFields, boolean isVariation) throws Exception {
         validateRelationOrDictionary(parameters, previousFields, isVariation);
+    }
+
+    private static void validateParagraphDictionary(Map<String, String> parameters) throws Exception {
+        Integer minWords = (Integer) Validator.findAndCheckParameter(
+                parameters, PropertiesConstants.MIN_WORDS, ValueType.INTEGER, true);
+        Integer maxWords = (Integer) Validator.findAndCheckParameter(
+                parameters, PropertiesConstants.MAX_WORDS, ValueType.INTEGER, true);
+
+        if (maxWords < minWords){
+            throw new Exception("\"maxWords\" parameter can't be smaller than \"minWords\"");
+        }
+
+
+        Integer minParagraphs = (Integer) Validator.findAndCheckParameter(
+                parameters, PropertiesConstants.MIN_PARAGRAPHS, ValueType.INTEGER, false);
+        Integer maxParagraphs = (Integer) Validator.findAndCheckParameter(
+                parameters, PropertiesConstants.MAX_PARAGRAPHS, ValueType.INTEGER, false);
+
+        if (null == minParagraphs){
+            minParagraphs = 1;
+            parameters.put(PropertiesConstants.MIN_PARAGRAPHS, "" + minParagraphs);
+        }
+
+        if (null == maxParagraphs){
+            maxParagraphs = 1;
+            parameters.put(PropertiesConstants.MAX_PARAGRAPHS, "" + maxParagraphs);
+        }
+
+        if (maxParagraphs < minParagraphs){
+            throw new Exception("\"maxParagraphs\" parameter can't be smaller than \"minParagraphs\"");
+        }
+
+        validateLanguage(parameters);
     }
 
     private static void validateRelationOrDictionary (Map<String, String> parameters,
@@ -144,6 +180,34 @@ public class TextValueInfoValidator extends FieldValueInfoValidator {
                         "previously processed field is set as origin");
             }
         }
+    }
+
+    private static void validateLanguage (Map<String, String> parameters) throws Exception {
+        Map<String, Double> words = new HashMap<>();
+
+        String languageName = (String) Validator.findAndCheckParameter(parameters,
+                PropertiesConstants.LANGUAGE, ValueType.STRING, false);
+        String languageFolderName = (CommonData.isResourceConfiguration() ?
+                "" : CommonData.getConfigurationPath()) + languageName;
+
+        List<String> languageLines = FileUtils.getListFromFolder(languageFolderName,
+                CommonData.isResourceConfiguration(), "txt");
+
+        for (String line : languageLines){
+            for (String word : line.split("\\s+")){
+                if (word.trim().isEmpty()){continue;}
+                word = word.toLowerCase();
+                Double previous = words.get(word);
+                words.put(word, null != previous ? previous + 1 : 1);
+            }
+        }
+
+        Dictionary languageDictionary = new Dictionary(languageName);
+        for (Map.Entry<String, Double> word : words.entrySet()){
+           languageDictionary.add(new Word(word.getKey(), word.getValue()));
+        }
+
+        CommonData.addLanguage(languageName, languageDictionary);
     }
 
     private static Dictionary getDictionary(String dictionaryName) throws Exception {

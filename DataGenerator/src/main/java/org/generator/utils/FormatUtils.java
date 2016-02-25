@@ -52,7 +52,9 @@ public class FormatUtils {
         String separator = "";
         for(Map.Entry<String, Object> entry : document.entrySet()){
             builder.append(separator);
-            builder.append(entry.getValue());
+            Object value = entry.getValue();
+            if (value instanceof String) {value = "\"" + value + "\"";}
+            builder.append(value);
             separator = CSV_SEPARATOR;
         }
         return builder.toString();

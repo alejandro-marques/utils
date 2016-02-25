@@ -18,6 +18,7 @@ public class HdfsOutput implements Output {
 
     private FileSystem hdfs;
     private BufferedWriter bufferedWriter;
+    private boolean firstLine = true;
 
 
     public HdfsOutput (Map<String, String> parameters) throws Exception {
@@ -30,11 +31,14 @@ public class HdfsOutput implements Output {
 
     @Override
     public void write(Map<String, Object> document, Format format) throws Exception {
+        if (!firstLine){bufferedWriter.newLine();}
         bufferedWriter.write(FormatUtils.formatDocument(document, format));
+        if (firstLine){firstLine = false;}
     }
 
     @Override
     public void flush() throws Exception {
+        bufferedWriter.flush();
     }
 
     @Override

@@ -1,0 +1,212 @@
+{
+    "generator": {
+        "maxDocuments": 20,
+        "minRelatedDocuments": 1,
+        "maxRelatedDocuments": 1,
+        "auxiliaryFields": false,
+        "idFields": [
+            {
+                "name": "user_id",
+                "order": 1,
+                "value": {
+                    "type": "numeric",
+                    "subtype": "integer",
+                    "initial": {"mode": "fixed", "value": 1},
+                    "variation": {"mode": "fixed", "value": 1}
+                }
+            }
+        ]
+    },
+
+    "model" :
+    [
+        {
+            "name": "surname1",
+            "value": {
+                "type": "text",
+                "subtype": "dictionary",
+                "initial": {
+                    "mode": "random",
+                    "dictionary": "common/dictionaries/surnames_es.json"
+                }
+            }
+        },
+        {
+            "name": "surname2",
+            "value": {
+                "type": "text",
+                "subtype": "dictionary",
+                "initial": {
+                    "mode": "random",
+                    "dictionary": "common/dictionaries/surnames_es.json"
+                }
+            }
+        },
+        {
+            "name": "gender",
+            "value": {
+                "type": "text",
+                "subtype": "dictionary",
+                "initial": {
+                    "mode": "random",
+                    "dictionary": "common/dictionaries/genders.json"
+                }
+            }
+        },
+        {
+            "name": "age",
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode" : "gaussian",
+                    "mean" : 35,
+                    "variance" : 20,
+                    "min" : 18,
+                    "max" : 100
+                }
+            }
+        },
+        {
+            "name": "province",
+            "value": {
+                "type": "text",
+                "subtype": "dictionary",
+                "initial": {
+                    "mode": "random",
+                    "dictionary": "common/dictionaries/provinces.json"
+                }
+            }
+        }
+    ],
+
+    "transformations" :
+    [
+        {
+            "operation": "create",
+            "field": "weight",
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode" : "gaussian",
+                    "mean" : 75,
+                    "variance" : 10,
+                    "min" : 50,
+                    "max" : 120
+                }
+            },
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["gender"],
+                    "value": "male"
+                }
+            ]
+        },
+        {
+            "operation": "create",
+            "field": "weight",
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode" : "gaussian",
+                    "mean" : 65,
+                    "variance" : 10,
+                    "min" : 40,
+                    "max" : 100
+                }
+            },
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["gender"],
+                    "value": "female"
+                }
+            ]
+        },
+        {
+            "operation": "create",
+            "field": "height",
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode" : "gaussian",
+                    "mean" : 170,
+                    "variance" : 20,
+                    "min" : 140,
+                    "max" : 210
+                }
+            },
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["gender"],
+                    "value": "male"
+                }
+            ]
+        },
+        {
+            "operation": "create",
+            "field": "height",
+            "value": {
+                "type": "numeric",
+                "subtype": "integer",
+                "initial": {
+                    "mode" : "gaussian",
+                    "mean" : 160,
+                    "variance" : 15,
+                    "min" : 130,
+                    "max" : 190
+                }
+            },
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["gender"],
+                    "value": "female"
+                }
+            ]
+        },
+        {
+            "operation": "create",
+            "field": "name",
+            "value": {
+                "type": "text",
+                "subtype": "dictionary",
+                "initial": {
+                    "mode": "random",
+                    "dictionary": "common/dictionaries/male_names_es.json"
+                }
+            },
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["gender"],
+                    "value": "male"
+                }
+            ]
+        },
+        {
+            "operation": "create",
+            "field": "name",
+            "value": {
+                "type": "text",
+                "subtype": "dictionary",
+                "initial": {
+                    "mode": "random",
+                    "dictionary": "common/dictionaries/female_names_es.json"
+                }
+            },
+            "conditions": [
+                {
+                    "condition" : "equal",
+                    "source" : ["gender"],
+                    "value": "female"
+                }
+            ]
+        }
+    ]
+}

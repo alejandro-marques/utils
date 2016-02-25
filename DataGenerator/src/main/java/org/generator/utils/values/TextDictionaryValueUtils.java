@@ -7,8 +7,10 @@ import org.generator.model.configuration.FieldValueInfo;
 import org.generator.model.data.Dictionary;
 import org.generator.model.configuration.FieldValueDefinition;
 import org.generator.model.configuration.FieldValueDefinition.Mode;
+import org.generator.model.configuration.FieldValueDefinition.DictionaryType;
 import org.generator.model.data.FieldValue;
 import org.generator.model.data.Word;
+import org.generator.utils.RandomUtils;
 
 import java.util.Map;
 
@@ -42,7 +44,7 @@ public class TextDictionaryValueUtils {
         Mode mode = FieldValueDefinition.getEnum(Mode.class, modeName);
         boolean isRelation = null != parameters.get(PropertiesConstants.RELATION);
 
-        Dictionary dictionary = getDictionary(parameters, previousValue, relatedValues, isRelation);
+        Dictionary dictionary = getDictionary(parameters, previousValue, relatedValues);
         Word word;
 
         if (null == mode) {
@@ -62,6 +64,10 @@ public class TextDictionaryValueUtils {
                 word = getSequentialValue(previousValue, dictionary, limit, isRelation);
                 break;
 
+            case PARAGRAPH:
+                word = getParagraphValue(dictionary, parameters);
+                break;
+
             default:
                 throw new Exception("String type \"" + modeName + "\" not implemented yet.");
         }
@@ -78,14 +84,29 @@ public class TextDictionaryValueUtils {
     }
 
     public static Dictionary getDictionary (Map<String, String> parameters, String previousValue,
-            Map<String, FieldValue> relatedValues, boolean isRelation) throws Exception {
+            Map<String, FieldValue> relatedValues) throws Exception {
 
-        if (isRelation){
-            return getDictionaryFromRelation(parameters.get(PropertiesConstants.RELATION),
-                parameters.get(PropertiesConstants.ORIGIN), previousValue, relatedValues);
+        DictionaryType type = DictionaryType.DICTIONARY;;
+        if (null != parameters.get(PropertiesConstants.RELATION)){
+            type = DictionaryType.RELATION;
         }
-        else {return getDictionary(parameters.get(PropertiesConstants.DICTIONARY));}
+        else if (null != parameters.get(PropertiesConstants.LANGUAGE)){
+            type = DictionaryType.LANGUAGE;
+        }
+
+        switch (type){
+            case RELATION:
+                return getDictionaryFromRelation(parameters.get(PropertiesConstants.RELATION),
+                        parameters.get(PropertiesConstants.ORIGIN), previousValue, relatedValues);
+
+            case LANGUAGE:
+                return CommonData.getLanguage(parameters.get(PropertiesConstants.LANGUAGE));
+
+            default:
+                return getDictionary(parameters.get(PropertiesConstants.DICTIONARY));
+        }
     }
+
 
     private static Dictionary getDictionary(String dictionaryName) throws Exception {
         Dictionary dictionary = CommonData.getDictionary(dictionaryName);
@@ -138,5 +159,48 @@ public class TextDictionaryValueUtils {
             throw new LimitReachedException(null, "Last word for relation already reached.");
         }
         return dictionary.getNextWord(previousValue, limit);
+    }
+
+    private static Word getParagraphValue(Dictionary dictionary, Map<String, String> parameters) throws Exception {
+        int minWords = Integer.parseInt(parameters.get(PropertiesConstants.MIN_WORDS));
+        int maxWords = Integer.parseInt(parameters.get(PropertiesConstants.MAX_WORDS));
+        int minParagraphs = Integer.parseInt(parameters.get(PropertiesConstants.MIN_PARAGRAPHS));
+        int maxParagraphs = Integer.parseInt(parameters.get(PropertiesConstants.MAX_PARAGRAPHS));
+        return new Word(getParagraphs(dictionary, minParagraphs, maxParagraphs, minWords, maxWords), 1.0);
+    }
+
+
+
+    private static String getParagraphs (Dictionary dictionary, int minParagraphs, int maxParagraphs,
+            int minWords, int maxWords) throws Exception {
+        int paragraphs = RandomUtils.getRandomInteger(minParagraphs, maxParagraphs);
+        StringBuilder builder = new StringBuilder();
+        boolean first = true;
+        for (int i = 0; i < paragraphs; i++){
+            if (!first) {builder.append("\n");}
+            builder.append(getParagraph(dictionary, minWords, maxWords));
+            first = false;
+        }
+        return builder.toString();
+    }
+
+
+
+    private static String getParagraph (Dictionary dictionary, int minWords, int maxWords) throws Exception {
+        int words = RandomUtils.getRandomInteger(minWords, maxWords);
+        StringBuilder builder = new StringBuilder();
+        boolean first = true;
+        boolean capitalize = true;
+        String word = "";
+        for (int i = 0; i < words; i++){
+            if (!first) {builder.append(" ");}
+            word = dictionary.getRandomWord().getValue();
+            if (capitalize){word = word.substring(0,1).toUpperCase() + word.substring(1);}
+            builder.append(word);
+            first = false;
+            capitalize = word.endsWith(".");
+        }
+        if (!builder.toString().endsWith(".")){builder.append(".");}
+        return builder.toString();
     }
 }
