@@ -32,10 +32,12 @@ public class ValueUtils {
             case NUMERIC:
                 switch (subtype){
                     case INTEGER:
-                        return NumericValueUtils.getIntegerValue(fieldValueInfo, previousValue);
+                        return NumericValueUtils.getIntegerValue(fieldValueInfo, previousValue,
+                                variationCount > 0);
 
                     case DOUBLE:
-                        return NumericValueUtils.getDoubleValue(fieldValueInfo, previousValue);
+                        return NumericValueUtils.getDoubleValue(fieldValueInfo, previousValue,
+                                variationCount > 0);
 
                     default:
                         throw new Exception(
@@ -57,7 +59,8 @@ public class ValueUtils {
                 }
 
             case DATE:
-                return DateValueUtils.getDatePropertyValue(fieldValueInfo, previousValue, true);
+                return DateValueUtils.getDatePropertyValue(fieldValueInfo, previousValue,
+                        variationCount > 0, true);
 
             default:
                 throw new Exception("Type \"" + type.toString() + "\" not implemented yet.");

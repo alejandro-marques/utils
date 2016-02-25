@@ -12,21 +12,21 @@ import java.util.Map;
 
 public class NumericValueUtils {
 
-    public static FieldValue getIntegerValue(FieldValueInfo fieldValueInfo, FieldValue previousValue)
-            throws Exception {
-        return new FieldValue(getNumericValue(fieldValueInfo, previousValue).intValue());
+    public static FieldValue getIntegerValue(FieldValueInfo fieldValueInfo, FieldValue previousValue,
+            boolean isVariation) throws Exception {
+        return new FieldValue(getNumericValue(fieldValueInfo, previousValue, isVariation).intValue());
     }
 
-    public static FieldValue getDoubleValue(FieldValueInfo fieldValueInfo, FieldValue previousValue)
-            throws Exception {
-        return new FieldValue(getNumericValue(fieldValueInfo, previousValue));
+    public static FieldValue getDoubleValue(FieldValueInfo fieldValueInfo, FieldValue previousValue,
+            boolean isVariation) throws Exception {
+        return new FieldValue(getNumericValue(fieldValueInfo, previousValue, isVariation));
     }
 
-    public static Double getNumericValue(FieldValueInfo fieldValueInfo, FieldValue previousValue)
-            throws Exception {
+    public static Double getNumericValue(FieldValueInfo fieldValueInfo, FieldValue previousValue,
+            boolean isVariation) throws Exception {
         Double value;
         // If there was a previous value
-        if (null != previousValue){
+        if (isVariation && null != previousValue && null != previousValue.getValue()){
             // Checks if previous value was a valid number
             try {value = Double.parseDouble(previousValue.getValue().toString());}
             catch (Exception exception){

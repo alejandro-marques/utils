@@ -38,6 +38,19 @@
                     "maxWords": 50
                 }
             }
+        },
+        {
+            "name": "date",
+            "value": {
+                "type": "date",
+                "subtype": "date",
+                "initial": {
+                    "mode": "uniform",
+                    "format": "dd/MM/yyyy HH:mm:ss",
+                    "min": "01/01/2015 00:00:00",
+                    "max": "01/01/2016 00:00:00"
+                }
+            }
         }
     ],
 

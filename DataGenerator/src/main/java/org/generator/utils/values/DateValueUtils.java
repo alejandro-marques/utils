@@ -26,19 +26,19 @@ public class DateValueUtils {
 
 
     public static FieldValue getDatePropertyValue (FieldValueInfo fieldValueInfo,
-            Object previousValue, boolean stringFormat) throws Exception {
+            FieldValue previousValue, boolean isVariation, boolean stringFormat) throws Exception {
         Date value = null;
         Map<String, String> parameters = fieldValueInfo.getInitial();
         SimpleDateFormat dateFormat = new SimpleDateFormat(parameters.get(PropertiesConstants.FORMAT));
 
-        if (null != previousValue){
-            if (stringFormat && previousValue instanceof String){
-                try{value = dateFormat.parse((String) previousValue);}
+        if (isVariation && null != previousValue && null != previousValue.getValue()){
+            if (stringFormat && previousValue.getValue() instanceof String){
+                try{value = dateFormat.parse((String) previousValue.getValue());}
                 catch (Exception exception){
                     throw new Exception (previousValue + " is not a valid Date (Reason: " + exception + ")");
                 }
             }
-            else if (previousValue instanceof Date){value = (Date) previousValue;}
+            else if (previousValue.getValue() instanceof Date){value = (Date) previousValue.getValue();}
             else {throw new Exception (previousValue.toString() + " is not a valid Date");}
             parameters = fieldValueInfo.getVariation();
         }

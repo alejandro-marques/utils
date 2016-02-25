@@ -9,7 +9,7 @@ public class FieldValueDefinition {
     public enum Type {
         TEXT (PropertiesConstants.TEXT, EnumSet.of(Subtype.STRING, Subtype.DICTIONARY)),
         NUMERIC (PropertiesConstants.NUMERIC, EnumSet.of(Subtype.INTEGER, Subtype.DOUBLE)),
-        DATE (PropertiesConstants.DATE, null);
+        DATE (PropertiesConstants.DATE, EnumSet.of(Subtype.DATE));
 
         private String name;
         private EnumSet<Subtype> subtypes;
@@ -39,7 +39,10 @@ public class FieldValueDefinition {
                 EnumSet.of(Mode.NONE, Mode.FIXED, Mode.UNIFORM, Mode.GAUSSIAN)),
         DOUBLE(PropertiesConstants.DOUBLE,
                 EnumSet.of(Mode.FIXED, Mode.UNIFORM, Mode.GAUSSIAN),
-                EnumSet.of(Mode.NONE, Mode.FIXED, Mode.UNIFORM, Mode.GAUSSIAN));
+                EnumSet.of(Mode.NONE, Mode.FIXED, Mode.UNIFORM, Mode.GAUSSIAN)),
+        DATE(PropertiesConstants.DATE,
+                EnumSet.of(Mode.FIXED, Mode.UNIFORM),
+                EnumSet.of(Mode.NONE));
 
         private String name;
         private EnumSet<Mode> values;
